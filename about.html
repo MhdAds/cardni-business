@@ -816,7 +816,12 @@
         const elements = document.querySelectorAll('[data-en][data-ar]');
 
         elements.forEach(el => {
-            el.textContent = lang === 'ar' ? el.dataset.ar : el.dataset.en;
+            const text = lang === 'ar' ? el.dataset.ar : el.dataset.en;
+            if (text.includes('<em>')) {
+                el.innerHTML = text;
+            } else {
+                el.textContent = text;
+            }
         });
     }
 

@@ -723,7 +723,11 @@
             document.querySelectorAll('[data-en], [data-ar]').forEach(el => {
                 const text = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
                 if (text && !el.getAttribute('data-en-line1')) {
-                    el.textContent = text;
+                    if (text.includes('<em>')) {
+                        el.innerHTML = text;
+                    } else {
+                        el.textContent = text;
+                    }
                 }
             });
 

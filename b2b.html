@@ -575,7 +575,7 @@
                 <p class="hero-subtitle" data-en="Connect seamlessly to Cardni's digital voucher platform with our REST API or Salla plugin. Scale your business with enterprise-grade infrastructure." data-ar="تواصل بسلاسة مع منصة كاردني للقسائم الرقمية باستخدام REST API أو مكون Salla. قم بتوسيع نطاق عملك باستخدام البنية التحتية على مستوى المؤسسات.">Connect seamlessly to Cardni's digital voucher platform with our REST API or Salla plugin. Scale your business with enterprise-grade infrastructure.</p>
                 <div class="hero-ctas">
                     <a href="#contact" class="btn btn-primary" data-en="Request Demo" data-ar="طلب عرض توضيحي">Request Demo</a>
-                    <a href="#" class="btn btn-outline" data-en="View Documentation" data-ar="عرض التوثيق">View Documentation</a>
+                    <a href="https://b2b.cardni.com/api/b2b/docs" target="_blank" class="btn btn-outline" data-en="View Documentation" data-ar="عرض التوثيق">View Documentation</a>
                 </div>
             </div>
         </div>
@@ -595,7 +595,7 @@
                         <li data-en="Rate limiting: 10k req/min" data-ar="حد المعدل: 10k طلب/دقيقة">Rate limiting: 10k req/min</li>
                         <li data-en="Developer sandbox environment" data-ar="بيئة رمل المطور">Developer sandbox environment</li>
                     </ul>
-                    <a href="#" class="btn-link" data-en="Read API Docs" data-ar="اقرأ مستندات API">Read API Docs</a>
+                    <a href="https://b2b.cardni.com/api/b2b/docs" target="_blank" class="btn-link" data-en="Read API Docs" data-ar="اقرأ مستندات API">Read API Docs</a>
                 </div>
                 <div class="block-visual">
                     <div class="mockup-code">
@@ -628,7 +628,7 @@
                         <li data-en="Commission management" data-ar="إدارة العمولة">Commission management</li>
                         <li data-en="Multi-currency support" data-ar="دعم العملات المتعددة">Multi-currency support</li>
                     </ul>
-                    <a href="#" class="btn-link" data-en="Install Plugin" data-ar="تثبيت المكون">Install Plugin</a>
+                    <a href="https://apps.salla.sa/en/app/1632668796" target="_blank" class="btn-link" data-en="Install Plugin" data-ar="تثبيت المكون">Install Plugin</a>
                 </div>
                 <div class="block-visual"></div>
             </div>
@@ -649,7 +649,7 @@
                         <li data-en="Rate limiting: 10k req/min" data-ar="حد المعدل: 10k طلب/دقيقة">Rate limiting: 10k req/min</li>
                         <li data-en="Developer sandbox environment" data-ar="بيئة رمل المطور">Developer sandbox environment</li>
                     </ul>
-                    <a href="#" class="btn-link" data-en="Read API Docs" data-ar="اقرأ مستندات API">Read API Docs</a>
+                    <a href="https://b2b.cardni.com/api/b2b/docs" target="_blank" class="btn-link" data-en="Read API Docs" data-ar="اقرأ مستندات API">Read API Docs</a>
                 </div>
 
                 <div class="integration-card fade-in" style="animation-delay: 0.1s;">
@@ -661,7 +661,7 @@
                         <li data-en="Commission management" data-ar="إدارة العمولة">Commission management</li>
                         <li data-en="Multi-currency support" data-ar="دعم العملات المتعددة">Multi-currency support</li>
                     </ul>
-                    <a href="#" class="btn-link" data-en="Install Plugin" data-ar="تثبيت المكون">Install Plugin</a>
+                    <a href="https://apps.salla.sa/en/app/1632668796" target="_blank" class="btn-link" data-en="Install Plugin" data-ar="تثبيت المكون">Install Plugin</a>
                 </div>
             </div>
         </div>
@@ -705,7 +705,7 @@
             <h2 class="heading-lg" style="margin-bottom: 48px;" data-en="Ready to integrate your <em>business?</em>" data-ar="هل أنت مستعد لتكامل <em>عملك؟</em>">Ready to integrate your <em>business?</em></h2>
             <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
                 <a href="#" class="btn btn-white" data-en="Contact Sales" data-ar="اتصل بالمبيعات">Contact Sales</a>
-                <a href="#" class="btn btn-outline" data-en="Read Documentation" data-ar="اقرأ التوثيق">Read Documentation</a>
+                <a href="https://b2b.cardni.com/api/b2b/docs" target="_blank" class="btn btn-outline" data-en="Read Documentation" data-ar="اقرأ التوثيق">Read Documentation</a>
             </div>
         </div>
     </section>
@@ -768,7 +768,11 @@
             document.querySelectorAll('[data-en], [data-ar]').forEach(el => {
                 const text = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
                 if (text && !el.getAttribute('data-en-line1')) {
-                    el.textContent = text;
+                    if (text.includes('<em>')) {
+                        el.innerHTML = text;
+                    } else {
+                        el.textContent = text;
+                    }
                 }
             });
 
