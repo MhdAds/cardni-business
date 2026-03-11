@@ -1,760 +1,848 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVD Platform - Electronic Voucher Distribution Software | Cardni</title>
-<meta name="description" content="Cardni EVD Platform: complete offline voucher distribution software for POS terminals, retail networks, and merchants worldwide. Instant delivery, multi-product support, real-time reporting.">
-<meta name="theme-color" content="#7c3aed">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-<style>
-/* ═══════════════════ RESET & TOKENS ═══════════════════ */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVD Platform - Electronic Voucher Distribution Software | Cardni</title>
+    <meta name="description" content="Cardni EVD Platform: complete digital voucher distribution software for POS terminals, retail networks, and merchants. Instant delivery, multi-product support, real-time reporting.">
 
-:root{
-  /* Primary - deep violet family */
-  --v50:#f5f3ff;--v100:#ede9fe;--v200:#ddd6fe;--v300:#c4b5fd;
-  --v400:#a78bfa;--v500:#8b5cf6;--v600:#7c3aed;--v700:#6d28d9;
-  --v800:#5b21b6;--v900:#4c1d95;
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  /* Accent - indigo for depth */
-  --i500:#6366f1;--i600:#4f46e5;
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=DM+Serif+Display&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
-  /* Neutral */
-  --n0:#fff;--n50:#fafafa;--n100:#f4f4f5;--n200:#e4e4e7;
-  --n300:#d4d4d8;--n400:#a1a1aa;--n500:#71717a;--n600:#52525b;
-  --n700:#3f3f46;--n800:#27272a;--n900:#18181b;--n950:#09090b;
+    <style>
+        /* ====== RESET ====== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-  /* Semantic */
-  --success:#10b981;--warning:#f59e0b;--info:#3b82f6;
+        /* ====== DESIGN TOKENS ====== */
+        :root {
+            --white: #ffffff;
+            --black: #1a1a2e;
+            --dark: #0f0f23;
+            --cream: #faf8f5;
+            --violet-50: #f5f3ff;
+            --violet-100: #ede9fe;
+            --violet-200: #ddd6fe;
+            --violet-400: #a78bfa;
+            --violet-500: #8b5cf6;
+            --violet-600: #7c3aed;
+            --violet-700: #6d28d9;
+            --violet-800: #5b21b6;
+            --blue: #3b82f6;
+            --emerald: #10b981;
+            --coral: #f97066;
+            --amber: #f59e0b;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --serif: 'DM Serif Display', Georgia, serif;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 40px;
+            --radius-pill: 980px;
+        }
 
-  /* Gradients */
-  --grad-hero:linear-gradient(135deg,#7c3aed 0%,#6366f1 50%,#8b5cf6 100%);
-  --grad-dark:linear-gradient(160deg,#0f0a1e 0%,#1a0e38 40%,#0f0a1e 100%);
-  --grad-card:linear-gradient(135deg,rgba(124,58,237,.06) 0%,rgba(99,102,241,.04) 100%);
+        body {
+            font-family: var(--sans);
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-  /* Shadows */
-  --sh-xs:0 1px 2px rgba(0,0,0,.05);
-  --sh-sm:0 2px 8px rgba(0,0,0,.06);
-  --sh-md:0 4px 24px rgba(0,0,0,.08);
-  --sh-lg:0 12px 48px rgba(0,0,0,.1);
-  --sh-glow:0 8px 32px rgba(124,58,237,.25);
-  --sh-glow-lg:0 16px 48px rgba(124,58,237,.35);
+        [dir="rtl"] { font-family: 'Tajawal', var(--sans); }
 
-  /* Typography */
-  --font-en:'Inter',system-ui,sans-serif;
-  --font-ar:'Tajawal',system-ui,sans-serif;
+        /* ====== TYPOGRAPHY ====== */
+        .display-xl {
+            font-family: var(--serif);
+            font-size: clamp(52px, 9vw, 100px);
+            font-weight: 400;
+            line-height: 1.0;
+            letter-spacing: -2px;
+        }
+        .display-lg {
+            font-family: var(--serif);
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -1px;
+        }
+        .heading-lg {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+        .heading-md {
+            font-size: clamp(22px, 3vw, 32px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        .body-lg {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--gray-500);
+        }
+        .body-md {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--gray-500);
+        }
+        .label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
 
-  /* Radius */
-  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-full:9999px;
+        /* ====== LAYOUT ====== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .container-narrow { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 120px 0; }
+        .section-lg { padding: 160px 0; }
+        .text-center { text-align: center; }
 
-  /* Timing */
-  --ease:cubic-bezier(.4,0,.2,1);
-  --ease-spring:cubic-bezier(.34,1.56,.64,1);
-}
+        /* ====== NAVBAR ====== */
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 64px;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        nav {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+        }
+        .logo {
+            font-size: 20px; font-weight: 700; color: var(--white);
+            text-decoration: none; letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--violet-400); }
+        .logo small {
+            font-size: 11px; font-weight: 500; color: var(--gray-400);
+            margin-left: 6px; letter-spacing: 0;
+        }
+        .nav-links {
+            display: flex; gap: 36px; align-items: center;
+        }
+        .nav-links a {
+            font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7);
+            text-decoration: none; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .lang-toggle {
+            font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7);
+            cursor: pointer; transition: color 0.2s;
+        }
+        .lang-toggle:hover { color: var(--white); }
 
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{font-family:var(--font-en);color:var(--n700);background:var(--n0);line-height:1.65;overflow-x:hidden}
-html[dir="rtl"] body{font-family:var(--font-ar)}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
-ul{list-style:none}
-button{font-family:inherit}
+        /* ====== BUTTONS ====== */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 32px; border-radius: var(--radius-pill);
+            font-family: var(--sans); font-size: 16px; font-weight: 600;
+            text-decoration: none; border: none; cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .btn-primary {
+            background: var(--violet-600); color: var(--white);
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
+        }
+        .btn-primary:hover {
+            background: var(--violet-700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
+        }
+        .btn-white {
+            background: var(--white); color: var(--dark);
+        }
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        .btn-outline {
+            background: transparent; color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline:hover {
+            border-color: var(--white); background: rgba(255,255,255,0.05);
+            transform: translateY(-2px);
+        }
+        .btn-dark {
+            background: var(--dark); color: var(--white);
+        }
+        .btn-dark:hover {
+            background: var(--black); transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        .btn-sm { padding: 10px 24px; font-size: 14px; }
 
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
+        /* ====== HERO ====== */
+        .hero {
+            background: var(--dark);
+            color: var(--white);
+            padding: 160px 0 120px;
+            min-height: 100vh;
+            display: flex; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: -40%; right: -20%; width: 80%; height: 120%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute; bottom: -30%; left: -10%; width: 60%; height: 80%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero .container { position: relative; z-index: 1; width: 100%; }
+        .hero-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center;
+        }
+        .hero-label {
+            color: var(--violet-400); margin-bottom: 24px;
+        }
+        .hero h1 {
+            color: var(--white); margin-bottom: 28px;
+        }
+        .hero h1 em {
+            font-family: var(--serif); font-style: italic; color: var(--violet-400);
+        }
+        .hero-subtitle {
+            font-size: 20px; color: rgba(255,255,255,0.6); line-height: 1.7;
+            margin-bottom: 40px; max-width: 480px;
+        }
+        .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-visual {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+        }
+        .hero-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-lg); padding: 28px;
+            transition: all 0.3s ease;
+        }
+        .hero-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(139, 92, 246, 0.2);
+            transform: translateY(-4px);
+        }
+        .hero-card:first-child { grid-column: 1 / -1; }
+        .hero-card-number {
+            font-size: 36px; font-weight: 700; color: var(--violet-400);
+            margin-bottom: 8px; line-height: 1;
+        }
+        .hero-card-label {
+            font-size: 14px; color: rgba(255,255,255,0.5);
+        }
+        .hero-card-big-number {
+            font-family: var(--serif); font-size: 56px; color: var(--white);
+            line-height: 1;
+        }
+        .hero-card-caption {
+            font-size: 15px; color: rgba(255,255,255,0.4); margin-top: 8px;
+        }
 
-/* ═══════════════════ NAVBAR ═══════════════════ */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:18px 0;transition:all .35s var(--ease);
-}
-.nav.scrolled{
-  padding:12px 0;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:saturate(180%) blur(20px);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-bottom:1px solid var(--n200);
-}
-.nav .container{display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:26px;font-weight:800;letter-spacing:-.75px;color:var(--n500);font-family:var(--font-en)!important}
-.logo span{color:var(--v600)}
-.logo small{font-size:20px;font-weight:400;color:var(--v400);letter-spacing:0;text-transform:none;margin-left:2px}
-.nav-mid{display:flex;gap:36px}
-.nav-mid a{
-  font-size:14px;font-weight:500;color:var(--n500);
-  transition:color .25s;position:relative;padding:4px 0;
-}
-.nav-mid a::after{
-  content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;
-  background:var(--v600);border-radius:2px;transition:all .25s var(--ease);transform:translateX(-50%);
-}
-.nav-mid a:hover{color:var(--n900)}
-.nav-mid a:hover::after{width:100%}
-.nav-mid a.active{color:var(--v600)}
-.nav-mid a.active::after{width:100%}
-.nav-right{display:flex;align-items:center;gap:10px}
+        /* ====== COLOR BLOCK SECTIONS (Square style) ====== */
+        .block { padding: 120px 0; position: relative; overflow: hidden; }
+        .block-dark { background: var(--dark); color: var(--white); }
+        .block-violet { background: var(--violet-600); color: var(--white); }
+        .block-cream { background: var(--cream); color: var(--black); }
+        .block-white { background: var(--white); color: var(--black); }
 
-.lang-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px;border-radius:var(--r-full);
-  border:1px solid var(--n200);background:var(--n0);
-  font-size:13px;font-weight:600;color:var(--n600);cursor:pointer;
-  transition:all .25s;
-}
-.lang-btn:hover{border-color:var(--v300);background:var(--v50)}
-.lang-btn svg{width:16px;height:16px}
+        .block-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center;
+        }
+        .block-grid.reverse { direction: rtl; }
+        .block-grid.reverse > * { direction: ltr; }
 
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:10px 24px;border-radius:var(--r-md);font-size:14px;font-weight:600;
-  border:none;cursor:pointer;transition:all .3s var(--ease);white-space:nowrap;
-  font-family:inherit;
-}
-.btn-fill{
-  background:var(--v600);color:var(--n0);
-  box-shadow:var(--sh-glow);
-}
-.btn-fill:hover{background:var(--v700);transform:translateY(-1px);box-shadow:var(--sh-glow-lg)}
-.btn-soft{
-  background:var(--v50);color:var(--v700);border:1px solid var(--v200);
-}
-.btn-soft:hover{background:var(--v100);border-color:var(--v300)}
-.btn-outline{
-  background:transparent;color:var(--v600);border:2px solid var(--v200);
-}
-.btn-outline:hover{background:var(--v50);border-color:var(--v400);transform:translateY(-1px)}
-.btn-white{
-  background:var(--n0);color:var(--v700);
-  box-shadow:var(--sh-md);
-}
-.btn-white:hover{transform:translateY(-2px);box-shadow:var(--sh-lg)}
-.btn-ghost{
-  background:rgba(255,255,255,.1);color:var(--n0);border:1.5px solid rgba(255,255,255,.25);
-}
-.btn-ghost:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
-.btn-lg{padding:14px 32px;font-size:15px;border-radius:var(--r-lg)}
-.btn svg{width:18px;height:18px;flex-shrink:0}
+        .block-label { margin-bottom: 16px; }
+        .block-dark .block-label { color: var(--violet-400); }
+        .block-violet .block-label { color: rgba(255,255,255,0.7); }
+        .block-cream .block-label { color: var(--violet-600); }
+        .block-white .block-label { color: var(--violet-600); }
 
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
-.hamburger span{display:block;width:22px;height:2px;background:var(--n700);border-radius:2px;margin:5px 0;transition:all .3s}
+        .block-title { margin-bottom: 24px; }
+        .block-title em {
+            font-family: var(--serif); font-style: italic;
+        }
+        .block-dark .block-title em { color: var(--violet-400); }
+        .block-violet .block-title em { color: var(--amber); }
+        .block-cream .block-title em { color: var(--violet-600); }
 
-/* ═══════════════════ HERO ═══════════════════ */
-.hero{
-  min-height:100vh;display:flex;align-items:center;
-  position:relative;overflow:hidden;padding:120px 0 80px;
-  background:var(--grad-hero);
-}
-.hero-bg{
-  position:absolute;inset:0;
-  background:linear-gradient(170deg,#f5f3ff 0%,#ede9fe 25%,#e0e7ff 50%,#f5f3ff 100%);
-}
-.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
-.hero-bg .orb-1{width:500px;height:500px;background:rgba(124,58,237,.15);top:-120px;right:-80px}
-.hero-bg .orb-2{width:350px;height:350px;background:rgba(99,102,241,.12);bottom:-60px;left:-100px}
-.hero-bg .orb-3{width:200px;height:200px;background:rgba(139,92,246,.1);top:40%;left:30%}
+        .block-desc {
+            font-size: 18px; line-height: 1.7; margin-bottom: 32px;
+        }
+        .block-dark .block-desc { color: rgba(255,255,255,0.6); }
+        .block-violet .block-desc { color: rgba(255,255,255,0.8); }
+        .block-cream .block-desc { color: var(--gray-500); }
+        .block-white .block-desc { color: var(--gray-500); }
 
-.hero-bg::after{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle at 1px 1px,rgba(124,58,237,.04) 1px,transparent 0);
-  background-size:32px 32px;
-}
+        .feature-list { list-style: none; margin-bottom: 36px; }
+        .feature-list li {
+            font-size: 16px; padding: 10px 0;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .feature-list li::before {
+            content: ''; width: 8px; height: 8px;
+            border-radius: 50%; flex-shrink: 0;
+        }
+        .block-dark .feature-list li { color: rgba(255,255,255,0.7); }
+        .block-dark .feature-list li::before { background: var(--violet-400); }
+        .block-violet .feature-list li { color: rgba(255,255,255,0.9); }
+        .block-violet .feature-list li::before { background: var(--amber); }
+        .block-cream .feature-list li { color: var(--gray-600); }
+        .block-cream .feature-list li::before { background: var(--violet-600); }
+        .block-white .feature-list li { color: var(--gray-600); }
+        .block-white .feature-list li::before { background: var(--emerald); }
 
-.hero .container{position:relative;z-index:1;display:flex;align-items:center;justify-content:center}
-.hero-content{max-width:740px;text-align:center}
+        .block-visual {
+            border-radius: var(--radius-lg);
+            overflow: hidden; position: relative;
+            min-height: 400px;
+        }
 
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.3);
-  border-radius:var(--r-full);padding:6px 6px 6px 8px;
-  font-size:13px;font-weight:600;color:var(--v700);
-  margin-bottom:28px;box-shadow:var(--sh-sm);
-}
-.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-badge .tag{
-  background:rgba(255,255,255,.4);color:var(--v700);
-  padding:3px 10px;border-radius:var(--r-full);font-size:11px;font-weight:700;
-  letter-spacing:.5px;text-transform:uppercase;
-}
+        /* Dashboard mockup for EVD */
+        .mockup-dashboard {
+            background: linear-gradient(145deg, var(--dark) 0%, #1e1b4b 100%);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            padding: 32px; border-radius: var(--radius-lg);
+            min-height: 400px;
+        }
+        .mockup-topbar {
+            display: flex; gap: 8px; margin-bottom: 24px;
+        }
+        .mockup-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+        }
+        .mockup-dot:nth-child(1) { background: var(--coral); }
+        .mockup-dot:nth-child(2) { background: var(--amber); }
+        .mockup-dot:nth-child(3) { background: var(--emerald); }
+        .mockup-row {
+            display: flex; gap: 12px; margin-bottom: 12px;
+        }
+        .mockup-bar {
+            height: 32px; border-radius: 8px;
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px solid rgba(139, 92, 246, 0.08);
+        }
+        .mockup-bar.accent { background: rgba(139, 92, 246, 0.25); }
+        .mockup-chart {
+            margin-top: 16px; height: 140px; border-radius: 12px;
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.02) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            position: relative; overflow: hidden;
+        }
+        .mockup-chart::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0; height: 60%;
+            background: linear-gradient(90deg,
+                transparent 0%, rgba(139,92,246,0.3) 15%, rgba(139,92,246,0.15) 30%,
+                rgba(139,92,246,0.35) 45%, rgba(139,92,246,0.2) 60%,
+                rgba(139,92,246,0.4) 75%, rgba(139,92,246,0.25) 100%
+            );
+            clip-path: polygon(0 80%, 10% 60%, 20% 70%, 30% 40%, 40% 55%, 50% 30%, 60% 45%, 70% 20%, 80% 35%, 90% 15%, 100% 25%, 100% 100%, 0 100%);
+        }
 
-.hero h1{
-  font-size:50px;font-weight:900;line-height:1.12;
-  color:var(--n950);letter-spacing:-1.5px;margin-bottom:20px;
-}
-.hero h1 .gradient{
-  background:var(--grad-hero);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-}
+        /* ====== STATS SECTION ====== */
+        .stats-section {
+            background: var(--dark); color: var(--white);
+            padding: 100px 0; position: relative; overflow: hidden;
+        }
+        .stats-section::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 40px; text-align: center; position: relative; z-index: 1;
+        }
+        .stat-value {
+            font-family: var(--serif);
+            font-size: clamp(40px, 5vw, 60px);
+            color: var(--white); line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 14px; color: var(--gray-400);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
 
-.hero-sub{font-size:17px;color:var(--n700);line-height:1.75;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto}
+        /* ====== CTA SECTION ====== */
+        .cta-section {
+            background: var(--violet-600);
+            color: var(--white); padding: 120px 0;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute;
+            top: -50%; right: -20%; width: 80%; height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .cta-section .container { position: relative; z-index: 1; }
+        .cta-section h2 { color: var(--white); margin-bottom: 20px; }
+        .cta-section p { color: rgba(255,255,255,0.7); margin-bottom: 40px; font-size: 20px; }
+        .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-.hero-ctas{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;justify-content:center}
+        /* ====== BENEFITS GRID ====== */
+        .benefits-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; margin-top: 48px;
+        }
+        .benefit-card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius-lg); padding: 32px;
+            text-align: center; transition: all 0.3s ease;
+        }
+        .benefit-card:hover {
+            border-color: var(--violet-400);
+            box-shadow: 0 16px 48px rgba(124, 58, 237, 0.12);
+            transform: translateY(-6px);
+        }
+        .benefit-card .icon {
+            font-size: 36px; margin-bottom: 16px; display: block;
+        }
+        .benefit-card h3 {
+            font-size: 18px; font-weight: 700; color: var(--black);
+            margin-bottom: 12px;
+        }
+        .benefit-card p {
+            font-size: 14px; color: var(--gray-500); line-height: 1.6;
+        }
 
-/* ═══════════════════ SECTION COMMON ═══════════════════ */
-.section{padding:96px 0;position:relative}
-.section-dark{background:var(--grad-dark);color:var(--n0)}
-.section-head{max-width:640px;margin:0 auto 60px;text-align:center}
-.section-tag{
-  display:inline-flex;align-items:center;gap:12px;
-  font-size:12px;font-weight:700;text-transform:uppercase;
-  letter-spacing:2px;color:var(--v600);margin-bottom:16px;
-}
-.section-dark .section-tag{color:var(--v400)}
-.section-tag .line{width:24px;height:1px;background:currentColor}
-.section-head h2{
-  font-size:42px;font-weight:900;line-height:1.15;
-  color:var(--n900);margin-bottom:16px;letter-spacing:-.8px;
-}
-.section-dark .section-head h2{color:var(--n0)}
-.section-head p{
-  font-size:16px;color:var(--n500);line-height:1.7;
-}
-.section-dark .section-head p{color:rgba(255,255,255,.7)}
+        /* ====== FOOTER ====== */
+        footer {
+            background: var(--dark); color: var(--white);
+            padding: 80px 0 40px;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px; margin-bottom: 60px;
+        }
+        .footer-brand p {
+            font-size: 14px; color: var(--gray-400); margin-top: 16px;
+            line-height: 1.6; max-width: 280px;
+        }
+        .footer-col h4 {
+            font-size: 13px; font-weight: 600; color: var(--gray-400);
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .footer-col a {
+            display: block; font-size: 14px; color: rgba(255,255,255,0.6);
+            text-decoration: none; margin-bottom: 14px; transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 32px;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px;
+        }
+        .footer-meta {
+            display: flex; gap: 24px; align-items: center;
+            font-size: 13px; color: var(--gray-400);
+        }
+        .footer-meta a { color: var(--gray-400); text-decoration: none; }
+        .footer-meta a:hover { color: var(--white); }
 
-/* ═══════════════════ BENEFITS GRID ═══════════════════ */
-.benefits-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-bottom:40px;
-}
-.benefit-card{
-  background:var(--n0);border:1px solid var(--n200);border-radius:var(--r-lg);padding:32px 28px;
-  text-align:center;transition:all .3s var(--ease);
-}
-.benefit-card:hover{border-color:var(--v400);box-shadow:0 12px 40px rgba(124,58,237,.12);transform:translateY(-4px)}
-.benefit-card .icon{
-  font-size:36px;margin-bottom:16px;display:block;
-}
-.benefit-card h3{
-  font-size:18px;font-weight:700;color:var(--n900);margin-bottom:12px;
-}
-.benefit-card p{
-  font-size:14px;color:var(--n500);line-height:1.6;
-}
+        /* ====== ANIMATIONS ====== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-/* ═══════════════════ HOW IT WORKS STEPS ═══════════════════ */
-.steps-container{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;margin-bottom:60px;
-}
-.steps-container::before{
-  content:'';position:absolute;top:40px;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--v200) 0%,var(--v400) 50%,var(--v200) 100%);
-  z-index:0;pointer-events:none;
-}
-.step-box{
-  position:relative;z-index:1;background:var(--n0);border:1px solid var(--v200);
-  border-radius:var(--r-lg);padding:32px 24px;text-align:center;
-}
-.step-number{
-  width:80px;height:80px;border-radius:50%;background:var(--grad-hero);
-  color:white;font-size:32px;font-weight:900;display:flex;align-items:center;justify-content:center;
-  margin:0 auto 20px;box-shadow:var(--sh-glow);
-}
-.step-box h3{
-  font-size:18px;font-weight:700;color:var(--n900);margin-bottom:12px;
-}
-.step-box p{
-  font-size:14px;color:var(--n500);line-height:1.6;
-}
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
 
-/* ═══════════════════ FEATURES GRID ═══════════════════ */
-.features-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
-}
-.feature-item{
-  background:var(--n0);border:1px solid var(--n200);border-radius:var(--r-lg);
-  padding:28px;transition:all .3s var(--ease);
-}
-.feature-item:hover{border-color:var(--v400);box-shadow:var(--sh-md);background:linear-gradient(135deg,rgba(124,58,237,.02) 0%,rgba(99,102,241,.02) 100%)}
-.feature-item .icon{
-  font-size:28px;margin-bottom:16px;display:block;
-}
-.feature-item h4{
-  font-size:16px;font-weight:700;color:var(--n900);margin-bottom:8px;
-}
-.feature-item p{
-  font-size:13px;color:var(--n500);line-height:1.6;
-}
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 900px) {
+            .hero-grid, .block-grid { grid-template-columns: 1fr; gap: 48px; }
+            .block-grid.reverse { direction: ltr; }
+            .hero { padding: 120px 0 80px; min-height: auto; }
+            .section, .block { padding: 80px 0; }
+            .section-lg { padding: 100px 0; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+            .hero-visual { display: none; }
+        }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
+        }
 
-/* ═══════════════════ USE CASES ═══════════════════ */
-.use-cases-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
-}
-.use-case{
-  background:linear-gradient(135deg,rgba(124,58,237,.05) 0%,rgba(99,102,241,.05) 100%);
-  border:1px solid var(--v100);border-radius:var(--r-lg);
-  padding:32px 24px;text-align:center;cursor:default;
-  transition:all .3s var(--ease);
-}
-.use-case:hover{border-color:var(--v300);background:linear-gradient(135deg,rgba(124,58,237,.1) 0%,rgba(99,102,241,.08) 100%);transform:translateY(-2px)}
-.use-case .icon{
-  font-size:40px;margin-bottom:16px;display:block;
-}
-.use-case h4{
-  font-size:16px;font-weight:700;color:var(--n900);margin-bottom:8px;
-}
-.use-case p{
-  font-size:13px;color:var(--n500);line-height:1.5;
-}
-
-/* ═══════════════════ CTA SECTION ═══════════════════ */
-.cta-box{
-  background:var(--grad-hero);border-radius:var(--r-2xl);padding:64px 40px;
-  text-align:center;box-shadow:var(--sh-glow);
-}
-.cta-box h2{
-  font-size:38px;font-weight:900;color:var(--n0);margin-bottom:16px;
-}
-.cta-box p{
-  font-size:16px;color:rgba(255,255,255,.85);margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;
-}
-.cta-box .btn{
-  margin:0 8px;
-}
-
-/* ═══════════════════ FOOTER ═══════════════════ */
-.footer{background:var(--n950);color:var(--n400);padding:72px 0 36px}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand .logo{margin-bottom:12px;display:inline-block}
-.footer-brand>p{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:280px}
-.footer-social{display:flex;gap:10px}
-.footer-social a{
-  width:36px;height:36px;border-radius:var(--r-sm);
-  background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;
-  font-size:14px;transition:all .3s;color:var(--n400);
-}
-.footer-social a:hover{background:var(--v600);color:var(--n0)}
-.footer-col h4{font-size:13px;font-weight:700;color:var(--n0);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
-.footer-col a{display:block;font-size:13px;color:var(--n400);padding:5px 0;transition:color .25s}
-.footer-col a:hover{color:var(--v400)}
-.footer-bottom{
-  padding-top:28px;border-top:1px solid rgba(255,255,255,.06);
-  display:flex;align-items:center;justify-content:space-between;font-size:13px;
-}
-
-/* ═══════════════════ WHATSAPP FAB ═══════════════════ */
-.wa-fab{
-  position:fixed;bottom:24px;right:24px;z-index:99;
-  width:56px;height:56px;border-radius:50%;background:#25d366;
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 20px rgba(37,211,102,.4);
-  transition:all .3s var(--ease-spring);cursor:pointer;
-}
-html[dir="rtl"] .wa-fab{right:auto;left:24px}
-.wa-fab:hover{transform:scale(1.08);box-shadow:0 8px 28px rgba(37,211,102,.5)}
-.wa-fab svg{width:28px;height:28px}
-
-/* Sticky mobile CTA */
-.sticky-cta{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;
-  background:rgba(255,255,255,.95);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  padding:12px 20px;border-top:1px solid var(--n200);
-}
-.sticky-cta .btn{width:100%;justify-content:center}
-
-/* ═══════════════════ MOBILE MENU ═══════════════════ */
-.mob-overlay{
-  display:none;position:fixed;inset:0;z-index:200;
-  background:rgba(0,0,0,.4);backdrop-filter:blur(4px);
-}
-.mob-overlay.open{display:block}
-.mob-panel{
-  position:absolute;top:0;right:0;width:300px;height:100%;
-  background:var(--n0);padding:28px;box-shadow:var(--sh-lg);
-}
-html[dir="rtl"] .mob-panel{right:auto;left:0}
-.mob-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:26px;cursor:pointer;color:var(--n600)}
-html[dir="rtl"] .mob-close{right:auto;left:16px}
-.mob-links{margin-top:56px;display:flex;flex-direction:column;gap:22px}
-.mob-links a{font-size:17px;font-weight:600;color:var(--n700);transition:color .25s}
-.mob-links a:hover{color:var(--v600)}
-
-/* ═══════════════════ ANIMATIONS ═══════════════════ */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
-.reveal-delay-4{transition-delay:.4s}
-.reveal-delay-5{transition-delay:.5s}
-.reveal-delay-6{transition-delay:.6s}
-
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
-@media(max-width:1024px){
-  .hero h1{font-size:42px}
-  .benefits-grid{grid-template-columns:repeat(2,1fr)}
-  .steps-container{grid-template-columns:repeat(2,1fr)}
-  .steps-container::before{display:none}
-  .features-grid{grid-template-columns:repeat(2,1fr)}
-  .use-cases-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:768px){
-  .nav-mid{display:none}
-  .nav-right .btn-fill{display:none}
-  .hamburger{display:block}
-  .hero{padding:100px 0 60px}
-  .hero h1{font-size:34px;letter-spacing:-1px}
-  .hero-sub{font-size:15px}
-  .section{padding:80px 0}
-  .section-head h2{font-size:28px}
-  .benefit-card{padding:24px}
-  .benefits-grid{grid-template-columns:1fr}
-  .steps-container{grid-template-columns:1fr;gap:20px}
-  .step-number{width:60px;height:60px;font-size:24px}
-  .features-grid{grid-template-columns:1fr}
-  .use-cases-grid{grid-template-columns:1fr}
-  .cta-box{padding:48px 24px}
-  .cta-box h2{font-size:26px}
-  .footer-grid{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
-  .sticky-cta{display:block}
-  .wa-fab{bottom:80px}
-}
-</style>
+        /* ====== RTL ====== */
+        [dir="rtl"] .logo small { margin-left: 0; margin-right: 6px; }
+        [dir="rtl"] .nav-links { flex-direction: row-reverse; }
+        [dir="rtl"] .feature-list li { flex-direction: row-reverse; }
+        [dir="rtl"] .block-grid.reverse { direction: ltr; }
+        [dir="rtl"] .block-grid:not(.reverse) { direction: rtl; }
+        [dir="rtl"] .block-grid:not(.reverse) > * { direction: rtl; }
+        [dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <span data-en="Card" data-ar="كارد">Card</span>ni <small data-en="EVD" data-ar="EVD">EVD</small>
+            </a>
+            <div class="nav-links">
+                <a href="#features" data-en="Features" data-ar="المميزات">Features</a>
+                <a href="#benefits" data-en="Benefits" data-ar="الفوائد">Benefits</a>
+                <a href="#integrations" data-en="Integrations" data-ar="التكاملات">Integrations</a>
+                <a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+            <div class="nav-right">
+                <span class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()" data-en="عربي" data-ar="English">عربي</span>
+                <a href="#contact" class="btn btn-primary btn-sm" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+            </div>
+        </nav>
+    </header>
 
-<!-- ═══════════ NAVBAR ═══════════ -->
-<nav class="nav" id="nav">
-  <div class="container">
-    <a href="index.html" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
-    <div class="nav-mid" id="navMid">
-      <a href="index.html#services" data-en="Solutions" data-ar="الحلول">Solutions</a>
-      <a href="about.html" data-en="About" data-ar="حول">About</a>
-      <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
-      <a href="index.html#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
-    </div>
-    <div class="nav-right">
-      <button class="lang-btn" onclick="toggleLang()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span id="langLabel">عربي</span>
-      </button>
-      <a href="index.html#contact" class="btn btn-fill" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
-      <button class="hamburger" onclick="openMob()"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</nav>
-
-<!-- ═══════════ MOBILE MENU ═══════════ -->
-<div class="mob-overlay" id="mobOverlay" onclick="closeMob()">
-  <div class="mob-panel" onclick="event.stopPropagation()">
-    <button class="mob-close" onclick="closeMob()">&times;</button>
-    <div class="mob-links">
-      <a href="index.html#services" onclick="closeMob()" data-en="Solutions" data-ar="الحلول">Solutions</a>
-      <a href="about.html" onclick="closeMob()" data-en="About" data-ar="حول">About</a>
-      <a href="faq.html" onclick="closeMob()" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
-      <a href="index.html#contact" onclick="closeMob()" data-en="Contact" data-ar="تواصل معنا">Contact</a>
-      <a href="index.html#contact" class="btn btn-fill" style="margin-top:8px;text-align:center" onclick="closeMob()" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-  <div class="container">
-    <div class="hero-content reveal">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        <span data-en="Offline Distribution" data-ar="توزيع أوفلاين">Offline Distribution</span>
-        <span class="tag" data-en="SOLUTION" data-ar="الحل">SOLUTION</span>
-      </div>
-      <h1>
-        <span data-en="EVD" data-ar="منصة EVD">EVD</span><br>
-        <span class="gradient" style="display:inline-block;margin-top:12px" data-en="Platform" data-ar="منصة">Platform</span>
-      </h1>
-      <p class="hero-sub" data-en="Complete offline voucher distribution software for POS terminals and retail networks. Manage stock, distributors, merchants, and deliver instant vouchers with real-time reporting." data-ar="برنامج توزيع قسائم أوفلاين متكامل لأجهزة نقاط البيع والشبكات البيعية. أدر المخزون والموزعين والتجار وقدم القسائم الفوري مع تقارير فوري.">Complete offline voucher distribution software for POS terminals and retail networks. Manage stock, distributors, merchants, and deliver instant vouchers with real-time reporting.</p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn btn-fill btn-lg" data-en="Get Custom Pricing" data-ar="احصل على سعر مخصص">
-          Get Custom Pricing
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-        </a>
-        <a href="#how" class="btn btn-outline btn-lg" data-en="Learn More" data-ar="تعرف على المزيد">Learn More</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ KEY BENEFITS ═══════════ -->
-<section class="section">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag"><span class="line"></span> <span data-en="KEY BENEFITS" data-ar="الفوائد الرئيسية">KEY BENEFITS</span> <span class="line"></span></div>
-      <h2 data-en="Why Choose EVD Platform" data-ar="لماذا تختار منصة EVD">Why Choose EVD Platform</h2>
-      <p data-en="Powerful features designed to streamline your distribution operations and maximize profitability." data-ar="ميزات قوية مصممة لتبسيط عمليات التوزيع وتعظيم الربحية.">Powerful features designed to streamline your distribution operations and maximize profitability.</p>
-    </div>
-    <div class="benefits-grid">
-      <div class="benefit-card reveal">
-        <span class="icon">⚡</span>
-        <h3 data-en="Offline Operation" data-ar="تشغيل أوفلاين">Offline Operation</h3>
-        <p data-en="POS terminals work seamlessly without internet. Sync transactions whenever connection available." data-ar="تعمل أجهزة نقاط البيع بسلاسة بدون إنترنت. مزامنة المعاملات عند توفر الاتصال.">POS terminals work seamlessly without internet. Sync transactions whenever connection available.</p>
-      </div>
-      <div class="benefit-card reveal reveal-delay-1">
-        <span class="icon">📦</span>
-        <h3 data-en="Multi-Product Support" data-ar="دعم منتجات متعددة">Multi-Product Support</h3>
-        <p data-en="Sell vouchers, game top-ups, mobile recharge, and gift cards all from one platform." data-ar="بيع القسائم وشحن الألعاب وشحن الجوال والهدايا من منصة واحدة.">Sell vouchers, game top-ups, mobile recharge, and gift cards all from one platform.</p>
-      </div>
-      <div class="benefit-card reveal reveal-delay-2">
-        <span class="icon">📊</span>
-        <h3 data-en="Real-time Reporting" data-ar="تقارير فورية">Real-time Reporting</h3>
-        <p data-en="Track sales, inventory, and performance across all terminals and distributors instantly." data-ar="تتبع المبيعات والمخزون والأداء عبر جميع الأجهزة والموزعين فوراً.">Track sales, inventory, and performance across all terminals and distributors instantly.</p>
-      </div>
-      <div class="benefit-card reveal reveal-delay-3">
-        <span class="icon">🔒</span>
-        <h3 data-en="Secure Transactions" data-ar="معاملات آمنة">Secure Transactions</h3>
-        <p data-en="Bank-grade encryption and PCI compliance ensure every transaction is protected." data-ar="تشفير بمستوى البنوك ومطابقة PCI تضمن حماية كل معاملة.">Bank-grade encryption and PCI compliance ensure every transaction is protected.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ HOW EVD WORKS ═══════════ -->
-<section class="section" style="background:var(--n50)">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag"><span class="line"></span> <span data-en="HOW IT WORKS" data-ar="كيف يعمل">HOW IT WORKS</span> <span class="line"></span></div>
-      <h2 data-en="Four Simple Steps" data-ar="أربع خطوات بسيطة">Four Simple Steps</h2>
-      <p data-en="From POS connection to instant voucher delivery, our streamlined process makes distribution seamless." data-ar="من توصيل جهاز نقاط البيع إلى توصيل القسائم الفوري، عملية موحدة تجعل التوزيع بسيطاً.">From POS connection to instant voucher delivery, our streamlined process makes distribution seamless.</p>
-    </div>
-    <div class="steps-container">
-      <div class="step-box reveal">
-        <div class="step-number">1</div>
-        <h3 data-en="Connect POS" data-ar="توصيل نقاط البيع">Connect POS</h3>
-        <p data-en="Link your terminals to the EVD platform through our secure gateway." data-ar="اربط أجهزتك بمنصة EVD من خلال بوابتنا الآمنة.">Link your terminals to the EVD platform through our secure gateway.</p>
-      </div>
-      <div class="step-box reveal reveal-delay-1">
-        <div class="step-number">2</div>
-        <h3 data-en="Select Product" data-ar="اختر المنتج">Select Product</h3>
-        <p data-en="Choose voucher type and amount from your loaded inventory." data-ar="اختر نوع القسيمة والمبلغ من مخزونك المحمل.">Choose voucher type and amount from your loaded inventory.</p>
-      </div>
-      <div class="step-box reveal reveal-delay-2">
-        <div class="step-number">3</div>
-        <h3 data-en="Process Transaction" data-ar="معالجة المعاملة">Process Transaction</h3>
-        <p data-en="Customer pays and transaction is processed instantly on the terminal." data-ar="يدفع العميل وتتم معالجة المعاملة فوراً على الجهاز.">Customer pays and transaction is processed instantly on the terminal.</p>
-      </div>
-      <div class="step-box reveal reveal-delay-3">
-        <div class="step-number">4</div>
-        <h3 data-en="Instant Delivery" data-ar="التسليم الفوري">Instant Delivery</h3>
-        <p data-en="Voucher code delivered via SMS, email, or printed receipt immediately." data-ar="يتم تسليم رمز القسيمة عبر الرسائل النصية أو البريد الإلكتروني أو الإيصال المطبوع فوراً.">Voucher code delivered via SMS, email, or printed receipt immediately.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ FEATURES GRID ═══════════ -->
-<section class="section">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag"><span class="line"></span> <span data-en="FEATURES" data-ar="الميزات">FEATURES</span> <span class="line"></span></div>
-      <h2 data-en="Comprehensive Feature Set" data-ar="مجموعة ميزات شاملة">Comprehensive Feature Set</h2>
-      <p data-en="Everything you need to run a successful distribution network." data-ar="كل ما تحتاجه لتشغيل شبكة توزيع ناجحة.">Everything you need to run a successful distribution network.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-item reveal">
-        <span class="icon">📦</span>
-        <h4 data-en="Inventory Management" data-ar="إدارة المخزون">Inventory Management</h4>
-        <p data-en="Real-time stock tracking with automatic low-stock alerts across all terminals." data-ar="تتبع المخزون فوري مع تنبيهات المخزون المنخفض التلقائية.">Real-time stock tracking with automatic low-stock alerts across all terminals.</p>
-      </div>
-      <div class="feature-item reveal reveal-delay-1">
-        <span class="icon">📈</span>
-        <h4 data-en="Sales Tracking" data-ar="تتبع المبيعات">Sales Tracking</h4>
-        <p data-en="Monitor revenue, transaction count, and performance metrics by terminal or distributor." data-ar="راقب الإيرادات وعدد المعاملات ومقاييس الأداء حسب الجهاز أو الموزع.">Monitor revenue, transaction count, and performance metrics by terminal or distributor.</p>
-      </div>
-      <div class="feature-item reveal reveal-delay-2">
-        <span class="icon">👥</span>
-        <h4 data-en="Multi-User Support" data-ar="دعم مستخدمين متعددين">Multi-User Support</h4>
-        <p data-en="Role-based access control for distributors, merchants, and system administrators." data-ar="التحكم في الوصول بناءً على الأدوار للموزعين والتجار والمسؤولين.">Role-based access control for distributors, merchants, and system administrators.</p>
-      </div>
-      <div class="feature-item reveal reveal-delay-3">
-        <span class="icon">🧾</span>
-        <h4 data-en="Receipt Printing" data-ar="طباعة الإيصالات">Receipt Printing</h4>
-        <p data-en="Professional receipt generation with logos, codes, and transaction details." data-ar="توليد إيصالات احترافية مع الشعارات والأكواز والتفاصيل.">Professional receipt generation with logos, codes, and transaction details.</p>
-      </div>
-      <div class="feature-item reveal reveal-delay-4">
-        <span class="icon">🚨</span>
-        <h4 data-en="Stock Alerts" data-ar="تنبيهات المخزون">Stock Alerts</h4>
-        <p data-en="Automatic notifications when inventory reaches critical levels on any terminal." data-ar="تنبيهات تلقائية عندما يصل المخزون إلى مستويات حرجة.">Automatic notifications when inventory reaches critical levels on any terminal.</p>
-      </div>
-      <div class="feature-item reveal reveal-delay-5">
-        <span class="icon">💰</span>
-        <h4 data-en="Commission Management" data-ar="إدارة العمولات">Commission Management</h4>
-        <p data-en="Automated commission calculation and settlement for distributors and agents." data-ar="حساب وتسوية العمولات التلقائية للموزعين والوكلاء.">Automated commission calculation and settlement for distributors and agents.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ USE CASES ═══════════ -->
-<section class="section" style="background:var(--n50)">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag"><span class="line"></span> <span data-en="USE CASES" data-ar="حالات الاستخدام">USE CASES</span> <span class="line"></span></div>
-      <h2 data-en="Perfect For" data-ar="مثالي ل">Perfect For</h2>
-      <p data-en="EVD Platform works across diverse retail and service sectors." data-ar="تعمل منصة EVD عبر قطاعات البيع بالتجزئة والخدمات المتنوعة.">EVD Platform works across diverse retail and service sectors.</p>
-    </div>
-    <div class="use-cases-grid">
-      <div class="use-case reveal">
-        <span class="icon">📞</span>
-        <h4 data-en="Telecom Retailers" data-ar="متاجر الاتصالات">Telecom Retailers</h4>
-        <p data-en="Sell mobile recharge, data plans, and SIM cards instantly." data-ar="بيع شحن الجوال وخطط البيانات وبطاقات SIM فوراً.">Sell mobile recharge, data plans, and SIM cards instantly.</p>
-      </div>
-      <div class="use-case reveal reveal-delay-1">
-        <span class="icon">🛒</span>
-        <h4 data-en="Grocery Stores" data-ar="محلات البقالة">Grocery Stores</h4>
-        <p data-en="Add digital vouchers and gift cards alongside physical products." data-ar="أضف القسائم الرقمية وبطاقات الهدايا إلى المنتجات الفعلية.">Add digital vouchers and gift cards alongside physical products.</p>
-      </div>
-      <div class="use-case reveal reveal-delay-2">
-        <span class="icon">💻</span>
-        <h4 data-en="Electronics Shops" data-ar="متاجر الإلكترونيات">Electronics Shops</h4>
-        <p data-en="Sell gaming credits, software licenses, and digital subscriptions." data-ar="بيع أرصدة الألعاب والرخص البرمجية والاشتراكات الرقمية.">Sell gaming credits, software licenses, and digital subscriptions.</p>
-      </div>
-      <div class="use-case reveal reveal-delay-3">
-        <span class="icon">🎮</span>
-        <h4 data-en="Gaming Cafes" data-ar="مقاهي الألعاب">Gaming Cafes</h4>
-        <p data-en="Quick redemption of game top-ups, in-game currency, and skins." data-ar="استرجاع سريع لشحن الألعاب والعملات داخل اللعبة والمظاهر.">Quick redemption of game top-ups, in-game currency, and skins.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ CTA ═══════════ -->
-<section class="section">
-  <div class="container">
-    <div class="cta-box reveal">
-      <h2 data-en="Ready to Launch Your EVD Business" data-ar="هل أنت مستعد لإطلاق أعمال EVD">Ready to Launch Your EVD Business</h2>
-      <p data-en="Get in touch with our team to discuss your requirements and receive custom pricing." data-ar="تواصل مع فريقنا لمناقشة احتياجاتك والحصول على سعر مخصص.">Get in touch with our team to discuss your requirements and receive custom pricing.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="https://wa.me/966539761698" target="_blank" class="btn btn-white" data-en="Chat on WhatsApp" data-ar="تحدث على WhatsApp">Chat on WhatsApp</a>
-        <a href="mailto:info@cardni.com" class="btn btn-white" data-en="Email Us" data-ar="أرسل بريد">Email Us</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ FOOTER ═══════════ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
-        <p data-en="Empowering businesses with complete digital voucher distribution solutions worldwide." data-ar="نمكّن الشركات بحلول توزيع القسائم الرقمية المتكاملة حول العالم.">Empowering businesses with complete digital voucher distribution solutions worldwide.</p>
-        <div class="footer-social">
-          <a href="https://t.me/cardnicom" target="_blank" aria-label="Telegram">✈</a>
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="Instagram">◻</a>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <div class="label hero-label" data-en="Electronic Voucher Distribution" data-ar="توزيع القسائم الإلكترونية">Electronic Voucher Distribution</div>
+                    <h1 class="heading-lg" data-en="Sell Vouchers <em>at Scale.</em>" data-ar="بِع القسائم <em>على نطاق واسع.</em>">
+                        <div>Sell Vouchers</div>
+                        <div><em>at Scale.</em></div>
+                    </h1>
+                    <p class="hero-subtitle" data-en="Complete offline voucher distribution software for POS terminals, retail networks, and merchants worldwide. Instant delivery, multi-product support, and real-time reporting." data-ar="برنامج توزيع قسائم أوفلاين كامل لمحطات نقاط البيع والشبكات الخاصة بالبيع بالتجزئة والتجار في جميع أنحاء العالم. التسليم الفوري والدعم متعدد المنتجات والإبلاغ في الوقت الفعلي.">Complete offline voucher distribution software for POS terminals, retail networks, and merchants worldwide. Instant delivery, multi-product support, and real-time reporting.</p>
+                    <div class="hero-ctas">
+                        <a href="#contact" class="btn btn-primary" data-en="Get Pricing" data-ar="احصل على السعر">Get Pricing</a>
+                        <a href="#features" class="btn btn-outline" data-en="Learn More" data-ar="تعلم المزيد">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="mockup-dashboard">
+                            <div class="mockup-topbar">
+                                <div class="mockup-dot"></div>
+                                <div class="mockup-dot"></div>
+                                <div class="mockup-dot"></div>
+                            </div>
+                            <div class="mockup-row">
+                                <div class="mockup-bar" style="flex: 2;"></div>
+                            </div>
+                            <div class="mockup-row">
+                                <div class="mockup-bar" style="flex: 1;"></div>
+                                <div class="mockup-bar accent" style="flex: 1;"></div>
+                            </div>
+                            <div class="mockup-chart"></div>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-number" data-en="24/7" data-ar="24/7">24/7</div>
+                        <div class="hero-card-label" data-en="Uptime Guarantee" data-ar="ضمان التوفر">Uptime Guarantee</div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-big-number">150+</div>
+                        <div class="hero-card-caption" data-en="Countries Supported" data-ar="دول مدعومة">Countries Supported</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="Solutions" data-ar="الحلول">Solutions</h4>
-        <a href="evd.html" data-en="EVD Platform" data-ar="منصة EVD">EVD Platform</a>
-        <a href="b2b.html" data-en="B2B Integration" data-ar="تكامل B2B">B2B Integration</a>
-        <a href="b2c.html" data-en="B2C Store" data-ar="متجر B2C">B2C Store</a>
-        <a href="#" data-en="API Docs" data-ar="توثيق API">API Docs</a>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="Company" data-ar="الشركة">Company</h4>
-        <a href="about.html" data-en="About Us" data-ar="من نحن">About Us</a>
-        <a href="#" data-en="Careers" data-ar="وظائف">Careers</a>
-        <a href="#" data-en="Blog" data-ar="المدونة">Blog</a>
-        <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
-        <a href="privacy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
-        <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
-        <a href="#" data-en="Cookie Policy" data-ar="سياسة الكوكيز">Cookie Policy</a>
-        <a href="#" data-en="SLA" data-ar="اتفاقية مستوى الخدمة">SLA</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Cardni. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></span>
-      <span data-en="Riyadh, Saudi Arabia" data-ar="الرياض، المملكة العربية السعودية">Riyadh, Saudi Arabia</span>
-    </div>
-  </div>
-</footer>
+    </section>
 
-<!-- ═══════════ WHATSAPP FAB ═══════════ -->
-<a href="https://wa.me/966539761698" target="_blank" class="wa-fab" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
+    <!-- Features Block (Dark) -->
+    <section class="block block-dark" id="features">
+        <div class="container">
+            <div class="block-grid">
+                <div>
+                    <div class="label block-label" data-en="Core Features" data-ar="المميزات الأساسية">Core Features</div>
+                    <h2 class="heading-lg block-title" data-en="Real-Time <em>Analytics Dashboard</em>" data-ar="لوحة <em>تحليلات فورية</em>">
+                        Real-Time <em>Analytics Dashboard</em>
+                    </h2>
+                    <p class="block-desc" data-en="Monitor every transaction as it happens. Get full visibility into sales, inventory, and partner performance with live dashboards and detailed reports." data-ar="راقب كل معاملة فور حدوثها. احصل على رؤية كاملة للمبيعات والمخزون وأداء الشركاء مع لوحات معلومات حية وتقارير مفصلة.">Monitor every transaction as it happens. Get full visibility into sales, inventory, and partner performance with live dashboards and detailed reports.</p>
+                    <ul class="feature-list">
+                        <li data-en="Live transaction monitoring" data-ar="مراقبة المعاملات الحية">Live transaction monitoring</li>
+                        <li data-en="Sales &amp; revenue reports" data-ar="تقارير المبيعات والإيرادات">Sales &amp; revenue reports</li>
+                        <li data-en="Inventory tracking across all products" data-ar="تتبع المخزون عبر جميع المنتجات">Inventory tracking across all products</li>
+                        <li data-en="Partner performance insights" data-ar="رؤى أداء الشركاء">Partner performance insights</li>
+                    </ul>
+                </div>
+                <div class="block-visual">
+                    <div class="mockup-dashboard">
+                        <div class="mockup-topbar">
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                        </div>
+                        <div style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 12px;">
+                            <div style="color: rgba(255,255,255,0.5); font-size: 12px; margin-bottom: 8px;">Status: LIVE</div>
+                            <div style="color: var(--emerald); font-size: 14px; font-weight: 600;">Today: 1,247 transactions</div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="mockup-bar" style="flex: 1;"></div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="mockup-bar" style="flex: 1.5;"></div>
+                            <div class="mockup-bar accent" style="flex: 1;"></div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="mockup-bar" style="flex: 1.2;"></div>
+                            <div class="mockup-bar" style="flex: 0.8;"></div>
+                            <div class="mockup-bar accent" style="flex: 1;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Sticky mobile CTA -->
-<div class="sticky-cta">
-  <a href="index.html#contact" class="btn btn-fill btn-lg" data-en="Get Pricing" data-ar="احصل على السعر">Get Pricing</a>
-</div>
+    <!-- Integration Block (Violet) -->
+    <section class="block block-violet" id="integrations">
+        <div class="container">
+            <div class="block-grid reverse">
+                <div>
+                    <div class="label block-label" data-en="POS Integration" data-ar="تكامل نقاط البيع">POS Integration</div>
+                    <h2 class="heading-lg block-title" data-en="Works with <em>Any Terminal</em>" data-ar="يعمل مع <em>أي محطة</em>">
+                        Works with <em>Any Terminal</em>
+                    </h2>
+                    <p class="block-desc" data-en="Seamless integration with all major POS systems. Connect NCR, PAX, Ingenico, Verifone terminals and mobile payment solutions." data-ar="تكامل سلس مع جميع أنظمة نقاط البيع الرئيسية. توصيل محطات NCR و PAX و Ingenico و Verifone وحلول الدفع عبر الهاتف المحمول.">Seamless integration with all major POS systems. Connect NCR, PAX, Ingenico, Verifone terminals and mobile payment solutions.</p>
+                    <ul class="feature-list">
+                        <li data-en="API-first architecture" data-ar="معمارية موجهة للـ API">API-first architecture</li>
+                        <li data-en="Custom webhook support" data-ar="دعم webhook مخصص">Custom webhook support</li>
+                        <li data-en="Real-time sync" data-ar="المزامنة في الوقت الفعلي">Real-time sync</li>
+                        <li data-en="Legacy system compatibility" data-ar="توافق النظام القديم">Legacy system compatibility</li>
+                    </ul>
+                </div>
+                <div class="block-visual">
+                    <div class="mockup-dashboard" style="background: linear-gradient(145deg, rgba(124, 58, 237, 0.15) 0%, rgba(99, 102, 241, 0.1) 100%); border-color: rgba(255,255,255,0.1);">
+                        <div style="text-align: center; padding: 40px;">
+                            <div style="font-size: 24px; margin-bottom: 20px;">🔌</div>
+                            <div style="color: rgba(255,255,255,0.8); font-weight: 600; margin-bottom: 8px;">PAX</div>
+                            <div style="color: rgba(255,255,255,0.4); font-size: 12px; margin-bottom: 24px;">Connected</div>
 
-<!-- ═══════════ JAVASCRIPT ═══════════ -->
-<script>
-// Language Toggle
-let lang = 'en';
-function toggleLang() {
-  lang = lang === 'en' ? 'ar' : 'en';
-  const html = document.documentElement;
-  html.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  html.lang = lang;
-  document.body.style.fontFamily = lang === 'ar' ? 'var(--font-ar)' : 'var(--font-en)';
+                            <div style="font-size: 24px; margin-bottom: 20px;">📱</div>
+                            <div style="color: rgba(255,255,255,0.8); font-weight: 600; margin-bottom: 8px;">Newland</div>
+                            <div style="color: rgba(255,255,255,0.4); font-size: 12px; margin-bottom: 24px;">Connected</div>
 
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const t = el.getAttribute('data-' + lang);
-    if (t) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = t;
-      else el.textContent = t;
-    }
-  });
-  document.querySelectorAll('[data-placeholder-en]').forEach(el => {
-    el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
-  });
-  document.querySelectorAll('select option[data-en]').forEach(o => {
-    const t = o.getAttribute('data-' + lang);
-    if (t) o.textContent = t;
-  });
-  document.getElementById('langLabel').textContent = lang === 'en' ? 'عربي' : 'English';
-}
+                            <div style="font-size: 24px; margin-bottom: 20px;">💳</div>
+                            <div style="color: rgba(255,255,255,0.8); font-weight: 600; margin-bottom: 8px;">Sunmi</div>
+                            <div style="color: rgba(255,255,255,0.4); font-size: 12px;">Connected</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-// Navbar scroll effect
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('nav');
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+    <!-- Benefits Block (Cream) -->
+    <section class="block block-cream" id="benefits">
+        <div class="container">
+            <h2 class="heading-lg text-center" style="margin-bottom: 60px;" data-en="Why Choose EVD Platform" data-ar="لماذا اختيار منصة EVD">Why Choose EVD Platform</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <span class="icon">⚡</span>
+                    <h3 data-en="Instant Activation" data-ar="التفعيل الفوري">Instant Activation</h3>
+                    <p data-en="Deploy and activate your voucher program in minutes, not weeks." data-ar="نشّط برنامج القسيمة الخاص بك في دقائق، وليس أسابيع.">Deploy and activate your voucher program in minutes, not weeks.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <span class="icon">🔐</span>
+                    <h3 data-en="Enterprise Security" data-ar="أمان المؤسسة">Enterprise Security</h3>
+                    <p data-en="PCI DSS L1 compliant with end-to-end encryption and fraud detection." data-ar="ممتثل لـ PCI DSS L1 مع التشفير من البداية إلى النهاية واكتشاف الاحتيال.">PCI DSS L1 compliant with end-to-end encryption and fraud detection.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <span class="icon">📊</span>
+                    <h3 data-en="Real-time Analytics" data-ar="تحليلات فورية">Real-time Analytics</h3>
+                    <p data-en="Monitor sales, redemptions, and inventory in real-time dashboards." data-ar="مراقبة المبيعات والاسترجاع والمخزون في لوحات المعلومات الفورية.">Monitor sales, redemptions, and inventory in real-time dashboards.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <span class="icon">🌍</span>
+                    <h3 data-en="Global Scale" data-ar="النطاق العالمي">Global Scale</h3>
+                    <p data-en="Support for 150+ countries with local payment methods and regulations." data-ar="دعم أكثر من 150 دولة مع طرق الدفع المحلية والتنظيمات.">Support for 150+ countries with local payment methods and regulations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-// Mobile menu
-function openMob() {
-  document.getElementById('mobOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeMob() {
-  document.getElementById('mobOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
+    <!-- Stats Block (Dark) -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div>
+                    <div class="stat-value" data-en="1.8M+" data-ar="1.8M+">1.8M+</div>
+                    <div class="stat-label" data-en="Transactions" data-ar="معاملات">Transactions</div>
+                </div>
+                <div>
+                    <div class="stat-value" data-en="7,000+" data-ar="7,000+">7,000+</div>
+                    <div class="stat-label" data-en="Merchants" data-ar="التجار">Merchants</div>
+                </div>
+                <div>
+                    <div class="stat-value" data-en="99.99%" data-ar="99.99%">99.99%</div>
+                    <div class="stat-label" data-en="Uptime SLA" data-ar="اتفاق مستوى الخدمة">Uptime SLA</div>
+                </div>
+                <div>
+                    <div class="stat-value" data-en="24/7" data-ar="24/7">24/7</div>
+                    <div class="stat-label" data-en="Support" data-ar="الدعم">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-// Scroll reveal animation
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('visible');
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    <!-- CTA Block -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="heading-lg" data-en="Ready to Launch Your EVD Business" data-ar="هل أنت مستعد لإطلاق أعمال EVD">Ready to Launch Your EVD Business</h2>
+            <p data-en="Get in touch with our team to discuss your requirements and receive custom pricing tailored to your needs." data-ar="تواصل مع فريقنا لمناقشة احتياجاتك والحصول على سعر مخصص يناسب احتياجاتك.">Get in touch with our team to discuss your requirements and receive custom pricing tailored to your needs.</p>
+            <div class="cta-btns">
+                <a href="https://wa.me/966539761698" target="_blank" class="btn btn-white" data-en="Chat on WhatsApp" data-ar="تحدث على WhatsApp">Chat on WhatsApp</a>
+                <a href="mailto:info@cardni.com" class="btn btn-white" data-en="Email Us" data-ar="أرسل بريد">Email Us</a>
+            </div>
+        </div>
+    </section>
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-</script>
+    <!-- Contact Block -->
+    <section class="block block-white" id="contact">
+        <div class="container container-narrow">
+            <h2 class="heading-lg text-center" style="margin-bottom: 60px;" data-en="Contact EVD Team" data-ar="تواصل مع فريق EVD">Contact EVD Team</h2>
+            <p class="body-md text-center" style="margin-bottom: 48px; color: var(--gray-500);" data-en="Dedicated support for implementation, training, and ongoing operations." data-ar="دعم مخصص للتنفيذ والتدريب والعمليات الجارية.">Dedicated support for implementation, training, and ongoing operations.</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <span class="icon">💚</span>
+                    <h3 data-en="WhatsApp" data-ar="واتس آب">WhatsApp</h3>
+                    <p><a href="https://wa.me/966539761698" target="_blank" style="color: var(--violet-600); font-weight: 600; text-decoration: none;">+966 539 761 698</a></p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">📧</span>
+                    <h3 data-en="Email" data-ar="البريد الإلكتروني">Email</h3>
+                    <p><a href="mailto:info@cardni.com" style="color: var(--violet-600); font-weight: 600; text-decoration: none;">info@cardni.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span>Card</span>ni <small>EVD</small>
+                    </a>
+                    <p data-en="Complete digital voucher distribution platform trusted by 50+ merchants." data-ar="منصة توزيع قسائم رقمية كاملة موثوقة من قبل 50+ تاجر.">Complete digital voucher distribution platform trusted by 50+ merchants.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Company" data-ar="الشركة">Company</h4>
+                    <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+                    <a href="about.html" data-en="About Us" data-ar="من نحن">About Us</a>
+                    <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+                    <a href="privacy.html" data-en="Privacy" data-ar="الخصوصية">Privacy</a>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Solutions" data-ar="الحلول">Solutions</h4>
+                    <a href="evd.html" data-en="EVD Platform" data-ar="منصة EVD">EVD Platform</a>
+                    <a href="b2b.html" data-en="B2B API" data-ar="API B2B">B2B API</a>
+                    <a href="b2c.html" data-en="B2C Store" data-ar="متجر B2C">B2C Store</a>
+                    <a href="#" data-en="Documentation" data-ar="التوثيق">Documentation</a>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Support" data-ar="الدعم">Support</h4>
+                    <a href="https://wa.me/966539761698" target="_blank" data-en="WhatsApp" data-ar="واتس آب">WhatsApp</a>
+                    <a href="mailto:info@cardni.com" data-en="Email" data-ar="بريد إلكتروني">Email</a>
+                    <a href="https://t.me/cardnicom" target="_blank" data-en="Telegram" data-ar="تيليجرام">Telegram</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Cardni. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></span>
+                <div class="footer-meta">
+                    <span data-en="Made in" data-ar="صنعت في">Made in</span>
+                    <span>🇸🇦</span>
+                    <a href="#" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                    <a href="#" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Language system
+        let lang = 'en';
+        function toggleLanguage() {
+            lang = lang === 'en' ? 'ar' : 'en';
+            const html = document.documentElement;
+            html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            html.lang = lang;
+            document.body.style.fontFamily = lang === 'ar' ? "'Tajawal', var(--sans)" : "var(--sans)";
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+
+            document.getElementById('lang-toggle').textContent = lang === 'en' ? 'العربية' : 'English';
+        }
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
