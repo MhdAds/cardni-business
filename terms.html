@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-en="Terms of Service - Cardni Business" data-ar="شروط الخدمة - كاردني أعمال">Terms of Service - Cardni Business</title>
+<meta name="description" content="Cardni Business Terms of Service covering EVD platform, B2B API, and B2C marketplace operations.">
+<meta name="theme-color" content="#7c3aed">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════ RESET & TOKENS ═══════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --v50:#f5f3ff;--v100:#ede9fe;--v200:#ddd6fe;--v300:#c4b5fd;
+  --v400:#a78bfa;--v500:#8b5cf6;--v600:#7c3aed;--v700:#6d28d9;
+  --v800:#5b21b6;--v900:#4c1d95;
+  --i500:#6366f1;--i600:#4f46e5;
+  --n0:#fff;--n50:#fafafa;--n100:#f4f4f5;--n200:#e4e4e7;
+  --n300:#d4d4d8;--n400:#a1a1aa;--n500:#71717a;--n600:#52525b;
+  --n700:#3f3f46;--n800:#27272a;--n900:#18181b;--n950:#09090b;
+  --success:#10b981;--warning:#f59e0b;--info:#3b82f6;
+  --grad-hero:linear-gradient(135deg,#7c3aed 0%,#6366f1 50%,#8b5cf6 100%);
+  --grad-dark:linear-gradient(160deg,#0f0a1e 0%,#1a0e38 40%,#0f0a1e 100%);
+  --sh-xs:0 1px 2px rgba(0,0,0,.05);--sh-sm:0 2px 8px rgba(0,0,0,.06);
+  --sh-md:0 4px 24px rgba(0,0,0,.08);--sh-lg:0 12px 48px rgba(0,0,0,.1);
+  --sh-glow:0 8px 32px rgba(124,58,237,.25);
+  --font-en:'Inter',system-ui,sans-serif;--font-ar:'Tajawal',system-ui,sans-serif;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-full:9999px;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-en);color:var(--n700);background:var(--n0);line-height:1.65;overflow-x:hidden}
+html[dir="rtl"] body{font-family:var(--font-ar)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button{font-family:inherit}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ═══════════════════ NAVBAR ═══════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;transition:all .35s var(--ease);
+}
+.nav.scrolled{
+  padding:12px 0;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--n200);
+}
+.nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:26px;font-weight:800;letter-spacing:-.75px;color:var(--n500);font-family:var(--font-en)!important}
+.logo span{color:var(--v600)}
+.logo small{font-size:20px;font-weight:400;color:var(--v400);letter-spacing:0;text-transform:none;margin-left:2px}
+html[dir="rtl"] .logo small{margin-left:0;margin-right:2px}
+.nav-mid{display:flex;gap:36px}
+.nav-mid a{
+  font-size:14px;font-weight:500;color:var(--n500);
+  transition:color .25s;position:relative;padding:4px 0;
+}
+.nav-mid a::after{
+  content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;
+  background:var(--v600);border-radius:2px;transition:all .25s var(--ease);transform:translateX(-50%);
+}
+.nav-mid a:hover{color:var(--n900)}
+.nav-mid a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:10px}
+.lang-toggle{
+  background:var(--n100);border:none;padding:8px 12px;border-radius:var(--r-md);
+  font-size:13px;font-weight:600;color:var(--n700);cursor:pointer;
+  transition:all .25s var(--ease);
+}
+.lang-toggle:hover{background:var(--v50);color:var(--v600)}
+.btn-get-started{
+  background:var(--v600);color:var(--n0);padding:10px 20px;
+  border-radius:var(--r-md);font-weight:600;font-size:14px;
+  transition:all .25s var(--ease);box-shadow:0 4px 16px rgba(124,58,237,.25);
+}
+.btn-get-started:hover{
+  background:var(--v700);transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+
+@media(max-width:768px){
+  .nav-mid{display:none}
+  .nav{padding:12px 0}
+  .nav.scrolled{padding:10px 0}
+}
+
+/* ═══════════════════ HERO SECTION ═══════════════════ */
+.hero-bar{
+  background:var(--grad-hero);color:var(--n0);padding:120px 0 60px;
+  text-align:center;margin-top:80px;
+}
+.hero-bar h1{
+  font-size:48px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px;
+}
+.hero-bar .hero-meta{
+  font-size:14px;color:rgba(255,255,255,.8);margin-bottom:0;
+}
+
+@media(max-width:768px){
+  .hero-bar{padding:80px 0 40px;margin-top:60px}
+  .hero-bar h1{font-size:36px}
+}
+
+/* ═══════════════════ CONTENT ═══════════════════ */
+.terms-content{
+  max-width:800px;margin:0 auto;padding:60px 24px;
+}
+.terms-content h2{
+  font-size:24px;font-weight:700;margin:48px 0 20px 0;color:var(--n900);
+  padding-bottom:12px;border-bottom:2px solid var(--v200);
+}
+.terms-content h3{
+  font-size:16px;font-weight:700;margin:28px 0 12px 0;color:var(--n800);
+}
+.terms-content p{
+  margin-bottom:16px;color:var(--n700);line-height:1.8;
+}
+.terms-content ul{
+  margin:16px 0 16px 24px;
+  list-style-type:disc;
+}
+html[dir="rtl"] .terms-content ul{
+  margin:16px 24px 16px 0;
+  list-style-position:inside;
+}
+.terms-content li{
+  margin-bottom:10px;color:var(--n700);line-height:1.7;
+}
+.terms-content strong{
+  color:var(--n900);font-weight:700;
+}
+.terms-content em{
+  color:var(--n600);font-style:italic;
+}
+
+.highlight-box{
+  background:var(--v50);border-left:4px solid var(--v600);padding:20px;
+  border-radius:var(--r-md);margin:24px 0;
+  color:var(--n700);
+}
+html[dir="rtl"] .highlight-box{
+  border-left:none;border-right:4px solid var(--v600);
+}
+
+.toc{
+  background:var(--n50);padding:24px;border-radius:var(--r-lg);
+  margin:40px 0;border:1px solid var(--n200);
+}
+.toc h3{
+  margin-top:0;font-size:16px;color:var(--n900);margin-bottom:16px;
+}
+.toc a{
+  display:block;margin:8px 0;color:var(--v600);font-size:14px;
+  transition:color .25s var(--ease);
+}
+.toc a:hover{color:var(--v700);text-decoration:underline}
+
+.footer-legal{
+  margin-top:60px;padding-top:40px;border-top:2px solid var(--n200);
+  font-size:13px;color:var(--n600);
+}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+.footer{
+  background:var(--n50);border-top:1px solid var(--n200);padding:60px 0 24px;
+  margin-top:60px;
+}
+.footer .container{max-width:1200px}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;
+  margin-bottom:40px;
+}
+.footer-brand a.logo{color:var(--n700);font-size:24px}
+.footer-brand p{font-size:14px;color:var(--n600);margin:12px 0 20px;line-height:1.6}
+.footer-social{display:flex;gap:12px;margin-top:16px}
+.footer-social a{
+  display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:var(--r-md);
+  background:var(--n0);border:1px solid var(--n200);
+  color:var(--n700);transition:all .25s var(--ease);font-size:18px;
+}
+.footer-social a:hover{background:var(--v50);border-color:var(--v600);color:var(--v600)}
+.footer-col h4{
+  font-size:13px;font-weight:700;color:var(--n900);
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;
+}
+.footer-col a{
+  display:block;font-size:14px;color:var(--n600);margin-bottom:12px;
+  transition:color .25s var(--ease);
+}
+.footer-col a:hover{color:var(--v600)}
+.footer-bottom{
+  border-top:1px solid var(--n200);padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;color:var(--n600);
+}
+
+@media(max-width:768px){
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
+}
+
+/* ═══════════════════ WHATSAPP FAB ═══════════════════ */
+.wa-fab{
+  position:fixed;bottom:24px;right:24px;z-index:50;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#20ba5f);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 32px rgba(37,211,102,.4);
+  transition:all .35s var(--ease);
+  animation:float 3s ease-in-out infinite;
+}
+.wa-fab:hover{
+  transform:scale(1.1);box-shadow:0 12px 40px rgba(37,211,102,.5);
+}
+.wa-fab svg{width:28px;height:28px;stroke-width:1.5}
+
+html[dir="rtl"] .wa-fab{right:auto;left:24px}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+@media(max-width:768px){
+  .wa-fab{width:48px;height:48px;bottom:20px;right:20px}
+  .wa-fab svg{width:24px;height:24px}
+  html[dir="rtl"] .wa-fab{right:auto;left:20px}
+}
+
+/* ═══════════════════ REVEAL ANIMATION ═══════════════════ */
+.reveal{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.34,1.56,.64,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="index.html" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+    <div class="nav-mid">
+      <a href="index.html#services" data-en="Solutions" data-ar="الحلول">Solutions</a>
+      <a href="about.html" data-en="About" data-ar="حول">About</a>
+      <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+      <a href="index.html#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-toggle" onclick="toggleLang()" id="langLabel">عربي</button>
+      <a href="index.html#contact" class="btn-get-started" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO BAR ═══════════ -->
+<section class="hero-bar">
+  <div class="container">
+    <h1 data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</h1>
+    <p class="hero-meta" data-en="Effective Date: March 2026" data-ar="تاريخ السريان: مارس 2026">Effective Date: March 2026</p>
+  </div>
+</section>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="terms-content">
+  <!-- Table of Contents -->
+  <div class="toc reveal">
+    <h3 data-en="Table of Contents" data-ar="جدول المحتويات">Table of Contents</h3>
+    <a href="#acceptance" data-en="1. Acceptance of Terms" data-ar="1. قبول الشروط">1. Acceptance of Terms</a>
+    <a href="#services" data-en="2. Description of Services" data-ar="2. وصف الخدمات">2. Description of Services</a>
+    <a href="#registration" data-en="3. Account Registration and Security" data-ar="3. تسجيل الحساب والأمان">3. Account Registration and Security</a>
+    <a href="#payment" data-en="4. Payment Terms" data-ar="4. شروط الدفع">4. Payment Terms</a>
+    <a href="#acceptable" data-en="5. Acceptable Use Policy" data-ar="5. سياسة الاستخدام المقبول">5. Acceptable Use Policy</a>
+    <a href="#ip" data-en="6. Intellectual Property" data-ar="6. الملكية الفكرية">6. Intellectual Property</a>
+    <a href="#api" data-en="7. API Usage Terms" data-ar="7. شروط استخدام API">7. API Usage Terms</a>
+    <a href="#liability" data-en="8. Limitation of Liability" data-ar="8. تحديد المسؤولية">8. Limitation of Liability</a>
+    <a href="#termination" data-en="9. Termination" data-ar="9. الإنهاء">9. Termination</a>
+    <a href="#governing" data-en="10. Governing Law" data-ar="10. القانون الحاكم">10. Governing Law</a>
+    <a href="#dispute" data-en="11. Dispute Resolution" data-ar="11. حل النزاعات">11. Dispute Resolution</a>
+    <a href="#changes" data-en="12. Changes to Terms" data-ar="12. التغييرات على الشروط">12. Changes to Terms</a>
+    <a href="#contact" data-en="13. Contact Information" data-ar="13. معلومات الاتصال">13. Contact Information</a>
+  </div>
+
+  <!-- 1. Acceptance of Terms -->
+  <section id="acceptance" class="reveal reveal-delay-1">
+    <h2 data-en="1. Acceptance of Terms" data-ar="1. قبول الشروط">1. Acceptance of Terms</h2>
+    <p data-en="By accessing and using the Cardni Business platform (including the EVD system, B2B API, and B2C marketplace), you agree to be bound by these Terms of Service. If you do not agree to any of these terms, you may not use our services. Your continued use of the platform constitutes acceptance of these terms and any modifications we make to them."
+       data-ar="بالوصول واستخدام منصة كاردني بيزنس (بما في ذلك نظام EVD وB2B API ومتجر B2C)، فإنك توافق على الالتزام بشروط الخدمة هذه. إذا كنت لا توافق على أي من هذه الشروط، فقد لا تستخدم خدماتنا. يشكل استمرار استخدامك للمنصة قبولاً لهذه الشروط وأي تعديلات نجريها عليها.">By accessing and using the Cardni Business platform (including the EVD system, B2B API, and B2C marketplace), you agree to be bound by these Terms of Service. If you do not agree to any of these terms, you may not use our services. Your continued use of the platform constitutes acceptance of these terms and any modifications we make to them.</p>
+    <p data-en="These Terms of Service (\"Terms\") constitute a legally binding agreement between you (\"User\", \"you\", or \"your\") and Cardni Business (\"Company\", \"we\", \"us\", or \"our\")."
+       data-ar="تشكل شروط الخدمة هذه (\"الشروط\") اتفاقية ملزمة قانوناً بينك (\"المستخدم\" أو \"أنت\") وكاردني بيزنس (\"الشركة\" أو \"نحن\").">These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you", or "your") and Cardni Business ("Company", "we", "us", or "our").</p>
+  </section>
+
+  <!-- 2. Description of Services -->
+  <section id="services" class="reveal reveal-delay-2">
+    <h2 data-en="2. Description of Services" data-ar="2. وصف الخدمات">2. Description of Services</h2>
+    <p data-en="Cardni Business provides the following services:"
+       data-ar="توفر كاردني بيزنس الخدمات التالية:">Cardni Business provides the following services:</p>
+    <ul>
+      <li><strong data-en="EVD Platform:" data-ar="منصة EVD:">EVD Platform:</strong> <span data-en="A complete Electronic Voucher Distribution system enabling businesses to issue, manage, and distribute digital vouchers, mobile top-ups, and other digital products to end consumers." data-ar="نظام توزيع القسائم الإلكترونية المتكامل يمكّن الشركات من إصدار وإدارة وتوزيع القسائم الرقمية والشحن الفوري والمنتجات الرقمية الأخرى للمستهلكين النهائيين.">A complete Electronic Voucher Distribution system enabling businesses to issue, manage, and distribute digital vouchers, mobile top-ups, and other digital products to end consumers.</span></li>
+      <li><strong data-en="B2B API Integration:" data-ar="تكامل B2B API:">B2B API Integration:</strong> <span data-en="RESTful API endpoints allowing businesses to integrate our voucher distribution system directly into their existing infrastructure, systems, and applications." data-ar="نقاط نهاية API REST تسمح للشركات بدمج نظام توزيع القسائم الخاص بنا مباشرة في البنية التحتية والأنظمة والتطبيقات الموجودة لديهم.">RESTful API endpoints allowing businesses to integrate our voucher distribution system directly into their existing infrastructure, systems, and applications.</span></li>
+      <li><strong data-en="B2C Marketplace:" data-ar="متجر B2C:">B2C Marketplace:</strong> <span data-en="A direct-to-consumer platform (Cardni Store) where end users can purchase digital vouchers, top-ups, and other digital products from partner suppliers globally." data-ar="منصة موجهة مباشرة للمستهلك (متجر كاردني) حيث يمكن للمستخدمين النهائيين شراء القسائم الرقمية والشحن والمنتجات الرقمية الأخرى من الموردين الشركاء عالمياً.">A direct-to-consumer platform (Cardni Store) where end users can purchase digital vouchers, top-ups, and other digital products from partner suppliers globally.</span></li>
+    </ul>
+    <p data-en="All services are provided on an \"as is\" basis. We reserve the right to modify, suspend, or discontinue any service at any time with reasonable notice." data-ar="يتم توفير جميع الخدمات على أساس \"كما هي\". نحتفظ بالحق في تعديل أو إيقاف أو إنهاء أي خدمة في أي وقت مع إخطار معقول.">All services are provided on an "as is" basis. We reserve the right to modify, suspend, or discontinue any service at any time with reasonable notice.</p>
+  </section>
+
+  <!-- 3. Account Registration and Security -->
+  <section id="registration" class="reveal reveal-delay-3">
+    <h2 data-en="3. Account Registration and Security" data-ar="3. تسجيل الحساب والأمان">3. Account Registration and Security</h2>
+    <h3 data-en="3.1 Account Creation" data-ar="3.1 إنشاء الحساب">3.1 Account Creation</h3>
+    <p data-en="To use Cardni Business services, you must create an account by providing accurate, complete, and current information. You are responsible for maintaining the confidentiality of your account credentials, including passwords and API keys. You agree not to share your credentials with unauthorized third parties." data-ar="لاستخدام خدمات كاردني بيزنس، يجب عليك إنشاء حساب بتقديم معلومات دقيقة وكاملة وحالية. أنت مسؤول عن الحفاظ على سرية بيانات اعتماد حسابك، بما في ذلك كلمات المرور ومفاتيح API. توافق على عدم مشاركة بيانات اعتمادك مع أطراف ثالثة غير مصرح لهم.">To use Cardni Business services, you must create an account by providing accurate, complete, and current information. You are responsible for maintaining the confidentiality of your account credentials, including passwords and API keys. You agree not to share your credentials with unauthorized third parties.</p>
+    <h3 data-en="3.2 Security Obligations" data-ar="3.2 التزامات الأمان">3.2 Security Obligations</h3>
+    <p data-en="You are responsible for all activities that occur under your account. You must immediately notify us of any unauthorized access or use of your account. We implement industry-standard security measures to protect your data, but you acknowledge that no system is completely secure."
+       data-ar="أنت مسؤول عن جميع الأنشطة التي تحدث تحت حسابك. يجب عليك إخطارنا فوراً بأي وصول أو استخدام غير مصرح لحسابك. نحن نطبق معايير الأمان القياسية في الصناعة لحماية بياناتك، لكنك تعترف بأنه لا يوجد نظام آمن تماماً.">You are responsible for all activities that occur under your account. You must immediately notify us of any unauthorized access or use of your account. We implement industry-standard security measures to protect your data, but you acknowledge that no system is completely secure.</p>
+  </section>
+
+  <!-- 4. Payment Terms -->
+  <section id="payment" class="reveal reveal-delay-4">
+    <h2 data-en="4. Payment Terms" data-ar="4. شروط الدفع">4. Payment Terms</h2>
+    <h3 data-en="4.1 Prepaid Wallet System" data-ar="4.1 نظام المحفظة المدفوعة مقدماً">4.1 Prepaid Wallet System</h3>
+    <p data-en="Cardni Business operates on a prepaid wallet model. Users must maintain a minimum balance in their wallet to conduct transactions. Wallet funds are non-refundable except in cases explicitly covered by our refund policy."
+       data-ar="تعمل كاردني بيزنس على نموذج محفظة مدفوعة مقدماً. يجب على المستخدمين الحفاظ على رصيد أدنى في محفظتهم لإجراء المعاملات. أموال المحفظة غير قابلة للاسترجاع إلا في الحالات المغطاة صراحة بسياسة الاسترجاع الخاصة بنا.">Cardni Business operates on a prepaid wallet model. Users must maintain a minimum balance in their wallet to conduct transactions. Wallet funds are non-refundable except in cases explicitly covered by our refund policy.</p>
+    <h3 data-en="4.2 Commission Structures" data-ar="4.2 هياكل العمولة">4.2 Commission Structures</h3>
+    <p data-en="For each transaction facilitated through our platform, Cardni Business retains a commission as follows:"
+       data-ar="لكل معاملة يتم تسهيلها من خلال منصتنا، تحتفظ كاردني بيزنس بعمولة كما يلي:">For each transaction facilitated through our platform, Cardni Business retains a commission as follows:</p>
+    <ul>
+      <li data-en="EVD Platform: 2.5% to 5% per transaction (varies by product category and volume tier)" data-ar="منصة EVD: 2.5% إلى 5% لكل معاملة (تختلف حسب فئة المنتج ومستوى الحجم)">EVD Platform: 2.5% to 5% per transaction (varies by product category and volume tier)</li>
+      <li data-en="B2B API Integration: 2% to 4% per transaction plus optional API subscription fees" data-ar="تكامل B2B API: 2% إلى 4% لكل معاملة بالإضافة إلى رسوم الاشتراك الاختيارية في API">B2B API Integration: 2% to 4% per transaction plus optional API subscription fees</li>
+      <li data-en="B2C Marketplace: 5% to 8% per transaction (Cardni handles end-user acquisition)" data-ar="متجر B2C: 5% إلى 8% لكل معاملة (كاردني تتعامل مع اكتساب المستخدم النهائي)">B2C Marketplace: 5% to 8% per transaction (Cardni handles end-user acquisition)</li>
+    </ul>
+    <p data-en="Commission rates are detailed in your service agreement. We may adjust rates with 30 days written notice." data-ar="يتم تفصيل معدلات العمولة في اتفاقية الخدمة الخاصة بك. قد نعدل الأسعار بإخطار كتابي قدره 30 يوماً.">Commission rates are detailed in your service agreement. We may adjust rates with 30 days written notice.</p>
+    <h3 data-en="4.3 Refund Policy" data-ar="4.3 سياسة الاسترجاع">4.3 Refund Policy</h3>
+    <p data-en="Refunds are processed under the following conditions:"
+       data-ar="يتم معالجة المبالغ المرتجعة في الحالات التالية:">Refunds are processed under the following conditions:</p>
+    <ul>
+      <li data-en="Failed transactions (due to system error, not user error) are refunded within 48 hours" data-ar="المعاملات الفاشلة (بسبب خطأ في النظام وليس خطأ المستخدم) يتم رد الأموال فيها خلال 48 ساعة">Failed transactions (due to system error, not user error) are refunded within 48 hours</li>
+      <li data-en="Duplicate charges are identified and refunded with commission reversal" data-ar="يتم تحديد الرسوم المكررة ورد الأموال مع عكس العمولة">Duplicate charges are identified and refunded with commission reversal</li>
+      <li data-en="Erroneous transfers can be disputed within 30 days with supporting documentation" data-ar="يمكن الطعن في التحويلات الخاطئة في غضون 30 يوماً مع الوثائق الداعمة">Erroneous transfers can be disputed within 30 days with supporting documentation</li>
+      <li data-en="Refund requests must be submitted within 60 days of the transaction date" data-ar="يجب تقديم طلبات استرجاع الأموال في غضون 60 يوماً من تاريخ المعاملة">Refund requests must be submitted within 60 days of the transaction date</li>
+    </ul>
+  </section>
+
+  <!-- 5. Acceptable Use Policy -->
+  <section id="acceptable" class="reveal reveal-delay-5">
+    <h2 data-en="5. Acceptable Use Policy" data-ar="5. سياسة الاستخدام المقبول">5. Acceptable Use Policy</h2>
+    <p data-en="You agree not to use Cardni Business for any unlawful, fraudulent, or harmful purpose. Prohibited activities include:"
+       data-ar="توافق على عدم استخدام كاردني بيزنس لأي غرض غير قانوني أو احتيالي أو ضار. تشمل الأنشطة المحظورة:">You agree not to use Cardni Business for any unlawful, fraudulent, or harmful purpose. Prohibited activities include:</p>
+    <ul>
+      <li data-en="Money laundering, terrorist financing, or sanctions violations" data-ar="غسيل الأموال أو تمويل الإرهاب أو انتهاك العقوبات">Money laundering, terrorist financing, or sanctions violations</li>
+      <li data-en="Fraudulent transactions, card testing, or chargebacks" data-ar="المعاملات الاحتيالية أو اختبار البطاقة أو الارتجاع">Fraudulent transactions, card testing, or chargebacks</li>
+      <li data-en="Circumventing regional restrictions or compliance requirements" data-ar="تجاوز القيود الإقليمية أو متطلبات الامتثال">Circumventing regional restrictions or compliance requirements</li>
+      <li data-en="Reverse engineering, disassembling, or attempting to decompile our systems" data-ar="الهندسة العكسية أو فك التجميع أو محاولة فك ترميز أنظمتنا">Reverse engineering, disassembling, or attempting to decompile our systems</li>
+      <li data-en="Unauthorized access, hacking, or attempting to probe security vulnerabilities" data-ar="الوصول غير المصرح به أو القرصنة أو محاولة فحص الثغرات الأمنية">Unauthorized access, hacking, or attempting to probe security vulnerabilities</li>
+      <li data-en="Creating multiple accounts to evade restrictions or manipulate the system" data-ar="إنشاء حسابات متعددة لتجنب القيود أو التلاعب بالنظام">Creating multiple accounts to evade restrictions or manipulate the system</li>
+    </ul>
+    <div class="highlight-box">
+      <strong data-en="Violation Consequences:" data-ar="عواقب الانتهاك:">Violation Consequences:</strong> <span data-en="Violations of this policy may result in account suspension, termination, and potential legal action. We cooperate fully with law enforcement and regulatory authorities." data-ar="قد تؤدي انتهاكات هذه السياسة إلى إيقاف الحساب أو إنهاؤه واتخاذ إجراءات قانونية محتملة. نحن نتعاون بشكل كامل مع جهات إنفاذ القانون والسلطات التنظيمية.">Violations of this policy may result in account suspension, termination, and potential legal action. We cooperate fully with law enforcement and regulatory authorities.</span>
+    </div>
+  </section>
+
+  <!-- 6. Intellectual Property -->
+  <section id="ip" class="reveal reveal-delay-6">
+    <h2 data-en="6. Intellectual Property" data-ar="6. الملكية الفكرية">6. Intellectual Property</h2>
+    <h3 data-en="6.1 Platform IP Rights" data-ar="6.1 حقوق ملكية المنصة">6.1 Platform IP Rights</h3>
+    <p data-en="All content, software, code, design, and other materials on the Cardni Business platform are the exclusive property of Cardni Business or our licensors. This includes but is not limited to trademarks, logos, documentation, API specifications, and software libraries. You may not reproduce, distribute, modify, or create derivative works without explicit written permission."
+       data-ar="جميع المحتوى والبرامج والأكواد والتصميمات والمواد الأخرى على منصة كاردني بيزنس هي ملكية حصرية لكاردني بيزنس أو مرخصينا. يتضمن ذلك على سبيل المثال لا الحصر العلامات التجارية والشعارات والتوثيق ومواصفات API ومكتبات البرامج. لا يمكنك إعادة إنتاج أو توزيع أو تعديل أو إنشاء أعمال مشتقة بدون إذن كتابي صريح.">All content, software, code, design, and other materials on the Cardni Business platform are the exclusive property of Cardni Business or our licensors. This includes but is not limited to trademarks, logos, documentation, API specifications, and software libraries. You may not reproduce, distribute, modify, or create derivative works without explicit written permission.</p>
+    <h3 data-en="6.2 User Content" data-ar="6.2 محتوى المستخدم">6.2 User Content</h3>
+    <p data-en="You retain ownership of any data or content you upload to the platform (\"User Content\"). By uploading User Content, you grant Cardni Business a worldwide, royalty-free license to use, process, and store your content solely for the purpose of providing services to you."
+       data-ar="أنت تحتفظ بملكية أي بيانات أو محتوى تحمله إلى المنصة (\"محتوى المستخدم\"). بتحميل محتوى المستخدم، فإنك تمنح كاردني بيزنس ترخيصاً عالمياً خالياً من الرسوم لاستخدام ومعالجة وتخزين محتواك حصرياً لغرض تقديم الخدمات لك.">You retain ownership of any data or content you upload to the platform ("User Content"). By uploading User Content, you grant Cardni Business a worldwide, royalty-free license to use, process, and store your content solely for the purpose of providing services to you.</p>
+  </section>
+
+  <!-- 7. API Usage Terms -->
+  <section id="api" class="reveal reveal-delay-7">
+    <h2 data-en="7. API Usage Terms" data-ar="7. شروط استخدام API">7. API Usage Terms</h2>
+    <h3 data-en="7.1 Rate Limits" data-ar="7.1 حدود معدل الاستخدام">7.1 Rate Limits</h3>
+    <p data-en="API usage is subject to the following rate limits per subscription tier:"
+       data-ar="يخضع استخدام API لحدود معدل الاستخدام التالية لكل مستوى الاشتراك:">API usage is subject to the following rate limits per subscription tier:</p>
+    <ul>
+      <li data-en="Basic Tier: 100 requests per minute" data-ar="المستوى الأساسي: 100 طلب في الدقيقة">Basic Tier: 100 requests per minute</li>
+      <li data-en="Professional Tier: 500 requests per minute" data-ar="المستوى الاحترافي: 500 طلب في الدقيقة">Professional Tier: 500 requests per minute</li>
+      <li data-en="Enterprise Tier: Custom limits (negotiable)" data-ar="مستوى المؤسسة: حدود مخصصة (قابلة للتفاوض)">Enterprise Tier: Custom limits (negotiable)</li>
+    </ul>
+    <p data-en="Exceeding these limits may result in temporary API access suspension. Persistent violations may lead to account termination." data-ar="قد يؤدي تجاوز هذه الحدود إلى إيقاف وصول API مؤقتاً. قد تؤدي الانتهاكات المستمرة إلى إنهاء الحساب.">Exceeding these limits may result in temporary API access suspension. Persistent violations may lead to account termination.</p>
+    <h3 data-en="7.2 Data Usage and Retention" data-ar="7.2 استخدام البيانات والاحتفاظ بها">7.2 Data Usage and Retention</h3>
+    <p data-en="Users may query transaction history for up to 12 months. Archived data older than 12 months is available upon request for a fee. API requests must not be used for data mining, scraping, or bulk data export without written consent."
+       data-ar="يمكن للمستخدمين الاستعلام عن سجل المعاملات لمدة تصل إلى 12 شهراً. البيانات المؤرشفة التي تزيد عن 12 شهراً متاحة عند الطلب برسوم. لا يجب استخدام طلبات API لتعدين البيانات أو الكشط أو تصدير البيانات بالجملة بدون موافقة مكتوبة.">Users may query transaction history for up to 12 months. Archived data older than 12 months is available upon request for a fee. API requests must not be used for data mining, scraping, or bulk data export without written consent.</p>
+    <h3 data-en="7.3 Fair Use Policy" data-ar="7.3 سياسة الاستخدام العادل">7.3 Fair Use Policy</h3>
+    <p data-en="APIs must be used in accordance with our fair use policy. Excessive API calls, testing transactions, or stress testing our infrastructure is prohibited. Any behavior deemed unfair may result in API access suspension."
+       data-ar="يجب استخدام APIs وفقاً لسياسة الاستخدام العادل لدينا. استدعاءات API المفرطة أو المعاملات الاختبارية أو اختبار الإجهاد لبنيتنا التحتية محظور. قد يؤدي أي سلوك يعتبر غير عادل إلى إيقاف وصول API.">APIs must be used in accordance with our fair use policy. Excessive API calls, testing transactions, or stress testing our infrastructure is prohibited. Any behavior deemed unfair may result in API access suspension.</p>
+  </section>
+
+  <!-- 8. Limitation of Liability -->
+  <section id="liability" class="reveal reveal-delay-8">
+    <h2 data-en="8. Limitation of Liability" data-ar="8. تحديد المسؤولية">8. Limitation of Liability</h2>
+    <p data-en="To the fullest extent permitted by law, Cardni Business shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business interruption, arising from your use of our services."
+       data-ar="إلى أقصى حد يسمح به القانون، لا تكون كاردني بيزنس مسؤولة عن أي أضرار غير مباشرة أو عرضية أو خاصة أو تبعية أو عقابية، بما في ذلك فقدان الأرباح أو البيانات أو انقطاع الأعمال، الناشئة عن استخدامك لخدماتنا.">To the fullest extent permitted by law, Cardni Business shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business interruption, arising from your use of our services.</p>
+    <p data-en="Our total liability for any claim arising out of or related to these Terms shall not exceed the fees you paid to Cardni Business in the 12 months preceding the claim."
+       data-ar="مسؤوليتنا الإجمالية عن أي مطالبة تنشأ من أو تتعلق بهذه الشروط لن تتجاوز الرسوم التي دفعتها لكاردني بيزنس في الـ 12 شهراً التي سبقت المطالبة.">Our total liability for any claim arising out of or related to these Terms shall not exceed the fees you paid to Cardni Business in the 12 months preceding the claim.</p>
+    <p data-en="Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability. In such cases, our liability shall be limited to the maximum extent permitted by law."
+       data-ar="لا تسمح بعض الولايات القضائية باستبعاد ضمانات معينة أو تحديد المسؤولية. في مثل هذه الحالات، ستقتصر مسؤوليتنا على أقصى حد يسمح به القانون.">Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability. In such cases, our liability shall be limited to the maximum extent permitted by law.</p>
+  </section>
+
+  <!-- 9. Termination -->
+  <section id="termination" class="reveal reveal-delay-9">
+    <h2 data-en="9. Termination" data-ar="9. الإنهاء">9. Termination</h2>
+    <h3 data-en="9.1 Termination by You" data-ar="9.1 الإنهاء من جانبك">9.1 Termination by You</h3>
+    <p data-en="You may terminate your account at any time by submitting a written request to info@cardni.com. Upon termination, your account will be closed and any remaining wallet balance will be refunded within 30 days, minus outstanding fees or chargebacks."
+       data-ar="يمكنك إنهاء حسابك في أي وقت بتقديم طلب كتابي إلى info@cardni.com. عند الإنهاء، سيتم إغلاق حسابك وسيتم رد أي رصيد متبقٍ في المحفظة خلال 30 يوماً، مطروحاً منه الرسوم المستحقة أو المردود.">You may terminate your account at any time by submitting a written request to info@cardni.com. Upon termination, your account will be closed and any remaining wallet balance will be refunded within 30 days, minus outstanding fees or chargebacks.</p>
+    <h3 data-en="9.2 Termination by Cardni Business" data-ar="9.2 الإنهاء من جانب كاردني بيزنس">9.2 Termination by Cardni Business</h3>
+    <p data-en="Cardni Business may terminate your account or suspend services immediately if:"
+       data-ar="قد تنهي كاردني بيزنس حسابك أو توقف الخدمات على الفور إذا:">Cardni Business may terminate your account or suspend services immediately if:</p>
+    <ul>
+      <li data-en="You violate these Terms or any applicable law" data-ar="تنتهك هذه الشروط أو أي قانون سارٍ">You violate these Terms or any applicable law</li>
+      <li data-en="Your account is involved in fraudulent, illegal, or suspicious activity" data-ar="يتم استخدام حسابك في أنشطة احتيالية أو غير قانونية أو مريبة">Your account is involved in fraudulent, illegal, or suspicious activity</li>
+      <li data-en="You provide false, inaccurate, or misleading information" data-ar="تقدم معلومات كاذبة أو غير دقيقة أو مضللة">You provide false, inaccurate, or misleading information</li>
+      <li data-en="We receive complaints or legal notices regarding your account" data-ar="نتلقى شكاوى أو إشعارات قانونية بشأن حسابك">We receive complaints or legal notices regarding your account</li>
+      <li data-en="Your account remains inactive for 365 consecutive days" data-ar="يبقى حسابك غير نشط لمدة 365 يوماً متتالياً">Your account remains inactive for 365 consecutive days</li>
+    </ul>
+    <p data-en="Upon termination by Cardni Business, no refund of wallet funds will be provided if the termination is due to policy violation."
+       data-ar="عند الإنهاء من قبل كاردني بيزنس، لن يتم توفير أي استرجاع لأموال المحفظة إذا كان الإنهاء بسبب انتهاك السياسة.">Upon termination by Cardni Business, no refund of wallet funds will be provided if the termination is due to policy violation.</p>
+  </section>
+
+  <!-- 10. Governing Law -->
+  <section id="governing" class="reveal reveal-delay-10">
+    <h2 data-en="10. Governing Law" data-ar="10. القانون الحاكم">10. Governing Law</h2>
+    <p data-en="These Terms of Service shall be governed by and construed in accordance with the laws of the Kingdom of Saudi Arabia, without regard to its conflict of law principles. You agree that any legal action or proceeding arising out of or related to these Terms shall be exclusively governed by the laws of Saudi Arabia."
+       data-ar="تحكم هذه الشروط وتُفسر وفقاً لقوانين المملكة العربية السعودية، بغض النظر عن مبادئ تنازع القوانين الخاصة بها. توافق على أن أي إجراء قانوني أو دعوى ناشئة عن أو تتعلق بهذه الشروط يجب أن تحكمها حصراً قوانين المملكة العربية السعودية.">These Terms of Service shall be governed by and construed in accordance with the laws of the Kingdom of Saudi Arabia, without regard to its conflict of law principles. You agree that any legal action or proceeding arising out of or related to these Terms shall be exclusively governed by the laws of Saudi Arabia.</p>
+  </section>
+
+  <!-- 11. Dispute Resolution -->
+  <section id="dispute" class="reveal reveal-delay-11">
+    <h2 data-en="11. Dispute Resolution" data-ar="11. حل النزاعات">11. Dispute Resolution</h2>
+    <h3 data-en="11.1 Negotiation and Mediation" data-ar="11.1 التفاوض والوساطة">11.1 Negotiation and Mediation</h3>
+    <p data-en="Any dispute arising out of or related to these Terms shall first be subject to good-faith negotiation between the parties. If negotiation fails within 30 days, the dispute shall be escalated to mediation under the rules of the Saudi Center for Commercial Arbitration."
+       data-ar="أي نزاع ناشئ عن أو يتعلق بهذه الشروط يجب أن يخضع أولاً للتفاوض بحسن نية بين الطرفين. إذا فشل التفاوض خلال 30 يوماً، سيتم تصعيد النزاع إلى الوساطة بموجب قواعد المركز السعودي للتحكيم التجاري.">Any dispute arising out of or related to these Terms shall first be subject to good-faith negotiation between the parties. If negotiation fails within 30 days, the dispute shall be escalated to mediation under the rules of the Saudi Center for Commercial Arbitration.</p>
+    <h3 data-en="11.2 Binding Arbitration" data-ar="11.2 التحكيم الملزم">11.2 Binding Arbitration</h3>
+    <p data-en="If mediation fails, all disputes shall be resolved by binding arbitration in Riyadh, Saudi Arabia, administered by the Saudi Center for Commercial Arbitration. The arbitration shall be conducted in English or Arabic as mutually agreed. Each party shall bear its own costs, and the arbitrator's fees shall be split equally."
+       data-ar="إذا فشلت الوساطة، سيتم حل جميع النزاعات عن طريق التحكيم الملزم في الرياض، المملكة العربية السعودية، بإدارة المركز السعودي للتحكيم التجاري. سيتم إجراء التحكيم باللغة الإنجليزية أو العربية حسب الاتفاق المتبادل. يتحمل كل طرف تكاليفه الخاصة، وسيتم تقسيم رسوم المحكم بالتساوي.">If mediation fails, all disputes shall be resolved by binding arbitration in Riyadh, Saudi Arabia, administered by the Saudi Center for Commercial Arbitration. The arbitration shall be conducted in English or Arabic as mutually agreed. Each party shall bear its own costs, and the arbitrator's fees shall be split equally.</p>
+  </section>
+
+  <!-- 12. Changes to Terms -->
+  <section id="changes" class="reveal reveal-delay-12">
+    <h2 data-en="12. Changes to Terms" data-ar="12. التغييرات على الشروط">12. Changes to Terms</h2>
+    <p data-en="Cardni Business reserves the right to modify these Terms at any time. Material changes will be communicated via email at least 30 days before they take effect. Your continued use of the platform after the effective date of any modifications constitutes your acceptance of the updated Terms."
+       data-ar="تحتفظ كاردني بيزنس بالحق في تعديل هذه الشروط في أي وقت. سيتم إبلاغ التغييرات الجوهرية عبر البريد الإلكتروني قبل 30 يوماً على الأقل من سريانها. يشكل استمرار استخدامك للمنصة بعد تاريخ سريان أي تعديلات قبولاً من جانبك للشروط المحدثة.">Cardni Business reserves the right to modify these Terms at any time. Material changes will be communicated via email at least 30 days before they take effect. Your continued use of the platform after the effective date of any modifications constitutes your acceptance of the updated Terms.</p>
+    <p data-en="We will maintain a version history of these Terms on our website so you can review changes over time."
+       data-ar="سنحتفظ بسجل الإصدارات من هذه الشروط على موقعنا الإلكتروني حتى تتمكن من مراجعة التغييرات بمرور الوقت.">We will maintain a version history of these Terms on our website so you can review changes over time.</p>
+  </section>
+
+  <!-- 13. Contact Information -->
+  <section id="contact" class="reveal reveal-delay-13">
+    <h2 data-en="13. Contact Information" data-ar="13. معلومات الاتصال">13. Contact Information</h2>
+    <p data-en="If you have questions, concerns, or requests regarding these Terms of Service, please contact us at:"
+       data-ar="إذا كان لديك أسئلة أو مخاوف أو طلبات تتعلق بشروط الخدمة هذه، يرجى الاتصال بنا على:">If you have questions, concerns, or requests regarding these Terms of Service, please contact us at:</p>
+    <ul>
+      <li><strong data-en="Email:" data-ar="البريد الإلكتروني:">Email:</strong> info@cardni.com</li>
+      <li><strong data-en="Phone:" data-ar="الهاتف:">Phone:</strong> +966 53 976 1698</li>
+      <li><strong data-en="Address:" data-ar="العنوان:">Address:</strong> <span data-en="Riyadh, Saudi Arabia" data-ar="الرياض، المملكة العربية السعودية">Riyadh, Saudi Arabia</span></li>
+      <li><strong data-en="WhatsApp:" data-ar="واتس آب:">WhatsApp:</strong> +966 53 976 1698</li>
+    </ul>
+    <p data-en="We will respond to all inquiries within 2 business days."
+       data-ar="سنرد على جميع الاستفسارات خلال يومي عمل.">We will respond to all inquiries within 2 business days.</p>
+  </section>
+
+  <!-- Footer note -->
+  <div class="footer-legal reveal reveal-delay-14">
+    <p data-en="Last Updated: March 2026. These Terms of Service supersede all previous agreements and understandings regarding the use of Cardni Business services." data-ar="آخر تحديث: مارس 2026. تلغي شروط الخدمة هذه جميع الاتفاقيات والفهم السابق بشأن استخدام خدمات كاردني بيزنس.">Last Updated: March 2026. These Terms of Service supersede all previous agreements and understandings regarding the use of Cardni Business services.</p>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+        <p data-en="Empowering businesses with complete digital voucher distribution solutions worldwide."
+           data-ar="نمكّن الشركات بحلول توزيع القسائم الرقمية المتكاملة حول العالم.">Empowering businesses with complete digital voucher distribution solutions worldwide.</p>
+        <div class="footer-social">
+          <a href="https://t.me/cardnicom" target="_blank" aria-label="Telegram">✈</a>
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">◻</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Solutions" data-ar="الحلول">Solutions</h4>
+        <a href="index.html#services" data-en="EVD Platform" data-ar="منصة EVD">EVD Platform</a>
+        <a href="index.html#services" data-en="B2B Integration" data-ar="تكامل B2B">B2B Integration</a>
+        <a href="https://cardni.com" data-en="Cardni Store" data-ar="متجر كاردني">Cardni Store</a>
+        <a href="#" data-en="API Documentation" data-ar="توثيق API">API Documentation</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Company" data-ar="الشركة">Company</h4>
+        <a href="about.html" data-en="About Us" data-ar="من نحن">About Us</a>
+        <a href="#" data-en="Careers" data-ar="وظائف">Careers</a>
+        <a href="index.html#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+        <a href="#" data-en="Blog" data-ar="المدونة">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+        <a href="#" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+        <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+        <a href="#" data-en="Cookie Policy" data-ar="سياسة الكوكيز">Cookie Policy</a>
+        <a href="#" data-en="SLA" data-ar="اتفاقية مستوى الخدمة">SLA</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Resources" data-ar="الموارد">Resources</h4>
+        <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+        <a href="#" data-en="API Docs" data-ar="توثيق API">API Docs</a>
+        <a href="#" data-en="Status Page" data-ar="صفحة الحالة">Status Page</a>
+        <a href="#" data-en="Guides" data-ar="الأدلة">Guides</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Cardni. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></span>
+      <span data-en="Riyadh, Saudi Arabia" data-ar="الرياض، المملكة العربية السعودية">Riyadh, Saudi Arabia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ WHATSAPP FAB ═══════════ -->
+<a href="https://wa.me/966539761698" target="_blank" class="wa-fab" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+// --- Language Toggle ---
+let lang = 'en';
+function toggleLang() {
+  lang = lang === 'en' ? 'ar' : 'en';
+  const html = document.documentElement;
+  html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  html.lang = lang;
+  document.body.style.fontFamily = lang === 'ar' ? 'var(--font-ar)' : 'var(--font-en)';
+
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const t = el.getAttribute('data-' + lang);
+    if (t) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = t;
+      else el.textContent = t;
+    }
+  });
+  document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+    el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
+  });
+  document.querySelectorAll('select option[data-en]').forEach(o => {
+    const t = o.getAttribute('data-' + lang);
+    if (t) o.textContent = t;
+  });
+  document.getElementById('langLabel').textContent = lang === 'en' ? 'عربي' : 'English';
+}
+
+// --- Navbar scroll ---
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// --- Scroll reveal ---
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// --- Smooth scroll for anchor links ---
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>

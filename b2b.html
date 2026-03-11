@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardni B2B API Integration - RESTful APIs & Salla Plugin</title>
+<meta name="description" content="Connect your platform to Cardni's vast product catalog through powerful RESTful APIs and ready-made Salla plugin integration. Sandbox environment, real-time inventory, and webhooks.">
+<meta name="theme-color" content="#7c3aed">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════ RESET & TOKENS ═══════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --v50:#f5f3ff;--v100:#ede9fe;--v200:#ddd6fe;--v300:#c4b5fd;
+  --v400:#a78bfa;--v500:#8b5cf6;--v600:#7c3aed;--v700:#6d28d9;
+  --v800:#5b21b6;--v900:#4c1d95;
+  --i500:#6366f1;--i600:#4f46e5;
+  --n0:#fff;--n50:#fafafa;--n100:#f4f4f5;--n200:#e4e4e7;
+  --n300:#d4d4d8;--n400:#a1a1aa;--n500:#71717a;--n600:#52525b;
+  --n700:#3f3f46;--n800:#27272a;--n900:#18181b;--n950:#09090b;
+  --success:#10b981;--warning:#f59e0b;--info:#3b82f6;
+  --grad-hero:linear-gradient(135deg,#7c3aed 0%,#6366f1 50%,#8b5cf6 100%);
+  --grad-dark:linear-gradient(160deg,#0f0a1e 0%,#1a0e38 40%,#0f0a1e 100%);
+  --grad-card:linear-gradient(135deg,rgba(124,58,237,.06) 0%,rgba(99,102,241,.04) 100%);
+  --grad-glow:radial-gradient(circle,rgba(124,58,237,.15) 0%,transparent 70%);
+  --sh-xs:0 1px 2px rgba(0,0,0,.05);
+  --sh-sm:0 2px 8px rgba(0,0,0,.06);
+  --sh-md:0 4px 24px rgba(0,0,0,.08);
+  --sh-lg:0 12px 48px rgba(0,0,0,.1);
+  --sh-glow:0 8px 32px rgba(124,58,237,.25);
+  --sh-glow-lg:0 16px 48px rgba(124,58,237,.35);
+  --font-en:'Inter',system-ui,sans-serif;
+  --font-ar:'Tajawal',system-ui,sans-serif;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-full:9999px;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-en);color:var(--n700);background:var(--n0);line-height:1.65;overflow-x:hidden}
+html[dir="rtl"] body{font-family:var(--font-ar)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button{font-family:inherit}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ═══════════════════ NAVBAR ═══════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;transition:all .35s var(--ease);
+}
+.nav.scrolled{
+  padding:12px 0;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--n200);
+}
+.nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:26px;font-weight:800;letter-spacing:-.75px;color:var(--n500);font-family:var(--font-en)!important}
+.logo span{color:var(--v600)}
+.logo small{font-size:20px;font-weight:400;color:var(--v400);letter-spacing:0;text-transform:none;margin-left:2px}
+html[dir="rtl"] .logo small{margin-left:0;margin-right:2px}
+.nav-mid{display:flex;gap:36px}
+.nav-mid a{
+  font-size:14px;font-weight:500;color:var(--n500);
+  transition:color .25s;position:relative;padding:4px 0;
+}
+.nav-mid a::after{
+  content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;
+  background:var(--v600);border-radius:2px;transition:all .25s var(--ease);transform:translateX(-50%);
+}
+.nav-mid a:hover{color:var(--n900)}
+.nav-mid a:hover::after{width:100%}
+.nav-mid a.active::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:10px}
+
+.lang-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:var(--r-full);
+  border:1px solid var(--n200);background:var(--n0);
+  font-size:13px;font-weight:600;color:var(--n600);cursor:pointer;
+  transition:all .25s;
+}
+.lang-btn:hover{border-color:var(--v300);background:var(--v50)}
+.lang-btn svg{width:16px;height:16px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 24px;border-radius:var(--r-md);font-size:14px;font-weight:600;
+  border:none;cursor:pointer;transition:all .3s var(--ease);white-space:nowrap;
+  font-family:inherit;
+}
+.btn-fill{
+  background:var(--v600);color:var(--n0);
+  box-shadow:var(--sh-glow);
+}
+.btn-fill:hover{background:var(--v700);transform:translateY(-1px);box-shadow:var(--sh-glow-lg)}
+.btn-soft{
+  background:var(--v50);color:var(--v700);border:1px solid var(--v200);
+}
+.btn-soft:hover{background:var(--v100);border-color:var(--v300)}
+.btn-outline{
+  background:transparent;color:var(--v600);border:2px solid var(--v200);
+}
+.btn-outline:hover{background:var(--v50);border-color:var(--v400);transform:translateY(-1px)}
+.btn-white{
+  background:var(--n0);color:var(--v700);
+  box-shadow:var(--sh-md);
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:var(--sh-lg)}
+.btn-ghost{
+  background:rgba(255,255,255,.1);color:var(--n0);border:1.5px solid rgba(255,255,255,.25);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
+.btn-lg{padding:14px 32px;font-size:15px;border-radius:var(--r-lg)}
+.btn svg{width:18px;height:18px;flex-shrink:0}
+
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--n700);border-radius:2px;margin:5px 0;transition:all .3s}
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;padding:120px 0 80px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(170deg,#f5f3ff 0%,#ede9fe 25%,#e0e7ff 50%,#f5f3ff 100%);
+}
+.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
+.hero-bg .orb-1{width:500px;height:500px;background:rgba(124,58,237,.15);top:-120px;right:-80px}
+.hero-bg .orb-2{width:350px;height:350px;background:rgba(99,102,241,.12);bottom:-60px;left:-100px}
+.hero-bg .orb-3{width:200px;height:200px;background:rgba(139,92,246,.1);top:40%;left:30%}
+
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(124,58,237,.04) 1px,transparent 0);
+  background-size:32px 32px;
+}
+
+.hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-content{max-width:540px}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--n0);border:1px solid var(--v200);
+  border-radius:var(--r-full);padding:6px 6px 6px 8px;
+  font-size:13px;font-weight:600;color:var(--v700);
+  margin-bottom:28px;box-shadow:var(--sh-sm);
+}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-badge .tag{
+  background:var(--v100);color:var(--v700);
+  padding:3px 10px;border-radius:var(--r-full);font-size:11px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+
+.hero h1{
+  font-size:50px;font-weight:900;line-height:1.12;
+  color:var(--n950);letter-spacing:-1.5px;margin-bottom:20px;
+}
+.hero h1 .gradient{
+  background:var(--grad-hero);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.hero-sub{font-size:17px;color:var(--n500);line-height:1.75;margin-bottom:32px;max-width:460px}
+
+.hero-ctas{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+
+/* ═══════════════════ SECTION COMMONS ═══════════════════ */
+.section{padding:120px 0}
+.section-dark{background:var(--grad-dark);color:var(--n0)}
+
+.section-head{text-align:center;max-width:600px;margin:0 auto 60px}
+.section-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--v600);margin-bottom:14px;
+}
+.section-tag .line{width:20px;height:2px;background:var(--v400);border-radius:2px}
+.section-dark .section-tag{color:var(--v300)}
+.section-dark .section-tag .line{background:var(--v400)}
+
+.section-head h2{
+  font-size:38px;font-weight:800;color:var(--n950);letter-spacing:-.5px;
+  margin-bottom:14px;line-height:1.2;
+}
+.section-dark .section-head h2{color:var(--n0)}
+
+.section-head p{font-size:16px;color:var(--n500);line-height:1.7}
+.section-dark .section-head p{color:var(--n400)}
+
+/* ═══════════════════ INTEGRATION OPTIONS ═══════════════════ */
+.int-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:60px}
+.int-card{
+  background:var(--n0);border:1.5px solid var(--n200);border-radius:var(--r-2xl);
+  padding:48px;transition:all .3s var(--ease);position:relative;overflow:hidden;
+}
+.int-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--grad-hero);
+}
+.int-card:hover{border-color:var(--v300);box-shadow:var(--sh-lg);transform:translateY(-4px)}
+.int-icon{
+  font-size:48px;margin-bottom:18px;display:inline-block
+}
+.int-card h3{
+  font-size:28px;font-weight:800;color:var(--n950);margin-bottom:8px;letter-spacing:-.3px
+}
+.int-card .subtitle{
+  font-size:14px;font-weight:600;color:var(--v600);margin-bottom:16px
+}
+.int-card>p{
+  font-size:15px;color:var(--n500);line-height:1.75;margin-bottom:24px
+}
+.int-features{
+  display:flex;flex-direction:column;gap:12px;margin-bottom:28px
+}
+.int-feat{
+  display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--n600)
+}
+.int-feat .ico{
+  width:20px;height:20px;min-width:20px;border-radius:4px;
+  background:var(--v100);color:var(--v600);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;margin-top:1px
+}
+.int-card .btn{width:100%}
+
+/* ═══════════════════ FEATURES GRID ═══════════════════ */
+.feat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:60px
+}
+.feat-card{
+  background:var(--n0);border:1px solid var(--n200);border-radius:var(--r-xl);
+  padding:32px;transition:all .3s;text-align:center;position:relative;overflow:hidden
+}
+.feat-card::before{
+  content:'';position:absolute;top:0;left:50%;width:80px;height:80px;
+  background:var(--grad-glow);transform:translateX(-50%);filter:blur(40px)
+}
+.feat-card:hover{border-color:var(--v300);box-shadow:var(--sh-md);transform:translateY(-3px)}
+.feat-card>*{position:relative;z-index:1}
+.feat-icon{font-size:40px;margin:0 auto 16px;display:block}
+.feat-card h4{
+  font-size:16px;font-weight:700;color:var(--n800);margin-bottom:8px
+}
+.feat-card p{
+  font-size:14px;color:var(--n500);line-height:1.6
+}
+
+/* ═══════════════════ CODE BLOCK ═══════════════════ */
+.api-section{
+  background:var(--n0);border:1px solid var(--n200);border-radius:var(--r-2xl);
+  padding:48px;margin-bottom:60px;box-shadow:var(--sh-sm)
+}
+.api-section h3{
+  font-size:26px;font-weight:800;color:var(--n950);margin-bottom:32px;letter-spacing:-.3px
+}
+.api-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center
+}
+.api-content h4{
+  font-size:18px;font-weight:700;color:var(--n800);margin-bottom:14px
+}
+.api-content p{
+  font-size:14px;color:var(--n500);line-height:1.7;margin-bottom:20px
+}
+.api-list{
+  display:flex;flex-direction:column;gap:10px;margin-bottom:20px
+}
+.api-item{
+  display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--n600)
+}
+.api-item .check{
+  width:20px;height:20px;min-width:20px;border-radius:6px;
+  background:var(--v100);color:var(--v600);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;margin-top:2px
+}
+.api-block{
+  font-family:'SF Mono','Fira Code',monospace;font-size:13px;line-height:1.8;
+  background:var(--n900);color:var(--n400);padding:24px;border-radius:var(--r-lg);
+  overflow-x:auto;border:1px solid rgba(255,255,255,.08)
+}
+.api-method{color:#60a5fa;font-weight:700}
+.api-key{color:var(--n400)}
+.api-str{color:#34d399}
+.api-num{color:#fbbf24}
+.api-resp{
+  margin-top:12px;padding:12px 16px;border-radius:var(--r-sm);
+  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);
+  color:#10b981;font-weight:600;font-size:12px
+}
+
+/* ═══════════════════ STEPS SECTION ═══════════════════ */
+.steps-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative;margin-bottom:60px
+}
+.steps-grid::before{
+  content:'';position:absolute;top:42px;left:12.5%;right:12.5%;
+  height:2px;background:var(--v200);z-index:0
+}
+.step-card{text-align:center;position:relative;z-index:1}
+.step-num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--v600);color:var(--n0);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;margin:0 auto 18px;
+  box-shadow:var(--sh-glow);position:relative;z-index:1
+}
+.step-card h3{font-size:16px;font-weight:700;color:var(--n800);margin-bottom:6px}
+.step-card p{font-size:14px;color:var(--n500);line-height:1.6}
+
+/* ═══════════════════ PRODUCTS SECTION ═══════════════════ */
+.prod-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-bottom:60px
+}
+.prod-card{
+  background:var(--n0);border:1px solid var(--n200);border-radius:var(--r-lg);
+  padding:20px;text-align:center;transition:all .3s;
+}
+.prod-card:hover{border-color:var(--v300);box-shadow:var(--sh-md);transform:translateY(-2px)}
+.prod-card .icon{font-size:32px;margin-bottom:10px;display:block}
+.prod-card h4{
+  font-size:14px;font-weight:700;color:var(--n800);margin-bottom:4px
+}
+.prod-card p{
+  font-size:12px;color:var(--n500)
+}
+
+/* ═══════════════════ CTA SECTION ═══════════════════ */
+.cta-section{padding:100px 0}
+.cta-box{
+  background:var(--grad-hero);border-radius:var(--r-2xl);
+  padding:72px 56px;text-align:center;position:relative;overflow:hidden
+}
+.cta-box::before,.cta-box::after{content:'';position:absolute;border-radius:50%}
+.cta-box::before{width:450px;height:450px;background:rgba(255,255,255,.08);top:-180px;right:-120px}
+.cta-box::after{width:300px;height:300px;background:rgba(255,255,255,.05);bottom:-120px;left:-60px}
+.cta-box>*{position:relative;z-index:1}
+.cta-box h2{font-size:36px;font-weight:800;color:var(--n0);margin-bottom:14px;letter-spacing:-.5px}
+.cta-box p{font-size:17px;color:rgba(255,255,255,.8);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+.footer{background:var(--n950);color:var(--n400);padding:72px 0 36px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo{margin-bottom:12px;display:inline-block}
+.footer-brand>p{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:280px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{
+  width:36px;height:36px;border-radius:var(--r-sm);
+  background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all .3s;color:var(--n400)
+}
+.footer-social a:hover{background:var(--v600);color:var(--n0)}
+.footer-col h4{
+  font-size:13px;font-weight:700;color:var(--n0);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px
+}
+.footer-col a{display:block;font-size:13px;color:var(--n400);padding:5px 0;transition:color .25s}
+.footer-col a:hover{color:var(--v400)}
+.footer-bottom{
+  padding-top:28px;border-top:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;font-size:13px
+}
+
+/* ═══════════════════ WHATSAPP FAB ═══════════════════ */
+.wa-fab{
+  position:fixed;bottom:24px;right:24px;z-index:99;
+  width:56px;height:56px;border-radius:50%;background:#25d366;
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(37,211,102,.4);
+  transition:all .3s var(--ease-spring);cursor:pointer
+}
+html[dir="rtl"] .wa-fab{right:auto;left:24px}
+.wa-fab:hover{transform:scale(1.08);box-shadow:0 8px 28px rgba(37,211,102,.5)}
+.wa-fab svg{width:28px;height:28px}
+
+/* ═══════════════════ ANIMATIONS ═══════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ═══════════════════ MOBILE MENU ═══════════════════ */
+.mob-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.4);backdrop-filter:blur(4px)
+}
+.mob-overlay.open{display:block}
+.mob-panel{
+  position:absolute;top:0;right:0;width:300px;height:100%;
+  background:var(--n0);padding:28px;box-shadow:var(--sh-lg)
+}
+html[dir="rtl"] .mob-panel{right:auto;left:0}
+.mob-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:26px;cursor:pointer;color:var(--n600)}
+html[dir="rtl"] .mob-close{right:auto;left:16px}
+.mob-links{margin-top:56px;display:flex;flex-direction:column;gap:22px}
+.mob-links a{font-size:17px;font-weight:600;color:var(--n700);transition:color .25s}
+.mob-links a:hover{color:var(--v600)}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media(max-width:1024px){
+  .hero .container{grid-template-columns:1fr;text-align:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-ctas{justify-content:center}
+  .int-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:repeat(2,1fr)}
+  .api-grid{grid-template-columns:1fr}
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
+  .steps-grid{grid-template-columns:1fr 1fr;gap:24px}
+  .steps-grid::before{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-mid{display:none}
+  .nav-right .btn-fill{display:none}
+  .hamburger{display:block}
+  .hero{padding:100px 0 60px}
+  .hero h1{font-size:34px;letter-spacing:-1px}
+  .hero-sub{font-size:15px}
+  .section{padding:80px 0}
+  .section-head h2{font-size:28px}
+  .int-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .api-grid{grid-template-columns:1fr}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .int-card{padding:32px}
+  .api-section{padding:32px}
+  .cta-box{padding:48px 24px}
+  .cta-box h2{font-size:26px}
+  .steps-grid{grid-template-columns:1fr;gap:20px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+  .wa-fab{bottom:80px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="index.html" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+    <div class="nav-mid" id="navMid">
+      <a href="index.html#services" data-en="Solutions" data-ar="الحلول">Solutions</a>
+      <a href="about.html" data-en="About" data-ar="حول">About</a>
+      <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+      <a href="index.html#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" onclick="toggleLang()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="langLabel" data-en="عربي" data-ar="EN">عربي</span>
+      </button>
+      <a href="index.html#contact" class="btn btn-fill" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+      <button class="hamburger" onclick="openMob()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ MOBILE MENU ═══════════ -->
+<div class="mob-overlay" id="mobOverlay" onclick="closeMob()">
+  <div class="mob-panel" onclick="event.stopPropagation()">
+    <button class="mob-close" onclick="closeMob()">&times;</button>
+    <div class="mob-links">
+      <a href="index.html#services" onclick="closeMob()" data-en="Solutions" data-ar="الحلول">Solutions</a>
+      <a href="about.html" onclick="closeMob()" data-en="About" data-ar="حول">About</a>
+      <a href="faq.html" onclick="closeMob()" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+      <a href="index.html#contact" onclick="closeMob()" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+      <a href="index.html#contact" class="btn btn-fill" style="margin-top:8px;text-align:center" onclick="closeMob()" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content reveal">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span data-en="B2B Integration" data-ar="التكامل B2B">B2B Integration</span>
+        <span class="tag" data-en="SCALABLE" data-ar="قابل للتوسع">SCALABLE</span>
+      </div>
+      <h1>
+        <span data-en="B2B API" data-ar="API B2B">B2B API</span><br>
+        <span class="gradient" style="display:inline-block;margin-top:12px" data-en="Integration" data-ar="التكامل">Integration</span>
+      </h1>
+      <p class="hero-sub" data-en="Connect your platform to our vast product catalog through powerful RESTful APIs and ready-made Salla plugin. Real-time inventory, webhook notifications, and comprehensive documentation to scale your business."
+         data-ar="ربط منصتك بكتالوجنا الضخم من المنتجات من خلال واجهات API قوية وإضافة Salla جاهزة. مخزون فوري وإشعارات webhook وتوثيق شامل لتوسيع أعمالك.">Connect your platform to our vast product catalog through powerful RESTful APIs and ready-made Salla plugin. Real-time inventory, webhook notifications, and comprehensive documentation to scale your business.</p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn btn-fill btn-lg" data-en="Get Your API Key" data-ar="احصل على مفتاح API">
+          <span data-en="Get Your API Key" data-ar="احصل على مفتاح API">Get Your API Key</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+        <a href="#integration" class="btn btn-outline btn-lg" data-en="Explore Options" data-ar="استكشف الخيارات">Explore Options</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal reveal-delay-1">
+      <div style="font-size:120px;opacity:.15;text-align:center">
+        {...api}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ INTEGRATION OPTIONS ═══════════ -->
+<section class="section" id="integration">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="INTEGRATION OPTIONS" data-ar="خيارات التكامل">INTEGRATION OPTIONS</span> <span class="line"></span></div>
+      <h2 data-en="Choose Your Integration Method" data-ar="اختر طريقة التكامل">Choose Your Integration Method</h2>
+      <p data-en="Whether you're building a custom platform or using Salla, we have a solution that fits your needs perfectly."
+         data-ar="سواء كنت تبني منصة مخصصة أو تستخدم Salla، لدينا حل يناسب احتياجاتك تماماً.">Whether you're building a custom platform or using Salla, we have a solution that fits your needs perfectly.</p>
+    </div>
+
+    <div class="int-grid">
+      <!-- REST API Card -->
+      <div class="int-card reveal">
+        <div class="int-icon">🔌</div>
+        <h3 data-en="REST API" data-ar="REST API">REST API</h3>
+        <div class="subtitle" data-en="For Custom Platforms" data-ar="للمنصات المخصصة">For Custom Platforms</div>
+        <p data-en="Full-featured RESTful API for complete control over your integration. Perfect for building custom solutions with our extensive product catalog and real-time data."
+           data-ar="واجهة API RESTful متكاملة للتحكم الكامل في التكامل. مثالية لبناء حلول مخصصة مع كتالوجنا الواسع وبيانات فوري.">Full-featured RESTful API for complete control over your integration. Perfect for building custom solutions with our extensive product catalog and real-time data.</p>
+        <div class="int-features">
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="RESTful endpoints" data-ar="نقاط نهاية RESTful">RESTful endpoints</span>
+          </div>
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="Real-time inventory" data-ar="مخزون فوري">Real-time inventory</span>
+          </div>
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="Webhook notifications" data-ar="إشعارات webhook">Webhook notifications</span>
+          </div>
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="Sandbox environment" data-ar="بيئة الاختبار">Sandbox environment</span>
+          </div>
+        </div>
+        <a href="index.html#contact" class="btn btn-fill" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+      </div>
+
+      <!-- Salla Plugin Card -->
+      <div class="int-card reveal reveal-delay-1">
+        <div class="int-icon">📦</div>
+        <h3 data-en="Salla Plugin" data-ar="إضافة Salla">Salla Plugin</h3>
+        <div class="subtitle" data-en="One-Click Installation" data-ar="التثبيت بنقرة واحدة">One-Click Installation</div>
+        <p data-en="Pre-built plugin that seamlessly integrates with your Salla store. No coding required, automatic product sync, and instant commission tracking."
+           data-ar="إضافة جاهزة تتكامل بسلاسة مع متجرك Salla. لا حاجة لترميز، مزامنة المنتجات التلقائية وتتبع العمولات الفوري.">Pre-built plugin that seamlessly integrates with your Salla store. No coding required, automatic product sync, and instant commission tracking.</p>
+        <div class="int-features">
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="One-click install" data-ar="التثبيت بنقرة واحدة">One-click install</span>
+          </div>
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="Auto product sync" data-ar="مزامنة المنتجات التلقائية">Auto product sync</span>
+          </div>
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="Live commission tracker" data-ar="متتبع العمولات المباشر">Live commission tracker</span>
+          </div>
+          <div class="int-feat">
+            <div class="ico">✓</div>
+            <span data-en="Native Salla UI" data-ar="واجهة Salla الأصلية">Native Salla UI</span>
+          </div>
+        </div>
+        <a href="index.html#contact" class="btn btn-fill" data-en="Install Now" data-ar="ثبّت الآن">Install Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ API FEATURES ═══════════ -->
+<section class="section" style="background:var(--n50)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="API CAPABILITIES" data-ar="قدرات API">API CAPABILITIES</span> <span class="line"></span></div>
+      <h2 data-en="Everything You Need" data-ar="كل ما تحتاجه">Everything You Need</h2>
+      <p data-en="Comprehensive features designed for enterprise-grade integrations and production-ready deployments."
+         data-ar="ميزات شاملة مصممة للتكاملات على مستوى المؤسسات والنشر الجاهز للإنتاج.">Comprehensive features designed for enterprise-grade integrations and production-ready deployments.</p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon">📡</div>
+        <h4 data-en="RESTful Endpoints" data-ar="نقاط نهاية RESTful">RESTful Endpoints</h4>
+        <p data-en="Standard HTTP methods for products, orders, inventory, and user management with consistent JSON responses."
+           data-ar="طرق HTTP قياسية للمنتجات والطلبات والمخزون وإدارة المستخدمين مع استجابات JSON متسقة.">Standard HTTP methods for products, orders, inventory, and user management.</p>
+      </div>
+
+      <div class="feat-card reveal reveal-delay-1">
+        <div class="feat-icon">⚡</div>
+        <h4 data-en="Real-Time Inventory" data-ar="مخزون فوري">Real-Time Inventory</h4>
+        <p data-en="Live product availability, stock levels, and pricing updates pushed directly to your platform instantly."
+           data-ar="توفر المنتجات المباشرة وأرصدة المخزون وتحديثات الأسعار المدفوعة مباشرة إلى منصتك فوراً.">Live product availability and stock level updates pushed directly to your platform instantly.</p>
+      </div>
+
+      <div class="feat-card reveal reveal-delay-2">
+        <div class="feat-icon">🔔</div>
+        <h4 data-en="Webhook Notifications" data-ar="إشعارات Webhook">Webhook Notifications</h4>
+        <p data-en="Real-time event notifications for order status, payments, fulfillment, and system events to stay in sync."
+           data-ar="إشعارات أحداث فوري لحالة الطلب والدفعات والتنفيذ والأحداث النظامية للبقاء متزامناً.">Real-time event notifications for order status, payments, and fulfillment events.</p>
+      </div>
+
+      <div class="feat-card reveal reveal-delay-1">
+        <div class="feat-icon">🧪</div>
+        <h4 data-en="Sandbox Environment" data-ar="بيئة الاختبار">Sandbox Environment</h4>
+        <p data-en="Risk-free testing environment with mock data to validate your integration before going live to production."
+           data-ar="بيئة اختبار آمنة مع بيانات وهمية لتحقق من التكامل قبل الانتقال إلى الإنتاج.">Risk-free testing environment with mock data before going live to production.</p>
+      </div>
+
+      <div class="feat-card reveal reveal-delay-2">
+        <div class="feat-icon">🚦</div>
+        <h4 data-en="Rate Limiting" data-ar="تحديد معدل">Rate Limiting</h4>
+        <p data-en="Generous rate limits (10,000 req/min) with clear headers and guidance for scaling your integration."
+           data-ar="حدود معدل سخية (10,000 طلب/دقيقة) مع رؤوس واضحة وإرشادات لتوسيع التكامل.">Generous rate limits with clear headers and guidance for scaling your integration.</p>
+      </div>
+
+      <div class="feat-card reveal reveal-delay-3">
+        <div class="feat-icon">📚</div>
+        <h4 data-en="Comprehensive Docs" data-ar="توثيق شامل">Comprehensive Docs</h4>
+        <p data-en="Complete API documentation with code examples, SDKs, and interactive API explorer for faster development."
+           data-ar="توثيق API كامل مع أمثلة كود و SDKs ومستكشف API تفاعلي لتطوير أسرع.">Complete API documentation with code examples and interactive API explorer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CODE EXAMPLE ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="api-section reveal">
+      <h3 data-en="Sample API Call" data-ar="استدعاء API نموذجي">Sample API Call</h3>
+
+      <div class="api-grid">
+        <div class="api-content">
+          <h4 data-en="Get Started in Minutes" data-ar="ابدأ في دقائق">Get Started in Minutes</h4>
+          <p data-en="Our API is designed for simplicity and power. Here's a basic example of fetching available products from our catalog and creating an order."
+             data-ar="تم تصميم API الخاص بنا للبساطة والقوة. إليك مثال أساسي لجلب المنتجات المتاحة من كتالوجنا وإنشاء طلب.">Our API is designed for simplicity and power. Here's a basic example of fetching products and creating orders.</p>
+
+          <div class="api-list">
+            <div class="api-item">
+              <div class="check">✓</div>
+              <span data-en="Simple JSON request/response format" data-ar="تنسيق طلب/استجابة JSON بسيط">Simple JSON request/response format</span>
+            </div>
+            <div class="api-item">
+              <div class="check">✓</div>
+              <span data-en="Standard HTTP status codes" data-ar="رموز حالة HTTP القياسية">Standard HTTP status codes</span>
+            </div>
+            <div class="api-item">
+              <div class="check">✓</div>
+              <span data-en="Bearer token authentication" data-ar="مصادقة Bearer token">Bearer token authentication</span>
+            </div>
+            <div class="api-item">
+              <div class="check">✓</div>
+              <span data-en="Instant processing and confirmation" data-ar="المعالجة والتأكيد الفوري">Instant processing and confirmation</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="api-block">
+<span class="api-method">GET</span> /v1/products?category=vouchers<br>
+Host: api.cardni.com<br>
+Authorization: Bearer YOUR_API_KEY<br>
+<br>
+<span class="api-resp"># Response (200 OK)</span><br>
+{<br>
+&nbsp;&nbsp;<span class="api-key">"products"</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="api-key">"id"</span>: <span class="api-str">"vucher_001"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="api-key">"name"</span>: <span class="api-str">"iTunes 50 USD"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="api-key">"price"</span>: <span class="api-num">47.50</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="api-key">"stock"</span>: <span class="api-num">1250</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="api-key">"available"</span>: <span class="api-str">true</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;]<br>
+}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ INTEGRATION STEPS ═══════════ -->
+<section class="section" style="background:var(--n50)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="QUICK START" data-ar="بداية سريعة">QUICK START</span> <span class="line"></span></div>
+      <h2 data-en="Get Live in 4 Steps" data-ar="انطلق حياً في 4 خطوات">Get Live in 4 Steps</h2>
+      <p data-en="From registration to production, follow our streamlined onboarding process designed for rapid deployment."
+         data-ar="من التسجيل إلى الإنتاج، اتبع عملية الإعداد المبسطة لدينا المصممة للنشر السريع.">From registration to production, follow our streamlined onboarding process.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3 data-en="Register for API Key" data-ar="تسجيل مفتاح API">Register for API Key</h3>
+        <p data-en="Sign up for your Cardni B2B account and receive immediate API credentials to start developing."
+           data-ar="اشترك في حسابك B2B بـ Cardni واستقبل بيانات اعتماد API الفورية للبدء في التطوير.">Sign up and receive immediate API credentials.</p>
+      </div>
+
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <h3 data-en="Test in Sandbox" data-ar="اختبر في Sandbox">Test in Sandbox</h3>
+        <p data-en="Use the sandbox environment with mock data to fully validate all transactions before going live."
+           data-ar="استخدم بيئة الاختبار مع البيانات الوهمية للتحقق من جميع المعاملات قبل الانطلاق.">Validate all transactions in sandbox with mock data.</p>
+      </div>
+
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <h3 data-en="Go Live" data-ar="انطلق حياً">Go Live</h3>
+        <p data-en="Switch to production environment and start processing real transactions with live inventory and pricing."
+           data-ar="انتقل إلى بيئة الإنتاج وابدأ معالجة المعاملات الحقيقية مع المخزون والأسعار المباشرة.">Switch to production and start processing live transactions.</p>
+      </div>
+
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <h3 data-en="Scale Your Business" data-ar="وسع أعمالك">Scale Your Business</h3>
+        <p data-en="Our team provides ongoing support, monitoring, and optimization to help your business grow exponentially."
+           data-ar="يوفر فريقنا دعماً مستمراً ومراقبة وتحسيناً لمساعدة نشاطك على النمو بشكل متسارع.">Our team provides ongoing support and monitoring.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SUPPORTED PRODUCTS ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="PRODUCT CATALOG" data-ar="كتالوج المنتجات">PRODUCT CATALOG</span> <span class="line"></span></div>
+      <h2 data-en="Supported Products" data-ar="المنتجات المدعومة">Supported Products</h2>
+      <p data-en="Access our comprehensive catalog of digital products to monetize every customer touchpoint."
+         data-ar="الوصول إلى كتالوجنا الشامل للمنتجات الرقمية لتحقيق دخل من كل نقطة اتصال العميل.">Access our comprehensive catalog of digital products.</p>
+    </div>
+
+    <div class="prod-grid">
+      <div class="prod-card reveal">
+        <span class="icon">🎁</span>
+        <h4 data-en="Vouchers" data-ar="القسائم">Vouchers</h4>
+        <p data-en="Digital vouchers for retailers, entertainment, and services."
+           data-ar="القسائم الرقمية للتجار والترفيه والخدمات.">Digital voucher codes</p>
+      </div>
+
+      <div class="prod-card reveal reveal-delay-1">
+        <span class="icon">🎮</span>
+        <h4 data-en="Game Top-Ups" data-ar="شحن الألعاب">Game Top-Ups</h4>
+        <p data-en="PUBG, FIFA, Fortnite, Steam, and more gaming credits."
+           data-ar="PUBG و FIFA و Fortnite و Steam وغيرها من أرصدة الألعاب.">Popular gaming platforms</p>
+      </div>
+
+      <div class="prod-card reveal reveal-delay-2">
+        <span class="icon">📱</span>
+        <h4 data-en="Mobile Recharge" data-ar="شحن الجوال">Mobile Recharge</h4>
+        <p data-en="Prepaid credit for Mobily, STC, Zain, and more carriers."
+           data-ar="رصيد مدفوع مقدماً لـ Mobily و STC و Zain والمزيد من مقدمي الخدمات.">Top carriers worldwide</p>
+      </div>
+
+      <div class="prod-card reveal reveal-delay-3">
+        <span class="icon">🎁</span>
+        <h4 data-en="Gift Cards" data-ar="بطاقات هدايا">Gift Cards</h4>
+        <p data-en="iTunes, Google Play, PlayStation, Xbox store credits."
+           data-ar="iTunes و Google Play و PlayStation و Xbox بطاقات متجر.">Digital store cards</p>
+      </div>
+
+      <div class="prod-card reveal reveal-delay-4">
+        <span class="icon">📺</span>
+        <h4 data-en="Subscriptions" data-ar="الاشتراكات">Subscriptions</h4>
+        <p data-en="Netflix, Spotify, Disney+, and streaming service plans."
+           data-ar="Netflix و Spotify و Disney+ خطط خدمات البث.">Streaming services</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA SECTION ═══════════ -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2 data-en="Ready to Get Started?" data-ar="هل أنت جاهز للبدء؟">Ready to Get Started?</h2>
+      <p data-en="Join hundreds of businesses using Cardni's B2B API to scale their digital distribution operations worldwide."
+         data-ar="انضم إلى مئات الشركات التي تستخدم B2B API بـ Cardni لتوسيع عمليات التوزيع الرقمي الخاصة بهم عالمياً.">Join hundreds of businesses using Cardni's B2B API to scale their operations.</p>
+      <div class="cta-btns">
+        <a href="mailto:info@cardni.com" class="btn btn-white" data-en="Get API Key" data-ar="احصل على مفتاح API">Get API Key</a>
+        <a href="https://t.me/cardnicom" class="btn btn-ghost" target="_blank" data-en="Contact Support" data-ar="تواصل معنا">Contact Support</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+        <p data-en="Complete digital voucher distribution platform with API integrations, EVD systems, and B2C storefronts for global businesses."
+           data-ar="منصة توزيع القسائم الرقمية الكاملة مع تكاملات API وأنظمة EVD وواجهات متاجر B2C للشركات العالمية.">Complete digital distribution platform with API integrations and storefronts.</p>
+        <div class="footer-social">
+          <a href="https://t.me/cardnicom" target="_blank" title="Telegram">✈️</a>
+          <a href="https://wa.me/966539761698" target="_blank" title="WhatsApp">💬</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Platform" data-ar="المنصة">Platform</h4>
+        <a href="index.html" data-en="EVD Solution" data-ar="حل EVD">EVD Solution</a>
+        <a href="b2b.html" data-en="B2B API" data-ar="B2B API">B2B API</a>
+        <a href="index.html" data-en="B2C Store" data-ar="متجر B2C">B2C Store</a>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Company" data-ar="الشركة">Company</h4>
+        <a href="about.html" data-en="About" data-ar="حول">About</a>
+        <a href="privacy.html" data-en="Privacy" data-ar="الخصوصية">Privacy</a>
+        <a href="terms.html" data-en="Terms" data-ar="الشروط">Terms</a>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Support" data-ar="الدعم">Support</h4>
+        <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+        <a href="mailto:info@cardni.com" data-en="Email" data-ar="بريد إلكتروني">Email</a>
+        <a href="https://wa.me/966539761698" target="_blank" data-en="WhatsApp" data-ar="واتسآب">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-en="2025 Cardni. All rights reserved." data-ar="2025 كاردني. جميع الحقوق محفوظة.">2025 Cardni. All rights reserved.</span>
+      <span data-en="Built for global digital distribution" data-ar="مصممة للتوزيع الرقمي العالمي">Built for global digital distribution</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ WHATSAPP FAB ═══════════ -->
+<a href="https://wa.me/966539761698" target="_blank" class="wa-fab" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.869 1.271c-2.996 1.969-4.992 5.236-4.992 8.93 0 2.047.504 4.068 1.455 5.869L2.05 22l6.305-1.654a9.823 9.823 0 004.782 1.216h.005c5.487 0 9.963-4.476 9.963-9.963 0-2.661-1.035-5.165-2.918-7.050-1.883-1.884-4.385-2.92-7.050-2.92M12.004 2C6.419 2 2 6.418 2 12c0 2.096.547 4.142 1.586 5.946L2 22l6.305-1.654C9.333 21.292 10.629 21.5 12 21.5c5.581 0 10-4.419 10-9.996C22 6.419 17.581 2 12.004 2"/></svg>
+</a>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+// Language switching
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  localStorage.setItem('lang', currentLang);
+  applyLang();
+}
+
+function applyLang() {
+  const isArabic = currentLang === 'ar';
+  document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+  document.documentElement.lang = currentLang;
+
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
+      el.textContent = text;
+    } else if (!el.querySelector('*')) {
+      el.textContent = text;
+    } else {
+      el.innerText = text;
+    }
+  });
+
+  const langLabel = document.getElementById('langLabel');
+  if (langLabel) {
+    langLabel.textContent = isArabic ? 'EN' : 'عربي';
+  }
+}
+
+// Initialize language
+applyLang();
+
+// Navbar scroll effect
+const nav = document.getElementById('nav');
+const navMid = document.getElementById('navMid');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// Mobile menu
+function openMob() {
+  document.getElementById('mobOverlay').classList.add('open');
+}
+
+function closeMob() {
+  document.getElementById('mobOverlay').classList.remove('open');
+}
+
+// Set active nav link
+function updateActiveNav() {
+  const sections = ['integration', 'cta'];
+  const scrollPos = window.scrollY + 100;
+
+  navMid?.querySelectorAll('a').forEach(link => {
+    link.classList.remove('active');
+  });
+
+  for (let id of sections) {
+    const section = document.getElementById(id);
+    if (section && section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+      navMid?.querySelector(`a[href="#${id}"]`)?.classList.add('active');
+      break;
+    }
+  }
+}
+
+window.addEventListener('scroll', updateActiveNav);
+
+// Scroll reveal animation
+const revealElements = document.querySelectorAll('.reveal');
+const revealOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const revealOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, revealOptions);
+
+revealElements.forEach(el => revealOnScroll.observe(el));
+</script>
+</body>
+</html>

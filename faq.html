@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-en="FAQ - Cardni Business" data-ar="الأسئلة الشائعة - كاردني أعمال">FAQ - Cardni Business</title>
+  <meta name="description" data-en="Find answers to frequently asked questions about Cardni Business, our EVD platform, B2B API, and payment solutions." data-ar="ابحث عن إجابات للأسئلة الشائعة حول كاردني أعمال، منصة EVD، وحلول B2B و الدفع.">
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════ RESET & TOKENS ═══════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --v50: #f5f3ff;
+      --v100: #ede9fe;
+      --v200: #ddd6fe;
+      --v300: #c4b5fd;
+      --v400: #a78bfa;
+      --v500: #8b5cf6;
+      --v600: #7c3aed;
+      --v700: #6d28d9;
+      --v800: #5b21b6;
+      --v900: #4c1d95;
+      --i500: #6366f1;
+      --i600: #4f46e5;
+      --n0: #fff;
+      --n50: #fafafa;
+      --n100: #f4f4f5;
+      --n200: #e4e4e7;
+      --n300: #d4d4d8;
+      --n400: #a1a1aa;
+      --n500: #71717a;
+      --n600: #52525b;
+      --n700: #3f3f46;
+      --n800: #27272a;
+      --n900: #18181b;
+      --n950: #09090b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --grad-hero: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #8b5cf6 100%);
+      --grad-dark: linear-gradient(160deg, #0f0a1e 0%, #1a0e38 40%, #0f0a1e 100%);
+      --sh-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --sh-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --sh-md: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --sh-lg: 0 12px 48px rgba(0, 0, 0, 0.1);
+      --sh-glow: 0 8px 32px rgba(124, 58, 237, 0.25);
+      --font-en: 'Inter', system-ui, sans-serif;
+      --font-ar: 'Tajawal', system-ui, sans-serif;
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --r-xl: 20px;
+      --r-2xl: 24px;
+      --r-full: 9999px;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-en);
+      color: var(--n700);
+      background: var(--n0);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    html[dir="rtl"] body {
+      font-family: var(--font-ar);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ═══════════════════ NAVBAR ═══════════════════ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 18px 0;
+      transition: all 0.35s var(--ease);
+    }
+
+    .nav.scrolled {
+      padding: 12px 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--n200);
+    }
+
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.75px;
+      color: var(--n500);
+      font-family: var(--font-en) !important;
+    }
+
+    .logo span {
+      color: var(--v600);
+    }
+
+    .logo small {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--v400);
+      letter-spacing: 0;
+      text-transform: none;
+      margin-left: 2px;
+    }
+
+    html[dir="rtl"] .logo small {
+      margin-left: 0;
+      margin-right: 2px;
+    }
+
+    .nav-mid {
+      display: flex;
+      gap: 36px;
+    }
+
+    .nav-mid a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--n500);
+      transition: color 0.25s;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-mid a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--v600);
+      border-radius: 2px;
+      transition: all 0.25s var(--ease);
+      transform: translateX(-50%);
+    }
+
+    .nav-mid a:hover {
+      color: var(--n900);
+    }
+
+    .nav-mid a:hover::after {
+      width: 100%;
+    }
+
+    .nav-mid a.active::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--r-full);
+      border: 1px solid var(--n200);
+      background: var(--n0);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--n600);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--v300);
+      background: var(--v50);
+    }
+
+    .lang-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: var(--r-md);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      white-space: nowrap;
+      font-family: inherit;
+    }
+
+    .btn-fill {
+      background: var(--v600);
+      color: var(--n0);
+      box-shadow: var(--sh-glow);
+    }
+
+    .btn-fill:hover {
+      background: var(--v700);
+      transform: translateY(-1px);
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .nav-mid {
+        display: none;
+      }
+
+      .nav-right {
+        gap: 8px;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .logo small {
+        font-size: 16px;
+      }
+    }
+
+    /* ═══════════════════ HERO SECTION ═══════════════════ */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 0 80px;
+      background: linear-gradient(170deg, #f5f3ff 0%, #ede9fe 25%, #e0e7ff 50%, #f5f3ff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--n950);
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--n500);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 140px 0 60px;
+        min-height: 50vh;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+    }
+
+    /* ═══════════════════ FILTER TABS ═══════════════════ */
+    .filter-section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--n200);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .filter-btn {
+      padding: 12px 24px;
+      border: 2px solid var(--n200);
+      background: var(--n0);
+      color: var(--n700);
+      border-radius: var(--r-full);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--v400);
+      color: var(--v600);
+    }
+
+    .filter-btn.active {
+      background: var(--v600);
+      color: var(--n0);
+      border-color: var(--v600);
+      box-shadow: var(--sh-glow);
+    }
+
+    @media (max-width: 768px) {
+      .filter-tabs {
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 10px 18px;
+        font-size: 13px;
+      }
+    }
+
+    /* ═══════════════════ FAQ ACCORDION ═══════════════════ */
+    .faq-section {
+      padding: 60px 0;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      margin-bottom: 16px;
+      border: 1px solid var(--n200);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: all 0.3s var(--ease);
+    }
+
+    .faq-item:hover {
+      border-color: var(--v300);
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06);
+    }
+
+    .faq-item.hidden {
+      display: none;
+    }
+
+    .faq-header {
+      padding: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--n0);
+      transition: all 0.3s var(--ease);
+    }
+
+    .faq-item.open .faq-header {
+      background: var(--v50);
+      border-bottom: 1px solid var(--v200);
+    }
+
+    .faq-header:hover {
+      background: var(--v50);
+    }
+
+    .faq-title {
+      flex: 1;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--n900);
+      line-height: 1.4;
+    }
+
+    html[dir="rtl"] .faq-title {
+      text-align: right;
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--v600);
+      font-size: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease);
+      font-weight: bold;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s var(--ease), padding 0.3s var(--ease);
+    }
+
+    .faq-item.open .faq-content {
+      max-height: 1000px;
+    }
+
+    .faq-answer {
+      padding: 0 24px 24px 24px;
+      color: var(--n600);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .faq-section {
+        padding: 40px 0;
+      }
+
+      .faq-header {
+        padding: 18px;
+      }
+
+      .faq-title {
+        font-size: 15px;
+      }
+
+      .faq-answer {
+        padding: 0 18px 18px 18px;
+        font-size: 14px;
+      }
+    }
+
+    /* ═══════════════════ CTA SECTION ═══════════════════ */
+    .cta-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--v50) 0%, var(--v100) 100%);
+      border-top: 1px solid var(--v200);
+    }
+
+    .cta-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--n950);
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: var(--n600);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 32px;
+      border-radius: var(--r-md);
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      white-space: nowrap;
+      font-family: inherit;
+    }
+
+    .cta-btn.primary {
+      background: var(--v600);
+      color: var(--n0);
+      box-shadow: var(--sh-glow);
+    }
+
+    .cta-btn.primary:hover {
+      background: var(--v700);
+      transform: translateY(-2px);
+    }
+
+    .cta-btn.secondary {
+      background: var(--n0);
+      color: var(--v700);
+      border: 2px solid var(--v200);
+    }
+
+    .cta-btn.secondary:hover {
+      border-color: var(--v400);
+      background: var(--v50);
+    }
+
+    .cta-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .cta-section {
+        padding: 60px 0;
+      }
+
+      .cta-section h2 {
+        font-size: 28px;
+      }
+
+      .cta-buttons {
+        gap: 12px;
+      }
+
+      .cta-btn {
+        padding: 10px 24px;
+        font-size: 14px;
+      }
+    }
+
+    /* ═══════════════════ FOOTER ═══════════════════ */
+    .footer {
+      background: var(--n950);
+      color: var(--n0);
+      padding: 60px 0 24px;
+      border-top: 1px solid var(--n800);
+    }
+
+    .footer .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--n400);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col a {
+      font-size: 14px;
+      color: var(--n300);
+      transition: color 0.25s;
+    }
+
+    .footer-col a:hover {
+      color: var(--v400);
+    }
+
+    .footer-logo {
+      margin-bottom: 20px;
+    }
+
+    .footer-logo a {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.75px;
+      color: var(--n0);
+      font-family: var(--font-en) !important;
+    }
+
+    .footer-logo span {
+      color: var(--v400);
+    }
+
+    .footer-logo small {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--v300);
+      margin-left: 2px;
+    }
+
+    html[dir="rtl"] .footer-logo small {
+      margin-left: 0;
+      margin-right: 2px;
+    }
+
+    .footer-desc {
+      font-size: 14px;
+      color: var(--n400);
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--n300);
+    }
+
+    .footer-contact a {
+      color: var(--v300);
+      transition: color 0.25s;
+    }
+
+    .footer-contact a:hover {
+      color: var(--v200);
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid var(--n800);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--n400);
+      font-size: 13px;
+    }
+
+    html[dir="rtl"] .footer-bottom {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 768px) {
+      .footer .container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    /* ═══════════════════ FLOATING ACTION BUTTON ═══════════════════ */
+    .fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--sh-lg);
+      transition: all 0.3s var(--ease);
+      z-index: 50;
+      color: var(--n0);
+      font-size: 24px;
+    }
+
+    html[dir="rtl"] .fab {
+      right: auto;
+      left: 24px;
+    }
+
+    .fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.35);
+    }
+
+    @media (max-width: 768px) {
+      .fab {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+
+      html[dir="rtl"] .fab {
+        right: auto;
+        left: 20px;
+      }
+    }
+
+    /* ═══════════════════ SCROLL REVEAL ═══════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s var(--ease);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════ UTILITIES ═══════════════════ */
+    .text-hide {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+
+      <div class="nav-mid">
+        <a href="index.html#services" data-en="Solutions" data-ar="الحلول">Solutions</a>
+        <a href="about.html" data-en="About" data-ar="حول">About</a>
+        <a href="faq.html" class="active" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+        <a href="index.html#contact" data-en="Contact" data-ar="تواصل">Contact</a>
+      </div>
+
+      <div class="nav-right">
+        <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span data-en="عربي" data-ar="EN">عربي</span>
+        </button>
+        <button class="btn btn-fill" onclick="document.getElementById('contactCta').scrollIntoView({behavior:'smooth'})" data-en="Get Started" data-ar="ابدأ الآن">Get Started</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ HERO SECTION ═══════════════════ -->
+  <section class="hero">
+    <div class="container">
+      <h1 data-en="Frequently Asked Questions" data-ar="الأسئلة الشائعة">Frequently Asked Questions</h1>
+      <p data-en="Find answers to your questions about Cardni Business solutions" data-ar="ابحث عن إجابات حول حلول كاردني أعمال">Find answers to your questions about Cardni Business solutions</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FILTER SECTION ═══════════════════ -->
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all" data-en="All" data-ar="الكل">All</button>
+        <button class="filter-btn" data-filter="general" data-en="General" data-ar="عام">General</button>
+        <button class="filter-btn" data-filter="evd" data-en="EVD" data-ar="EVD">EVD</button>
+        <button class="filter-btn" data-filter="b2b" data-en="B2B" data-ar="B2B">B2B</button>
+        <button class="filter-btn" data-filter="b2c" data-en="B2C" data-ar="B2C">B2C</button>
+        <button class="filter-btn" data-filter="payments" data-en="Payments" data-ar="الدفع">Payments</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FAQ SECTION ═══════════════════ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-container">
+
+        <!-- GENERAL QUESTIONS -->
+        <div class="faq-item" data-category="general">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="What is Cardni Business?" data-ar="ما هي كاردني أعمال؟">What is Cardni Business?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Cardni Business is a comprehensive digital voucher distribution platform offering EVD systems, B2B API integrations, and a consumer marketplace." data-ar="كاردني أعمال هي منصة شاملة لتوزيع القسائم الرقمية توفر أنظمة EVD وتكاملات B2B API وسوق استهلاكي.">Cardni Business is a comprehensive digital voucher distribution platform offering EVD systems, B2B API integrations, and a consumer marketplace.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="general">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="Where is Cardni based?" data-ar="أين يقع مقر كاردني؟">Where is Cardni based?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Cardni is headquartered in Riyadh, Saudi Arabia, serving businesses across the MENA region." data-ar="يقع مقر كاردني في الرياض، المملكة العربية السعودية، حيث تخدم الشركات في منطقة الشرق الأوسط وشمال أفريقيا.">Cardni is headquartered in Riyadh, Saudi Arabia, serving businesses across the MENA region.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="general">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="How do I get started?" data-ar="كيف أبدأ؟">How do I get started?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Contact our team through the website form, WhatsApp, or email. We will assess your needs and recommend the best solution." data-ar="تواصل مع فريقنا من خلال نموذج الموقع أو WhatsApp أو البريد الإلكتروني. سنقيم احتياجاتك وننصح بأفضل حل.">Contact our team through the website form, WhatsApp, or email. We will assess your needs and recommend the best solution.</div>
+          </div>
+        </div>
+
+        <!-- EVD QUESTIONS -->
+        <div class="faq-item" data-category="evd">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="What is the EVD platform?" data-ar="ما هي منصة EVD؟">What is the EVD platform?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Our Electronic Voucher Distribution platform enables offline voucher sales through POS terminals and retail networks." data-ar="تمكن منصة التوزيع الإلكترونية للقسائم من بيع القسائم بدون إنترنت من خلال محطات الدفع والشبكات الخاصة بالبيع بالتجزئة.">Our Electronic Voucher Distribution platform enables offline voucher sales through POS terminals and retail networks.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="evd">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="Does EVD work offline?" data-ar="هل يعمل EVD بدون إنترنت؟">Does EVD work offline?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Yes, our EVD system is designed to work in offline environments with automatic sync when connectivity is restored." data-ar="نعم، تم تصميم نظام EVD لدينا للعمل في بيئات بدون إنترنت مع المزامنة التلقائية عند استعادة الاتصال.">Yes, our EVD system is designed to work in offline environments with automatic sync when connectivity is restored.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="evd">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="What products can I sell with EVD?" data-ar="ما المنتجات التي يمكنني بيعها عبر EVD؟">What products can I sell with EVD?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Mobile recharge, gaming cards, streaming subscriptions, gift cards, and more." data-ar="شحن الهواتف المحمولة وبطاقات الألعاب واشتراكات البث وبطاقات الهدايا والمزيد.">Mobile recharge, gaming cards, streaming subscriptions, gift cards, and more.</div>
+          </div>
+        </div>
+
+        <!-- B2B QUESTIONS -->
+        <div class="faq-item" data-category="b2b">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="How do I integrate the API?" data-ar="كيف أدمج واجهة API؟">How do I integrate the API?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Register for an API key, test in our sandbox environment, then go live. Full documentation is provided." data-ar="سجل للحصول على مفتاح API واختبر في بيئتنا الرملية ثم انتقل للعمل بشكل مباشر. توفر الوثائق الكاملة.">Register for an API key, test in our sandbox environment, then go live. Full documentation is provided.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="b2b">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="Do you have a Salla plugin?" data-ar="هل لديكم إضافة سلة؟">Do you have a Salla plugin?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Yes, we offer a one-click Salla plugin for instant integration with your Salla store." data-ar="نعم، نقدم مكون إضافي لسلة بنقرة واحدة للتكامل الفوري مع متجرك على سلة.">Yes, we offer a one-click Salla plugin for instant integration with your Salla store.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="b2b">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="What are the API rate limits?" data-ar="ما هي حدود استخدام API؟">What are the API rate limits?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Rate limits depend on your plan. Contact us for specific details about your integration needs." data-ar="تعتمد حدود المعدل على خطتك. اتصل بنا للحصول على تفاصيل محددة حول احتياجات التكامل الخاصة بك.">Rate limits depend on your plan. Contact us for specific details about your integration needs.</div>
+          </div>
+        </div>
+
+        <!-- B2C QUESTIONS -->
+        <div class="faq-item" data-category="b2c">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="How does Cardni Store work?" data-ar="كيف يعمل متجر كاردني؟">How does Cardni Store work?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Visit cardni.com, browse products, pay securely, and receive your digital code instantly via email." data-ar="قم بزيارة cardni.com وتصفح المنتجات والدفع بأمان واستقبل كودك الرقمي فوراً عبر البريد الإلكتروني.">Visit cardni.com, browse products, pay securely, and receive your digital code instantly via email.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="b2c">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="What payment methods are accepted?" data-ar="ما طرق الدفع المقبولة؟">What payment methods are accepted?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="We accept credit/debit cards, Apple Pay, STC Pay, and bank transfers." data-ar="نقبل بطاقات الائتمان والخصم و Apple Pay و STC Pay والتحويلات البنكية.">We accept credit/debit cards, Apple Pay, STC Pay, and bank transfers.</div>
+          </div>
+        </div>
+
+        <!-- PAYMENTS QUESTIONS -->
+        <div class="faq-item" data-category="payments">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="How does the commission structure work?" data-ar="كيف يعمل هيكل العمولات؟">How does the commission structure work?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Commissions vary by product category and volume. Higher volumes unlock better rates." data-ar="تختلف العمولات حسب فئة المنتج والحجم. تفتح الأحجام الأكبر معدلات أفضل.">Commissions vary by product category and volume. Higher volumes unlock better rates.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="payments">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span class="faq-title" data-en="When do I get paid?" data-ar="متى أحصل على أرباحي؟">When do I get paid?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-content">
+            <div class="faq-answer" data-en="Settlements are processed weekly for EVD partners and monthly for B2B integrators." data-ar="يتم معالجة التسويات أسبوعياً لشركاء EVD وشهرياً لمدمجي B2B.">Settlements are processed weekly for EVD partners and monthly for B2B integrators.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CTA SECTION ═══════════════════ -->
+  <section class="cta-section" id="contactCta">
+    <div class="container">
+      <div class="cta-container">
+        <h2 data-en="Still have questions?" data-ar="لا تزال لديك أسئلة؟">Still have questions?</h2>
+        <p data-en="Our expert team is ready to help you find the perfect solution for your business needs." data-ar="فريقنا الخبير جاهز لمساعدتك في العثور على الحل المثالي لاحتياجات عملك.">Our expert team is ready to help you find the perfect solution for your business needs.</p>
+        <div class="cta-buttons">
+          <button class="cta-btn primary" onclick="window.location.href='index.html#contact'" data-en="Contact Us" data-ar="اتصل بنا">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Contact Us</span>
+          </button>
+          <button class="cta-btn secondary" onclick="openWhatsApp()" data-en="WhatsApp" data-ar="واتس أب">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.052 0-2.062.384-2.814 1.076-.752.692-1.156 1.694-1.156 2.715 0 1.021.404 2.023 1.156 2.715.752.692 1.762 1.076 2.814 1.076h.004c1.052 0 2.062-.384 2.814-1.076.752-.692 1.156-1.694 1.156-2.715 0-1.021-.404-2.023-1.156-2.715-.752-.692-1.762-1.076-2.814-1.076" />
+            </svg>
+            <span>WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <a href="index.html"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+        </div>
+        <p class="footer-desc" data-en="Complete digital voucher and top-up distribution platform for businesses across MENA region." data-ar="منصة شاملة لتوزيع القسائم الرقمية والشحنات للشركات في منطقة الشرق الأوسط وشمال أفريقيا.">Complete digital voucher and top-up distribution platform for businesses across MENA region.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Product" data-ar="المنتج">Product</h4>
+        <ul>
+          <li><a href="evd.html" data-en="EVD" data-ar="EVD">EVD</a></li>
+          <li><a href="b2b.html" data-en="B2B API" data-ar="B2B API">B2B API</a></li>
+          <li><a href="b2c.html" data-en="B2C Store" data-ar="متجر B2C">B2C Store</a></li>
+          <li><a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Company" data-ar="الشركة">Company</h4>
+        <ul>
+          <li><a href="about.html" data-en="About" data-ar="حول">About</a></li>
+          <li><a href="index.html#contact" data-en="Contact" data-ar="تواصل">Contact</a></li>
+          <li><a href="#" data-en="Blog" data-ar="المدونة">Blog</a></li>
+          <li><a href="#" data-en="Careers" data-ar="الوظائف">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Contact" data-ar="التواصل">Contact</h4>
+        <div class="footer-contact">
+          <a href="mailto:info@cardni.com">info@cardni.com</a>
+          <a href="tel:+966539761698">+966 53 976 1698</a>
+          <a href="#" data-en="WhatsApp" data-ar="واتس أب">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p data-en="© 2025 Cardni. All rights reserved." data-ar="© 2025 كاردني. جميع الحقوق محفوظة.">© 2025 Cardni. All rights reserved.</p>
+      <div>
+        <a href="#" style="color: var(--n400); margin-right: 20px;" data-en="Privacy" data-ar="الخصوصية">Privacy</a>
+        <a href="#" style="color: var(--n400);" data-en="Terms" data-ar="الشروط">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════ FLOATING ACTION BUTTON ═══════════════════ -->
+  <div class="fab" onclick="openWhatsApp()" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.052 0-2.062.384-2.814 1.076-.752.692-1.156 1.694-1.156 2.715 0 1.021.404 2.023 1.156 2.715.752.692 1.762 1.076 2.814 1.076h.004c1.052 0 2.062-.384 2.814-1.076.752-.692 1.156-1.694 1.156-2.715 0-1.021-.404-2.023-1.156-2.715-.752-.692-1.762-1.076-2.814-1.076M12 0C5.373 0 0 5.373 0 12c0 2.05.547 4.063 1.581 5.835L0 24l6.305-1.654A12 12 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0" />
+    </svg>
+  </div>
+
+  <script>
+    // ═══════════════════ LANGUAGE TOGGLE ═══════════════════
+    function toggleLanguage() {
+      const html = document.documentElement;
+      const isArabic = html.lang === 'ar';
+
+      html.lang = isArabic ? 'en' : 'ar';
+      html.dir = isArabic ? 'ltr' : 'rtl';
+
+      // Update all data-en and data-ar elements
+      document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+        const temp = el.textContent;
+        el.textContent = isArabic ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+      });
+
+      localStorage.setItem('language', isArabic ? 'en' : 'ar');
+    }
+
+    // ═══════════════════ NAVBAR SCROLL ═══════════════════
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ═══════════════════ FAQ ACCORDION ═══════════════════
+    function toggleFaq(header) {
+      const item = header.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+
+      // Close all other items
+      document.querySelectorAll('.faq-item.open').forEach(openItem => {
+        if (openItem !== item) {
+          openItem.classList.remove('open');
+        }
+      });
+
+      // Toggle current item
+      item.classList.toggle('open', !isOpen);
+    }
+
+    // ═══════════════════ FILTER FUNCTIONALITY ═══════════════════
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const filter = e.target.getAttribute('data-filter');
+
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+
+        // Filter FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+          const category = item.getAttribute('data-category');
+          item.classList.toggle('hidden', filter !== 'all' && category !== filter);
+          item.classList.remove('open');
+        });
+      });
+    });
+
+    // ═══════════════════ WHATSAPP LINK ═══════════════════
+    function openWhatsApp() {
+      window.open('https://wa.me/966539761698', '_blank');
+    }
+
+    // ═══════════════════ SCROLL REVEAL ═══════════════════
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ═══════════════════ LANGUAGE PERSISTENCE ═══════════════════
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || 'en';
+      if (savedLang === 'ar') {
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+      }
+    });
+
+    // ═══════════════════ UPDATE ACTIVE NAV ═══════════════════
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-mid a').forEach(link => {
+      const href = link.getAttribute('href').split('#')[0];
+      if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

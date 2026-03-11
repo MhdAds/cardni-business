@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-en="About Cardni Business" data-ar="حول كاردني أعمال">About Cardni Business</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='20' font-weight='bold' fill='white' font-family='Inter'>C</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%237c3aed' width='180' height='180' rx='40'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='120' font-weight='bold' fill='white' font-family='Inter'>C</text></svg>">
+  <style>
+    :root {
+      --v50: #f5f3ff;
+      --v100: #ede9fe;
+      --v200: #ddd6fe;
+      --v300: #c4b5fd;
+      --v400: #a78bfa;
+      --v500: #8b5cf6;
+      --v600: #7c3aed;
+      --v700: #6d28d9;
+      --v800: #5b21b6;
+      --v900: #4c1d95;
+      --i500: #6366f1;
+      --i600: #4f46e5;
+      --n0: #fff;
+      --n50: #fafafa;
+      --n100: #f4f4f5;
+      --n200: #e4e4e7;
+      --n300: #d4d4d8;
+      --n400: #a1a1aa;
+      --n500: #71717a;
+      --n600: #52525b;
+      --n700: #3f3f46;
+      --n800: #27272a;
+      --n900: #18181b;
+      --n950: #09090b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --grad-hero: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #8b5cf6 100%);
+      --grad-dark: linear-gradient(160deg, #0f0a1e 0%, #1a0e38 40%, #0f0a1e 100%);
+      --sh-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --sh-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --sh-md: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --sh-lg: 0 12px 48px rgba(0, 0, 0, 0.1);
+      --sh-glow: 0 8px 32px rgba(124, 58, 237, 0.25);
+      --font-en: 'Inter', system-ui, sans-serif;
+      --font-ar: 'Tajawal', system-ui, sans-serif;
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --r-xl: 20px;
+      --r-2xl: 24px;
+      --r-full: 9999px;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-en);
+      background: var(--n0);
+      color: var(--n700);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.ar {
+      font-family: var(--font-ar);
+      direction: rtl;
+      text-align: right;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--n600);
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s var(--ease);
+    }
+
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--sh-sm);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.75px;
+      color: var(--n500);
+      font-family: var(--font-en) !important;
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+    }
+
+    .logo span {
+      color: var(--v600);
+    }
+
+    .logo small {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--v400);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    body.ar .logo {
+      flex-direction: row-reverse;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--n600);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s var(--ease);
+    }
+
+    .nav-links a:hover {
+      color: var(--v600);
+    }
+
+    .nav-links a.active {
+      color: var(--v600);
+      border-bottom: 2px solid var(--v600);
+      padding-bottom: 0.25rem;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .lang-toggle {
+      background: var(--n100);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--r-full);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--n700);
+      transition: all 0.3s var(--ease);
+      font-family: var(--font-en);
+    }
+
+    .lang-toggle:hover {
+      background: var(--v100);
+      color: var(--v600);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--r-md);
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      transition: all 0.3s var(--ease);
+      font-family: inherit;
+    }
+
+    .btn-fill {
+      background: var(--v600);
+      color: var(--n0);
+    }
+
+    .btn-fill:hover {
+      background: var(--v700);
+      box-shadow: var(--sh-glow);
+    }
+
+    .btn-soft {
+      background: var(--v50);
+      color: var(--v700);
+    }
+
+    .btn-soft:hover {
+      background: var(--v100);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--v600);
+      color: var(--v600);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--v50);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--v600);
+    }
+
+    .btn-ghost:hover {
+      background: var(--v50);
+    }
+
+    .btn-white {
+      background: var(--n0);
+      color: var(--n700);
+      border: 1px solid var(--n200);
+    }
+
+    .btn-white:hover {
+      border-color: var(--v600);
+      color: var(--v600);
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .hero-bar {
+      background: var(--grad-hero);
+      color: var(--n0);
+      padding: 4rem 0 3rem;
+      text-align: center;
+      margin-top: 5rem;
+    }
+
+    .hero-bar h1 {
+      color: var(--n0);
+      margin-bottom: 1rem;
+    }
+
+    .hero-bar p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.125rem;
+    }
+
+    /* Story Section */
+    .story-section {
+      background: var(--n50);
+      padding: 5rem 0;
+    }
+
+    .story-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .story-text h2 {
+      color: var(--n900);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-text p {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--n600);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-visual {
+      background: linear-gradient(135deg, var(--v100) 0%, var(--v50) 100%);
+      border-radius: var(--r-lg);
+      padding: 3rem;
+      text-align: center;
+      box-shadow: var(--sh-md);
+    }
+
+    .story-visual-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .story-visual h3 {
+      color: var(--v600);
+      margin-bottom: 0.5rem;
+    }
+
+    .story-visual p {
+      color: var(--n600);
+      font-size: 0.95rem;
+    }
+
+    /* Mission & Vision */
+    .mission-vision {
+      padding: 5rem 0;
+    }
+
+    .mission-vision h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--n900);
+    }
+
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .mv-card {
+      background: var(--n0);
+      border: 2px solid var(--n200);
+      border-radius: var(--r-lg);
+      padding: 2.5rem;
+      transition: all 0.3s var(--ease);
+    }
+
+    .mv-card:hover {
+      border-color: var(--v600);
+      box-shadow: var(--sh-md);
+      transform: translateY(-4px);
+    }
+
+    .mv-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .mv-card h3 {
+      color: var(--n900);
+      margin-bottom: 1rem;
+    }
+
+    .mv-card p {
+      color: var(--n600);
+      line-height: 1.7;
+    }
+
+    /* Values Section */
+    .values-section {
+      background: linear-gradient(160deg, #0f0a1e 0%, #1a0e38 40%, #0f0a1e 100%);
+      padding: 5rem 0;
+      color: var(--n0);
+    }
+
+    .values-section h2 {
+      text-align: center;
+      color: var(--n0);
+      margin-bottom: 3rem;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .value-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: var(--r-lg);
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s var(--ease);
+    }
+
+    .value-card:hover {
+      border-color: rgba(124, 58, 237, 0.8);
+      background: rgba(124, 58, 237, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .value-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .value-card h3 {
+      color: var(--n0);
+      margin-bottom: 0.75rem;
+    }
+
+    .value-card p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: 5rem 0;
+      background: var(--n50);
+    }
+
+    .team-section h2 {
+      text-align: center;
+      color: var(--n900);
+      margin-bottom: 3rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .team-card {
+      background: var(--n0);
+      border-radius: var(--r-lg);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--sh-sm);
+      transition: all 0.3s var(--ease);
+    }
+
+    .team-card:hover {
+      box-shadow: var(--sh-md);
+      transform: translateY(-4px);
+    }
+
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--grad-hero);
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--n0);
+      font-weight: 700;
+    }
+
+    .team-card h3 {
+      color: var(--n900);
+      margin-bottom: 0.5rem;
+    }
+
+    .team-card .role {
+      color: var(--v600);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .team-card p {
+      color: var(--n600);
+      font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--grad-hero);
+      color: var(--n0);
+      padding: 4rem 0;
+      text-align: center;
+      margin: 5rem 0;
+      border-radius: var(--r-lg);
+    }
+
+    .cta-section h2 {
+      color: var(--n0);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      font-size: 1.125rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--n900);
+      color: var(--n400);
+      padding: 4rem 0 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--n800);
+    }
+
+    .footer-column h4 {
+      color: var(--n0);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-column a {
+      display: block;
+      color: var(--n400);
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+      transition: color 0.3s var(--ease);
+    }
+
+    .footer-column a:hover {
+      color: var(--v400);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      color: var(--n500);
+      font-size: 0.875rem;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--n800);
+      color: var(--n400);
+      text-decoration: none;
+      transition: all 0.3s var(--ease);
+    }
+
+    .social-link:hover {
+      background: var(--v600);
+      color: var(--n0);
+    }
+
+    /* WhatsApp FAB */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--sh-lg);
+      transition: all 0.3s var(--ease);
+      z-index: 999;
+      color: var(--n0);
+      font-size: 1.75rem;
+    }
+
+    .whatsapp-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 48px rgba(37, 211, 102, 0.4);
+    }
+
+    body.ar .whatsapp-fab {
+      right: auto;
+      left: 2rem;
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s var(--ease);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+      }
+
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-center {
+        gap: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .story-content {
+        grid-template-columns: 1fr;
+      }
+
+      .mv-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .whatsapp-fab {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+
+      body.ar .whatsapp-fab {
+        left: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      nav {
+        padding: 0.75rem 1rem;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .logo small {
+        font-size: 16px;
+      }
+
+      .nav-right {
+        gap: 0.5rem;
+      }
+
+      .btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+      }
+
+      section {
+        padding: 2rem 0;
+      }
+
+      .mv-card,
+      .value-card {
+        padding: 1.5rem;
+      }
+
+      .story-visual {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body class="en">
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small>
+    </a>
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="index.html#services" data-en="Solutions" data-ar="الحلول">Solutions</a></li>
+        <li><a href="about.html" class="active" data-en="About" data-ar="حول">About</a></li>
+        <li><a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a></li>
+        <li><a href="index.html#contact" data-en="Contact" data-ar="اتصل">Contact</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span data-en="AR" data-ar="EN">AR</span>
+      </button>
+      <a href="index.html#contact" class="btn btn-fill" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero Bar -->
+  <div class="hero-bar">
+    <div class="container">
+      <h1 data-en="About Cardni Business" data-ar="حول كاردني أعمال">About Cardni Business</h1>
+      <p data-en="Empowering businesses with cutting-edge digital voucher solutions across the MENA region" data-ar="تمكين الشركات بحلول القسائم الرقمية المتقدمة في منطقة الشرق الأوسط وشمال أفريقيا">Empowering businesses with cutting-edge digital voucher solutions across the MENA region</p>
+    </div>
+  </div>
+
+  <!-- Our Story -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-content">
+        <div class="story-text reveal">
+          <h2 data-en="Our Story" data-ar="قصتنا">Our Story</h2>
+          <p data-en="Founded in Saudi Arabia, Cardni Business started with a simple vision: to simplify how companies distribute digital vouchers and manage customer rewards at scale. What began as an innovative idea has grown into a comprehensive platform serving hundreds of businesses across the MENA region." data-ar="تأسست كاردني أعمال في المملكة العربية السعودية برؤية بسيطة: تبسيط طريقة توزيع الشركات للقسائم الرقمية وإدارة مكافآت العملاء على نطاق واسع. ما بدأ كفكرة مبتكرة تحول إلى منصة شاملة تخدم مئات الشركات في جميع أنحاء منطقة الشرق الأوسط وشمال أفريقيا.">Founded in Saudi Arabia, Cardni Business started with a simple vision: to simplify how companies distribute digital vouchers and manage customer rewards at scale. What began as an innovative idea has grown into a comprehensive platform serving hundreds of businesses across the MENA region.</p>
+          <p data-en="Today, we leverage cutting-edge technology to deliver three core solutions: our Enterprise Voucher Distribution platform for large-scale campaigns, B2B APIs for seamless integrations, and our consumer marketplace connecting millions of customers to exclusive digital rewards. We are committed to driving digital transformation across the region." data-ar="اليوم، نستخدم التكنولوجيا المتقدمة لتقديم ثلاثة حلول أساسية: منصة توزيع القسائم للمؤسسات للحملات على نطاق واسع، وواجهات برمجية B2B للتكامل السلس، وسوقنا للمستهلكين الذي يربط ملايين العملاء بمكافآت رقمية حصرية. نحن ملتزمون بقيادة التحول الرقمي في المنطقة.">Today, we leverage cutting-edge technology to deliver three core solutions: our Enterprise Voucher Distribution platform for large-scale campaigns, B2B APIs for seamless integrations, and our consumer marketplace connecting millions of customers to exclusive digital rewards. We are committed to driving digital transformation across the region.</p>
+        </div>
+        <div class="story-visual reveal">
+          <div class="story-visual-icon">🚀</div>
+          <h3 data-en="Built for Growth" data-ar="مبني للنمو">Built for Growth</h3>
+          <p data-en="Scaling your digital voucher business with reliability and innovation" data-ar="توسيع نطاق عملك في القسائم الرقمية بالموثوقية والابتكار">Scaling your digital voucher business with reliability and innovation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mission-vision">
+    <div class="container">
+      <h2 data-en="Our Mission & Vision" data-ar="مهمتنا ورؤيتنا">Our Mission & Vision</h2>
+      <div class="mv-grid">
+        <div class="mv-card reveal">
+          <div class="mv-card-icon">🎯</div>
+          <h3 data-en="Our Mission" data-ar="مهمتنا">Our Mission</h3>
+          <p data-en="To empower businesses with seamless, secure, and scalable digital distribution technology that transforms how they engage with customers and manage rewards." data-ar="تمكين الشركات بتكنولوجيا توزيع رقمية سلسة وآمنة وقابلة للتوسع تحول طريقة تفاعلهم مع العملاء وإدارة المكافآت.">To empower businesses with seamless, secure, and scalable digital distribution technology that transforms how they engage with customers and manage rewards.</p>
+        </div>
+        <div class="mv-card reveal">
+          <div class="mv-card-icon">🌟</div>
+          <h3 data-en="Our Vision" data-ar="رؤيتنا">Our Vision</h3>
+          <p data-en="To become the leading digital voucher and rewards ecosystem in the MENA region, recognized for innovation, trust, and excellence in enabling billions of transactions annually." data-ar="أن نصبح النظام البيئي الرائد للقسائم الرقمية والمكافآت في منطقة الشرق الأوسط وشمال أفريقيا، والمعروف بالابتكار والثقة والتميز في تمكين مليارات المعاملات سنويًا.">To become the leading digital voucher and rewards ecosystem in the MENA region, recognized for innovation, trust, and excellence in enabling billions of transactions annually.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Values -->
+  <section class="values-section">
+    <div class="container">
+      <h2 data-en="Our Values" data-ar="قيمنا">Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-card-icon">💡</div>
+          <h3 data-en="Innovation" data-ar="الابتكار">Innovation</h3>
+          <p data-en="We continuously push boundaries to create next-generation solutions that solve real business challenges and stay ahead of market trends." data-ar="نحن نواصل دفع الحدود باستمرار لإنشاء حلول الجيل القادم التي تحل تحديات العمل الحقيقية وتظل في الطليعة.">We continuously push boundaries to create next-generation solutions that solve real business challenges and stay ahead of market trends.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">🛡️</div>
+          <h3 data-en="Trust & Security" data-ar="الثقة والأمان">Trust & Security</h3>
+          <p data-en="We prioritize data protection and system integrity, maintaining the highest standards of security to protect our partners and customers." data-ar="نعطي الأولوية لحماية البيانات وسلامة النظام، مع الحفاظ على أعلى معايير الأمان لحماية شركائنا والعملاء.">We prioritize data protection and system integrity, maintaining the highest standards of security to protect our partners and customers.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">👥</div>
+          <h3 data-en="Customer First" data-ar="العميل أولاً">Customer First</h3>
+          <p data-en="Every decision we make is driven by our commitment to deliver exceptional value and support to our clients and end-users." data-ar="كل قرار نتخذه يتم تحريكه بالتزامنا بتقديم قيمة استثنائية والدعم لعملائنا ومستخدمينا النهائيين.">Every decision we make is driven by our commitment to deliver exceptional value and support to our clients and end-users.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">📈</div>
+          <h3 data-en="Scalability" data-ar="قابلية التوسع">Scalability</h3>
+          <p data-en="Our platform is built to grow with your business, handling millions of transactions seamlessly without compromising performance." data-ar="تم بناء منصتنا لتنمو مع عملك، والتعامل مع ملايين المعاملات بسلاسة دون المساس بالأداء.">Our platform is built to grow with your business, handling millions of transactions seamlessly without compromising performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <h2 data-en="Our Team" data-ar="فريقنا">Our Team</h2>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-avatar">SA</div>
+          <h3 data-en="Saad Al-Rashid" data-ar="سعد الرشيد">Saad Al-Rashid</h3>
+          <div class="role" data-en="Chief Executive Officer" data-ar="الرئيس التنفيذي">Chief Executive Officer</div>
+          <p data-en="Visionary leader with 15+ years in fintech and digital payments driving Cardni's strategic direction." data-ar="قائد بعيد النظر مع أكثر من 15 سنة في التكنولوجيا المالية والدفع الرقمي يقود الاتجاه الاستراتيجي لكاردني.">Visionary leader with 15+ years in fintech and digital payments driving Cardni's strategic direction.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">FZ</div>
+          <h3 data-en="Fatima Zahra" data-ar="فاطمة الزهراء">Fatima Zahra</h3>
+          <div class="role" data-en="Chief Technology Officer" data-ar="كبير مسؤولي التكنولوجيا">Chief Technology Officer</div>
+          <p data-en="Engineering expert specializing in scalable systems and blockchain integration for secure transactions." data-ar="خبير الهندسة متخصص في الأنظمة القابلة للتوسع والتكامل مع البلوكتشين للمعاملات الآمنة.">Engineering expert specializing in scalable systems and blockchain integration for secure transactions.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">MK</div>
+          <h3 data-en="Mohammed Karim" data-ar="محمد كريم">Mohammed Karim</h3>
+          <div class="role" data-en="VP Business Development" data-ar="نائب الرئيس للتطوير التجاري">VP Business Development</div>
+          <p data-en="Strategic growth partner building relationships with enterprise clients across MENA and beyond." data-ar="شريك نمو استراتيجي يبني علاقات مع عملاء المؤسسات عبر منطقة الشرق الأوسط وشمال أفريقيا وما بعدها.">Strategic growth partner building relationships with enterprise clients across MENA and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section>
+    <div class="container">
+      <div class="cta-section reveal">
+        <h2 data-en="Ready to Partner with Us?" data-ar="هل أنت مستعد للشراكة معنا؟">Ready to Partner with Us?</h2>
+        <p data-en="Let's discuss how Cardni Business can transform your digital distribution strategy" data-ar="دعنا نناقش كيف يمكن لكاردني أعمال تحويل استراتيجية التوزيع الرقمية الخاصة بك">Let's discuss how Cardni Business can transform your digital distribution strategy</p>
+        <a href="index.html#contact" class="btn btn-white" data-en="Get in Touch" data-ar="تواصل معنا">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4 data-en="Solutions" data-ar="الحلول">Solutions</h4>
+          <a href="evd.html" data-en="EVD Platform" data-ar="منصة EVD">EVD Platform</a>
+          <a href="b2b.html" data-en="B2B Integration" data-ar="تكامل B2B">B2B Integration</a>
+          <a href="b2c.html" data-en="Cardni Store" data-ar="متجر كاردني">Cardni Store</a>
+          <a href="#" data-en="API Documentation" data-ar="توثيق API">API Documentation</a>
+        </div>
+        <div class="footer-column">
+          <h4 data-en="Company" data-ar="الشركة">Company</h4>
+          <a href="about.html" data-en="About Us" data-ar="من نحن">About Us</a>
+          <a href="#" data-en="Careers" data-ar="الوظائف">Careers</a>
+          <a href="index.html#contact" data-en="Contact" data-ar="اتصل">Contact</a>
+          <a href="#" data-en="Blog" data-ar="المدونة">Blog</a>
+        </div>
+        <div class="footer-column">
+          <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+          <a href="privacy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+          <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+          <a href="#" data-en="Cookie Policy" data-ar="سياسة الكوكيز">Cookie Policy</a>
+          <a href="#" data-en="SLA" data-ar="اتفاقية مستوى الخدمة">SLA</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright" data-en="© 2026 Cardni. All rights reserved. Riyadh, Saudi Arabia" data-ar="© 2026 كاردني. جميع الحقوق محفوظة. الرياض، المملكة العربية السعودية">© 2026 Cardni. All rights reserved. Riyadh, Saudi Arabia</div>
+        <div class="footer-socials">
+          <a href="https://t.me/cardnicom" class="social-link" title="Telegram" target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.16.87-.48 1.16-.79 1.19-.67.06-1.18-.44-1.82-.86-.98-.65-1.54-1.05-2.5-1.68-1.1-.73-.39-1.13.24-1.78.16-.18 2.93-2.68 2.99-2.91.06-.3-.23-.46-.68-.36-.45.1-2.29 1.44-3.24 2.12-.43.29-.82.32-1.2.16-.4-.18-.77-.27-1.14-.26-.36.01-.74.2-1.1.39-.36.19-.68.36-1.02.35-.33-.01.07-.48.52-.74 2.65-1.7 4.69-2.81 5.6-3.21 2.51-1.26 3.05-1.17 3.4-.13.2.6.16 2.59-.04 4.21z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp FAB -->
+  <a href="https://wa.me/966539761698" class="whatsapp-fab" title="Contact on WhatsApp" target="_blank" rel="noopener noreferrer">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 6.172c-3.181 0-5.77 2.586-5.77 5.766 0 1.201.381 2.313 1.021 3.22l.841 1.301-1.265 3.644 3.8-1.043.668.893c.712.643 1.612.953 2.605.953 3.179 0 5.767-2.586 5.767-5.765 0-3.179-2.586-5.768-5.767-5.768zm3.392 8.244c-.144.405-.837.774-1.17.825-.299.045-.677.063-1.092-.069-.252-.08-.579-.27-.883-.512-1.02-.789-1.623-2.456-.167-4.978.19-.296.469-.437.846-.437.135 0 .266.028.39.064.141.04.293.11.418.18.725.426 1.157 1.081 1.164 1.923.006.842-.435 1.629-1.306 2.003z"/>
+    </svg>
+  </a>
+
+  <script>
+    // Language Toggle
+    function toggleLang() {
+      const body = document.body;
+      const isArabic = body.classList.contains('ar');
+
+      if (isArabic) {
+        body.classList.remove('ar');
+        body.classList.add('en');
+        localStorage.setItem('language', 'en');
+        updateLanguageDisplay('en');
+      } else {
+        body.classList.remove('en');
+        body.classList.add('ar');
+        localStorage.setItem('language', 'ar');
+        updateLanguageDisplay('ar');
+      }
+    }
+
+    function updateLanguageDisplay(lang) {
+      document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+        if (lang === 'ar') {
+          el.textContent = el.getAttribute('data-ar');
+        } else {
+          el.textContent = el.getAttribute('data-en');
+        }
+      });
+    }
+
+    // Load saved language preference
+    const savedLang = localStorage.getItem('language') || 'en';
+    if (savedLang === 'ar') {
+      document.body.classList.remove('en');
+      document.body.classList.add('ar');
+    }
+    updateLanguageDisplay(savedLang);
+
+    // Scroll effect on navbar
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Set active nav link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      if (link.href === window.location.href) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
