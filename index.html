@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardni - Digital Voucher & Top-Up Distribution Platform</title>
+<meta name="description" content="Cardni provides complete EVD software, B2B API integrations, and direct-to-consumer digital voucher and top-up solutions for businesses worldwide.">
+<meta name="theme-color" content="#7c3aed">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════ RESET & TOKENS ═══════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  /* Primary – deep violet family */
+  --v50:#f5f3ff;--v100:#ede9fe;--v200:#ddd6fe;--v300:#c4b5fd;
+  --v400:#a78bfa;--v500:#8b5cf6;--v600:#7c3aed;--v700:#6d28d9;
+  --v800:#5b21b6;--v900:#4c1d95;
+
+  /* Accent – indigo for depth */
+  --i500:#6366f1;--i600:#4f46e5;
+
+  /* Neutral */
+  --n0:#fff;--n50:#fafafa;--n100:#f4f4f5;--n200:#e4e4e7;
+  --n300:#d4d4d8;--n400:#a1a1aa;--n500:#71717a;--n600:#52525b;
+  --n700:#3f3f46;--n800:#27272a;--n900:#18181b;--n950:#09090b;
+
+  /* Semantic */
+  --success:#10b981;--warning:#f59e0b;--info:#3b82f6;
+
+  /* Gradients */
+  --grad-hero:linear-gradient(135deg,#7c3aed 0%,#6366f1 50%,#8b5cf6 100%);
+  --grad-dark:linear-gradient(160deg,#0f0a1e 0%,#1a0e38 40%,#0f0a1e 100%);
+  --grad-card:linear-gradient(135deg,rgba(124,58,237,.06) 0%,rgba(99,102,241,.04) 100%);
+  --grad-glow:radial-gradient(circle,rgba(124,58,237,.15) 0%,transparent 70%);
+
+  /* Shadows */
+  --sh-xs:0 1px 2px rgba(0,0,0,.05);
+  --sh-sm:0 2px 8px rgba(0,0,0,.06);
+  --sh-md:0 4px 24px rgba(0,0,0,.08);
+  --sh-lg:0 12px 48px rgba(0,0,0,.1);
+  --sh-glow:0 8px 32px rgba(124,58,237,.25);
+  --sh-glow-lg:0 16px 48px rgba(124,58,237,.35);
+
+  /* Typography */
+  --font-en:'Inter',system-ui,sans-serif;
+  --font-ar:'Tajawal',system-ui,sans-serif;
+
+  /* Radius */
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-full:9999px;
+
+  /* Timing */
+  --ease:cubic-bezier(.4,0,.2,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-en);color:var(--n700);background:var(--n0);line-height:1.65;overflow-x:hidden}
+html[dir="rtl"] body{font-family:var(--font-ar)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button{font-family:inherit}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ═══════════════════ NAVBAR ═══════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;transition:all .35s var(--ease);
+}
+.nav.scrolled{
+  padding:12px 0;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--n200);
+}
+.nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:26px;font-weight:800;letter-spacing:-.75px;color:var(--n500);font-family:var(--font-en)!important}
+.logo span{color:var(--v600)}
+.logo small{font-size:20px;font-weight:400;color:var(--v400);letter-spacing:0;text-transform:none;margin-left:2px}
+.nav-mid{display:flex;gap:36px}
+.nav-mid a{
+  font-size:14px;font-weight:500;color:var(--n500);
+  transition:color .25s;position:relative;padding:4px 0;
+}
+.nav-mid a::after{
+  content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;
+  background:var(--v600);border-radius:2px;transition:all .25s var(--ease);transform:translateX(-50%);
+}
+.nav-mid a:hover{color:var(--n900)}
+.nav-mid a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:10px}
+
+.lang-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:var(--r-full);
+  border:1px solid var(--n200);background:var(--n0);
+  font-size:13px;font-weight:600;color:var(--n600);cursor:pointer;
+  transition:all .25s;
+}
+.lang-btn:hover{border-color:var(--v300);background:var(--v50)}
+.lang-btn svg{width:16px;height:16px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 24px;border-radius:var(--r-md);font-size:14px;font-weight:600;
+  border:none;cursor:pointer;transition:all .3s var(--ease);white-space:nowrap;
+  font-family:inherit;
+}
+.btn-fill{
+  background:var(--v600);color:var(--n0);
+  box-shadow:var(--sh-glow);
+}
+.btn-fill:hover{background:var(--v700);transform:translateY(-1px);box-shadow:var(--sh-glow-lg)}
+.btn-soft{
+  background:var(--v50);color:var(--v700);border:1px solid var(--v200);
+}
+.btn-soft:hover{background:var(--v100);border-color:var(--v300)}
+.btn-outline{
+  background:transparent;color:var(--v600);border:2px solid var(--v200);
+}
+.btn-outline:hover{background:var(--v50);border-color:var(--v400);transform:translateY(-1px)}
+.btn-white{
+  background:var(--n0);color:var(--v700);
+  box-shadow:var(--sh-md);
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:var(--sh-lg)}
+.btn-ghost{
+  background:rgba(255,255,255,.1);color:var(--n0);border:1.5px solid rgba(255,255,255,.25);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
+.btn-lg{padding:14px 32px;font-size:15px;border-radius:var(--r-lg)}
+.btn svg{width:18px;height:18px;flex-shrink:0}
+
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--n700);border-radius:2px;margin:5px 0;transition:all .3s}
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;padding:120px 0 80px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(170deg,#f5f3ff 0%,#ede9fe 25%,#e0e7ff 50%,#f5f3ff 100%);
+}
+.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
+.hero-bg .orb-1{width:500px;height:500px;background:rgba(124,58,237,.15);top:-120px;right:-80px}
+.hero-bg .orb-2{width:350px;height:350px;background:rgba(99,102,241,.12);bottom:-60px;left:-100px}
+.hero-bg .orb-3{width:200px;height:200px;background:rgba(139,92,246,.1);top:40%;left:30%}
+
+/* Grid pattern overlay */
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(124,58,237,.04) 1px,transparent 0);
+  background-size:32px 32px;
+}
+
+.hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-content{max-width:540px}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--n0);border:1px solid var(--v200);
+  border-radius:var(--r-full);padding:6px 6px 6px 8px;
+  font-size:13px;font-weight:600;color:var(--v700);
+  margin-bottom:28px;box-shadow:var(--sh-sm);
+}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-badge .tag{
+  background:var(--v100);color:var(--v700);
+  padding:3px 10px;border-radius:var(--r-full);font-size:11px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+
+.hero h1{
+  font-size:50px;font-weight:900;line-height:1.12;
+  color:var(--n950);letter-spacing:-1.5px;margin-bottom:20px;
+}
+.hero h1 .gradient{
+  background:var(--grad-hero);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.hero-sub{font-size:17px;color:var(--n500);line-height:1.75;margin-bottom:32px;max-width:460px}
+
+.hero-ctas{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+
+/* Social proof bar in hero */
+.hero-proof{
+  display:flex;align-items:center;gap:16px;
+  padding-top:28px;border-top:1px solid var(--n200);
+}
+.hero-proof-avatars{display:flex}
+.hero-proof-avatars .av{
+  width:36px;height:36px;border-radius:50%;
+  border:2px solid var(--n0);margin-right:-10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:var(--n0);
+}
+html[dir="rtl"] .hero-proof-avatars .av{margin-right:0;margin-left:-10px}
+.hero-proof-text{font-size:13px;color:var(--n500);line-height:1.5}
+.hero-proof-text strong{color:var(--n800);font-weight:700}
+
+/* Hero visual – floating dashboard mockup */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+
+.dash-main{
+  background:var(--n0);border-radius:var(--r-2xl);padding:0;
+  box-shadow:0 25px 60px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.04);
+  overflow:hidden;width:100%;max-width:480px;
+  transform:perspective(1200px) rotateY(-3deg) rotateX(2deg);
+  transition:transform .5s var(--ease);
+}
+.dash-main:hover{transform:perspective(1200px) rotateY(0) rotateX(0)}
+
+.dash-topbar{
+  display:flex;align-items:center;gap:8px;
+  padding:14px 20px;background:var(--n50);border-bottom:1px solid var(--n100);
+}
+.dash-dot{width:8px;height:8px;border-radius:50%}
+.dash-url{
+  flex:1;height:28px;background:var(--n0);border-radius:6px;
+  margin-left:12px;border:1px solid var(--n200);
+  display:flex;align-items:center;padding:0 10px;
+  font-size:11px;color:var(--n400);
+}
+html[dir="rtl"] .dash-url{margin-left:0;margin-right:12px}
+.dash-url svg{width:12px;height:12px;margin-right:6px;color:var(--success)}
+html[dir="rtl"] .dash-url svg{margin-right:0;margin-left:6px}
+
+.dash-body{padding:24px}
+.dash-greeting{font-size:16px;font-weight:700;color:var(--n900);margin-bottom:4px}
+.dash-greeting-sub{font-size:12px;color:var(--n400);margin-bottom:20px}
+
+.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.dash-stat{
+  background:var(--n50);border-radius:var(--r-md);padding:14px;
+  border:1px solid var(--n100);
+}
+.dash-stat-label{font-size:10px;font-weight:600;color:var(--n400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.dash-stat-val{font-size:20px;font-weight:800;color:var(--n900)}
+.dash-stat-change{font-size:10px;font-weight:600;color:var(--success);margin-top:2px}
+
+.dash-table{width:100%}
+.dash-table-head{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  padding:8px 12px;font-size:10px;font-weight:600;
+  color:var(--n400);text-transform:uppercase;letter-spacing:.5px;
+  border-bottom:1px solid var(--n100);
+}
+.dash-table-row{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  padding:10px 12px;font-size:12px;align-items:center;
+  border-bottom:1px solid var(--n50);
+}
+.dash-table-row:last-child{border:none}
+.dash-product{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--n800)}
+.dash-product-icon{width:28px;height:28px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:14px}
+.dash-amount{font-weight:600;color:var(--n700)}
+.dash-status{
+  font-size:10px;font-weight:700;padding:3px 8px;
+  border-radius:var(--r-full);width:fit-content;
+}
+
+/* Floating accent cards */
+.float-card{
+  position:absolute;background:var(--n0);border-radius:var(--r-lg);
+  padding:14px 18px;box-shadow:var(--sh-lg);border:1px solid var(--n100);
+  animation:float 6s ease-in-out infinite;z-index:2;
+}
+.float-card-1{top:10%;left:-30px;animation-delay:0s}
+.float-card-2{bottom:15%;right:-20px;animation-delay:2s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.float-card .fc-row{display:flex;align-items:center;gap:10px}
+.float-card .fc-icon{width:36px;height:36px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:16px}
+.float-card .fc-label{font-size:11px;color:var(--n400)}
+.float-card .fc-val{font-size:15px;font-weight:700;color:var(--n800)}
+
+/* ═══════════════════ TRUST BAR ═══════════════════ */
+.trust-bar{
+  padding:48px 0;background:var(--n0);border-top:1px solid var(--n100);border-bottom:1px solid var(--n100);
+}
+.trust-bar .container{display:flex;flex-direction:column;align-items:center;gap:28px}
+.trust-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--n400)}
+.trust-logos{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.trust-logo{
+  font-size:18px;font-weight:800;color:var(--n300);letter-spacing:-.5px;
+  transition:color .3s;cursor:default;
+}
+.trust-logo:hover{color:var(--n500)}
+.trust-badges{display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:center}
+.trust-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:var(--r-lg);
+  background:var(--n0);border:1px solid var(--n200);
+  font-size:13px;font-weight:600;color:var(--n600);
+  box-shadow:var(--sh-xs);transition:all .25s;
+}
+.trust-badge:hover{border-color:var(--v200);box-shadow:var(--sh-sm)}
+.trust-badge .tb-icon{
+  width:32px;height:32px;border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+
+/* ═══════════════════ SECTION COMMONS ═══════════════════ */
+.section{padding:120px 0}
+.section-dark{background:var(--grad-dark);color:var(--n0)}
+
+.section-head{text-align:center;max-width:600px;margin:0 auto 60px}
+.section-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--v600);margin-bottom:14px;
+}
+.section-tag .line{width:20px;height:2px;background:var(--v400);border-radius:2px}
+.section-dark .section-tag{color:var(--v300)}
+.section-dark .section-tag .line{background:var(--v400)}
+
+.section-head h2{
+  font-size:38px;font-weight:800;color:var(--n950);letter-spacing:-.5px;
+  margin-bottom:14px;line-height:1.2;
+}
+.section-dark .section-head h2{color:var(--n0)}
+
+.section-head p{font-size:16px;color:var(--n500);line-height:1.7}
+.section-dark .section-head p{color:var(--n400)}
+
+/* ═══════════════════ HOW IT WORKS ═══════════════════ */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative}
+.steps-grid::before{
+  content:'';position:absolute;top:42px;left:12.5%;right:12.5%;
+  height:2px;background:var(--v200);z-index:0;
+}
+.step-card{text-align:center;position:relative;z-index:1}
+.step-num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--v600);color:var(--n0);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;margin:0 auto 18px;
+  box-shadow:var(--sh-glow);position:relative;z-index:1;
+}
+.step-card h3{font-size:16px;font-weight:700;color:var(--n800);margin-bottom:6px}
+.step-card p{font-size:14px;color:var(--n500);line-height:1.6}
+
+/* ═══════════════════ SERVICE BLOCKS ═══════════════════ */
+.svc-block{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  margin-bottom:80px;padding:56px;border-radius:var(--r-2xl);
+  background:var(--n0);border:1px solid var(--n200);
+  box-shadow:var(--sh-sm);transition:box-shadow .3s;
+}
+.svc-block:hover{box-shadow:var(--sh-md)}
+.svc-block:last-child{margin-bottom:0}
+.svc-block.flip .svc-info{order:2}
+.svc-block.flip .svc-visual{order:1}
+
+.svc-icon{
+  width:56px;height:56px;border-radius:var(--r-lg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:18px;
+}
+.svc-info h3{font-size:26px;font-weight:800;color:var(--n950);margin-bottom:6px;letter-spacing:-.3px}
+.svc-subtitle{font-size:14px;font-weight:600;color:var(--v600);margin-bottom:14px}
+.svc-info>p{font-size:15px;color:var(--n500);margin-bottom:24px;line-height:1.75}
+.svc-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.svc-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--n600)}
+.svc-feat .chk{
+  width:20px;height:20px;min-width:20px;border-radius:6px;
+  background:var(--v100);color:var(--v600);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;margin-top:2px;
+}
+
+/* Service mockups */
+.svc-visual{display:flex;justify-content:center;align-items:center}
+.mock{
+  background:var(--n0);border-radius:var(--r-xl);width:100%;max-width:420px;
+  box-shadow:var(--sh-lg);border:1px solid var(--n100);overflow:hidden;
+}
+.mock-bar{display:flex;align-items:center;gap:6px;padding:12px 16px;background:var(--n50);border-bottom:1px solid var(--n100)}
+.mock-d{width:8px;height:8px;border-radius:50%}
+.mock-url{flex:1;height:24px;background:var(--n0);border-radius:5px;margin-left:10px;border:1px solid var(--n200)}
+html[dir="rtl"] .mock-url{margin-left:0;margin-right:10px}
+.mock-body{padding:24px}
+
+/* EVD Mockup */
+.evd-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.evd-tile{
+  background:var(--n50);border-radius:var(--r-md);padding:16px;
+  border:1px solid var(--n100);text-align:center;
+  transition:all .25s;
+}
+.evd-tile:hover{border-color:var(--v300);background:var(--v50)}
+.evd-tile .icon{font-size:24px;margin-bottom:6px}
+.evd-tile .label{font-size:11px;font-weight:600;color:var(--n600)}
+.evd-tile .val{font-size:18px;font-weight:800;color:var(--n800);margin-top:2px}
+
+/* API Mockup */
+.api-block{font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:2}
+.api-method{color:var(--v600);font-weight:700}
+.api-key{color:var(--n500)}
+.api-str{color:var(--success)}
+.api-num{color:var(--warning)}
+.api-resp{
+  margin-top:12px;padding:10px 14px;border-radius:var(--r-sm);
+  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);
+  color:var(--success);font-weight:600;font-size:12px;
+}
+
+/* Store Mockup */
+.store-hero-mini{text-align:center;margin-bottom:16px}
+.store-hero-mini .icon{font-size:36px;margin-bottom:6px}
+.store-hero-mini h4{font-size:16px;font-weight:700;color:var(--n800)}
+.store-hero-mini p{font-size:11px;color:var(--n400)}
+.store-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.store-cat{
+  background:var(--n50);border-radius:var(--r-md);padding:14px;text-align:center;
+  border:1px solid var(--n100);transition:all .25s;cursor:default;
+}
+.store-cat:hover{border-color:var(--v300);transform:translateY(-2px)}
+.store-cat .icon{font-size:22px;margin-bottom:4px}
+.store-cat .label{font-size:11px;font-weight:600;color:var(--n600)}
+
+/* ═══════════════════ WHY CARDNI ═══════════════════ */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.why-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-xl);padding:32px;
+  transition:all .3s var(--ease);backdrop-filter:blur(8px);
+  position:relative;overflow:hidden;
+}
+.why-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--grad-hero);opacity:0;transition:opacity .3s;
+}
+.why-card:hover{
+  background:rgba(255,255,255,.08);transform:translateY(-4px);
+  border-color:rgba(124,58,237,.3);
+}
+.why-card:hover::before{opacity:1}
+.why-card-icon{
+  width:48px;height:48px;border-radius:var(--r-md);
+  background:rgba(124,58,237,.15);display:flex;align-items:center;
+  justify-content:center;font-size:22px;margin-bottom:16px;
+}
+.why-card h3{font-size:17px;font-weight:700;color:var(--n0);margin-bottom:8px}
+.why-card p{font-size:14px;color:var(--n400);line-height:1.7}
+
+/* ═══════════════════ TESTIMONIALS ═══════════════════ */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.test-card{
+  background:var(--n0);border:1px solid var(--n200);border-radius:var(--r-xl);
+  padding:32px;transition:all .3s;position:relative;
+}
+.test-card:hover{box-shadow:var(--sh-md);border-color:var(--v200)}
+.test-stars{color:var(--warning);font-size:14px;letter-spacing:2px;margin-bottom:14px}
+.test-quote{font-size:15px;color:var(--n600);line-height:1.7;margin-bottom:20px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-av{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;color:var(--n0);
+}
+.test-name{font-size:14px;font-weight:700;color:var(--n800)}
+.test-role{font-size:12px;color:var(--n400)}
+
+/* ═══════════════════ CTA SECTION ═══════════════════ */
+.cta-section{padding:100px 0}
+.cta-box{
+  background:var(--grad-hero);border-radius:var(--r-2xl);
+  padding:72px 56px;text-align:center;position:relative;overflow:hidden;
+}
+.cta-box::before,.cta-box::after{content:'';position:absolute;border-radius:50%}
+.cta-box::before{width:450px;height:450px;background:rgba(255,255,255,.08);top:-180px;right:-120px}
+.cta-box::after{width:300px;height:300px;background:rgba(255,255,255,.05);bottom:-120px;left:-60px}
+.cta-box>*{position:relative;z-index:1}
+.cta-box h2{font-size:36px;font-weight:800;color:var(--n0);margin-bottom:14px;letter-spacing:-.5px}
+.cta-box p{font-size:17px;color:rgba(255,255,255,.8);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* ═══════════════════ CONTACT ═══════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact-left h2{font-size:32px;font-weight:800;color:var(--n950);margin-bottom:12px;letter-spacing:-.3px}
+.contact-left>p{font-size:15px;color:var(--n500);margin-bottom:32px;line-height:1.7}
+.contact-methods{display:flex;flex-direction:column;gap:18px;margin-bottom:32px}
+.c-method{display:flex;align-items:center;gap:14px}
+.c-method-icon{
+  width:44px;height:44px;border-radius:var(--r-md);
+  background:var(--v50);border:1px solid var(--v200);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.c-method h4{font-size:13px;font-weight:600;color:var(--n700)}
+.c-method p{font-size:14px;color:var(--n500)}
+
+/* Security trust strip in contact */
+.contact-trust{
+  display:flex;gap:20px;flex-wrap:wrap;
+  padding-top:24px;border-top:1px solid var(--n200);
+}
+.ct-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--n500);font-weight:500}
+.ct-item svg{width:16px;height:16px;color:var(--success)}
+
+.contact-form{
+  background:var(--n0);border-radius:var(--r-2xl);padding:36px;
+  box-shadow:var(--sh-md);border:1px solid var(--n200);
+}
+.contact-form h3{font-size:20px;font-weight:700;color:var(--n900);margin-bottom:22px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--n600);margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:11px 14px;border:1px solid var(--n200);border-radius:var(--r-md);
+  font-size:14px;font-family:inherit;color:var(--n800);background:var(--n50);
+  transition:all .25s;outline:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--v400);box-shadow:0 0 0 3px rgba(124,58,237,.08);background:var(--n0);
+}
+.form-group textarea{min-height:100px;resize:vertical}
+.form-submit{
+  width:100%;padding:13px;background:var(--v600);color:var(--n0);
+  border:none;border-radius:var(--r-md);font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .3s;font-family:inherit;box-shadow:var(--sh-glow);
+}
+.form-submit:hover{background:var(--v700);transform:translateY(-1px)}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+.footer{background:var(--n950);color:var(--n400);padding:72px 0 36px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo{margin-bottom:12px;display:inline-block}
+.footer-brand>p{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:280px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{
+  width:36px;height:36px;border-radius:var(--r-sm);
+  background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all .3s;color:var(--n400);
+}
+.footer-social a:hover{background:var(--v600);color:var(--n0)}
+.footer-col h4{font-size:13px;font-weight:700;color:var(--n0);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.footer-col a{display:block;font-size:13px;color:var(--n400);padding:5px 0;transition:color .25s}
+.footer-col a:hover{color:var(--v400)}
+.footer-bottom{
+  padding-top:28px;border-top:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;font-size:13px;
+}
+
+/* ═══════════════════ WHATSAPP FAB ═══════════════════ */
+.wa-fab{
+  position:fixed;bottom:24px;right:24px;z-index:99;
+  width:56px;height:56px;border-radius:50%;background:#25d366;
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(37,211,102,.4);
+  transition:all .3s var(--ease-spring);cursor:pointer;
+}
+html[dir="rtl"] .wa-fab{right:auto;left:24px}
+.wa-fab:hover{transform:scale(1.08);box-shadow:0 8px 28px rgba(37,211,102,.5)}
+.wa-fab svg{width:28px;height:28px}
+
+/* Sticky mobile CTA */
+.sticky-cta{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  padding:12px 20px;border-top:1px solid var(--n200);
+}
+.sticky-cta .btn{width:100%;justify-content:center}
+
+/* ═══════════════════ MOBILE MENU ═══════════════════ */
+.mob-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.4);backdrop-filter:blur(4px);
+}
+.mob-overlay.open{display:block}
+.mob-panel{
+  position:absolute;top:0;right:0;width:300px;height:100%;
+  background:var(--n0);padding:28px;box-shadow:var(--sh-lg);
+}
+html[dir="rtl"] .mob-panel{right:auto;left:0}
+.mob-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:26px;cursor:pointer;color:var(--n600)}
+html[dir="rtl"] .mob-close{right:auto;left:16px}
+.mob-links{margin-top:56px;display:flex;flex-direction:column;gap:22px}
+.mob-links a{font-size:17px;font-weight:600;color:var(--n700);transition:color .25s}
+.mob-links a:hover{color:var(--v600)}
+
+/* ═══════════════════ ANIMATIONS ═══════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media(max-width:1024px){
+  .hero .container{grid-template-columns:1fr;text-align:center}
+  .hero-content{max-width:100%}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-ctas{justify-content:center}
+  .hero-proof{justify-content:center}
+  .hero-visual{margin-top:40px}
+  .float-card{display:none}
+  .svc-block{grid-template-columns:1fr;padding:40px}
+  .svc-block.flip .svc-info{order:1}
+  .svc-block.flip .svc-visual{order:2}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .test-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .steps-grid{grid-template-columns:1fr 1fr;gap:24px}
+  .steps-grid::before{display:none}
+}
+@media(max-width:768px){
+  .nav-mid{display:none}
+  .nav-right .btn-fill{display:none}
+  .hamburger{display:block}
+  .hero{padding:100px 0 60px}
+  .hero h1{font-size:34px;letter-spacing:-1px}
+  .hero-sub{font-size:15px}
+  .section{padding:80px 0}
+  .section-head h2{font-size:28px}
+  .dash-main{transform:none}
+  .dash-stats{grid-template-columns:1fr}
+  .svc-block{padding:24px}
+  .why-grid{grid-template-columns:1fr}
+  .test-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr;gap:20px}
+  .cta-box{padding:48px 24px}
+  .cta-box h2{font-size:26px}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+  .sticky-cta{display:block}
+  .wa-fab{bottom:80px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+    <div class="nav-mid" id="navMid">
+      <a href="#services" data-en="Solutions" data-ar="الحلول">Solutions</a>
+      <a href="#how" data-en="How It Works" data-ar="كيف يعمل">How It Works</a>
+      <a href="#why" data-en="Why Cardni" data-ar="لماذا كاردني">Why Cardni</a>
+      <!-- <a href="#testimonials" data-en="Testimonials" data-ar="آراء العملاء">Testimonials</a> -->
+      <a href="#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" onclick="toggleLang()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="langLabel">عربي</span>
+      </button>
+      <a href="#contact" class="btn btn-fill" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+      <button class="hamburger" onclick="openMob()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ MOBILE MENU ═══════════ -->
+<div class="mob-overlay" id="mobOverlay" onclick="closeMob()">
+  <div class="mob-panel" onclick="event.stopPropagation()">
+    <button class="mob-close" onclick="closeMob()">&times;</button>
+    <div class="mob-links">
+      <a href="#services" onclick="closeMob()" data-en="Solutions" data-ar="الحلول">Solutions</a>
+      <a href="#how" onclick="closeMob()" data-en="How It Works" data-ar="كيف يعمل">How It Works</a>
+      <a href="#why" onclick="closeMob()" data-en="Why Cardni" data-ar="لماذا كاردني">Why Cardni</a>
+      <!-- <a href="#testimonials" onclick="closeMob()" data-en="Testimonials" data-ar="آراء العملاء">Testimonials</a> -->
+      <a href="#contact" onclick="closeMob()" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+      <a href="#contact" class="btn btn-fill" style="margin-top:8px;text-align:center" onclick="closeMob()" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content reveal">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span data-en="Digital Distribution Platform" data-ar="منصة التوزيع الرقمي">Digital Distribution Platform</span>
+        <span class="tag" data-en="NEW" data-ar="جديد">NEW</span>
+      </div>
+      <h1>
+        <span data-en="Sell Vouchers &" data-ar="بِع القسائم والشحن">Sell Vouchers &</span><br>
+        <span class="gradient" style="display:inline-block;margin-top:12px" data-en="Top-Ups at Scale" data-ar="على نطاق واسع">Top-Ups at Scale</span>
+      </h1>
+      <p class="hero-sub" data-en="Complete EVD systems, powerful B2B APIs, and a massive product catalog of vouchers, game top-ups, and mobile recharge. Everything you need to launch and scale your digital distribution business."
+         data-ar="أنظمة EVD متكاملة، واجهات API قوية، وكتالوج ضخم من القسائم وشحن الألعاب وشحن الجوال. كل ما تحتاجه لإطلاق وتوسيع أعمال التوزيع الرقمي.">Complete EVD systems, powerful B2B APIs, and a massive product catalog of vouchers, game top-ups, and mobile recharge. Everything you need to launch and scale your digital distribution business.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-fill btn-lg" data-en="Start Free Consultation" data-ar="ابدأ استشارة مجانية">
+          Start Free Consultation
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+        <a href="#services" class="btn btn-outline btn-lg" data-en="Explore Solutions" data-ar="اكتشف الحلول">Explore Solutions</a>
+      </div>
+      <div class="hero-proof">
+        <div class="hero-proof-avatars">
+          <div class="av" style="background:var(--v500)">A</div>
+          <div class="av" style="background:var(--i500)">M</div>
+          <div class="av" style="background:#f59e0b">S</div>
+          <div class="av" style="background:var(--success)">K</div>
+        </div>
+        <div class="hero-proof-text">
+          <strong data-en="50+ businesses" data-ar="50+ شركة">50+ businesses</strong>
+          <span data-en=" trust Cardni worldwide" data-ar=" تثق بكاردني حول العالم"> trust Cardni worldwide</span><br>
+          <span style="color:var(--warning)">★★★★★</span>
+          <span data-en=" rated by partners" data-ar=" تقييم الشركاء"> rated by partners</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal reveal-delay-1">
+      <!-- Floating cards -->
+      <div class="float-card float-card-1">
+        <div class="fc-row">
+          <div class="fc-icon" style="background:rgba(16,185,129,.1)">📈</div>
+          <div>
+            <div class="fc-label" data-en="Revenue Today" data-ar="إيرادات اليوم">Revenue Today</div>
+            <div class="fc-val">$12,847</div>
+          </div>
+        </div>
+      </div>
+      <div class="float-card float-card-2">
+        <div class="fc-row">
+          <div class="fc-icon" style="background:rgba(124,58,237,.1)">⚡</div>
+          <div>
+            <div class="fc-label" data-en="Orders/min" data-ar="طلبات/دقيقة">Orders/min</div>
+            <div class="fc-val">342</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard mockup -->
+      <div class="dash-main">
+        <div class="dash-topbar">
+          <span class="dash-dot" style="background:#ff5f57"></span>
+          <span class="dash-dot" style="background:#febc2e"></span>
+          <span class="dash-dot" style="background:#28c840"></span>
+          <div class="dash-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            dashboard.cardni.com
+          </div>
+        </div>
+        <div class="dash-body">
+          <div class="dash-greeting" data-en="Good morning, Partner" data-ar="صباح الخير، شريكنا">Good morning, Partner</div>
+          <div class="dash-greeting-sub" data-en="Here's your distribution overview" data-ar="نظرة عامة على التوزيع">Here's your distribution overview</div>
+          <div class="dash-stats">
+            <div class="dash-stat">
+              <div class="dash-stat-label" data-en="Revenue" data-ar="الإيرادات">Revenue</div>
+              <div class="dash-stat-val">$48.2K</div>
+              <div class="dash-stat-change">↑ 12.5%</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label" data-en="Orders" data-ar="الطلبات">Orders</div>
+              <div class="dash-stat-val">8,431</div>
+              <div class="dash-stat-change">↑ 8.3%</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label" data-en="Uptime" data-ar="وقت التشغيل">Uptime</div>
+              <div class="dash-stat-val">99.9%</div>
+              <div class="dash-stat-change">● Live</div>
+            </div>
+          </div>
+          <div class="dash-table">
+            <div class="dash-table-head">
+              <span data-en="Product" data-ar="المنتج">Product</span>
+              <span data-en="Amount" data-ar="المبلغ">Amount</span>
+              <span data-en="Status" data-ar="الحالة">Status</span>
+            </div>
+            <div class="dash-table-row">
+              <div class="dash-product">
+                <div class="dash-product-icon" style="background:#f3e8ff">🎮</div>
+                <span>PUBG UC</span>
+              </div>
+              <span class="dash-amount">$24.99</span>
+              <span class="dash-status" style="background:#dcfce7;color:#16a34a" data-en="Fulfilled" data-ar="تم">Fulfilled</span>
+            </div>
+            <div class="dash-table-row">
+              <div class="dash-product">
+                <div class="dash-product-icon" style="background:#ede9fe">📱</div>
+                <span>Mobily 50</span>
+              </div>
+              <span class="dash-amount">$13.33</span>
+              <span class="dash-status" style="background:#dbeafe;color:#2563eb" data-en="Processing" data-ar="قيد التنفيذ">Processing</span>
+            </div>
+            <div class="dash-table-row">
+              <div class="dash-product">
+                <div class="dash-product-icon" style="background:#fef3c7">🎁</div>
+                <span>iTunes $50</span>
+              </div>
+              <span class="dash-amount">$47.50</span>
+              <span class="dash-status" style="background:#dcfce7;color:#16a34a" data-en="Fulfilled" data-ar="تم">Fulfilled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TRUST BAR ═══════════ -->
+<section class="trust-bar">
+  <div class="container">
+    <span class="trust-label" data-en="Trusted Partners & Products" data-ar="شركاء ومنتجات موثوقة">Trusted Partners & Products</span>
+    <div class="trust-logos">
+      <span class="trust-logo">iTunes</span>
+      <span class="trust-logo">Google Play</span>
+      <span class="trust-logo">PlayStation</span>
+      <span class="trust-logo">Xbox</span>
+      <span class="trust-logo">Steam</span>
+      <span class="trust-logo">Salla</span>
+      <span class="trust-logo">Razer Gold</span>
+    </div>
+    <div class="trust-badges">
+      <span class="trust-badge">
+        <span class="tb-icon" style="background:rgba(16,185,129,.1)">🔒</span>
+        <span data-en="SSL Encrypted" data-ar="مشفر SSL">SSL Encrypted</span>
+      </span>
+      <span class="trust-badge">
+        <span class="tb-icon" style="background:rgba(59,130,246,.1)">⚡</span>
+        <span data-en="99.9% Uptime" data-ar="99.9% وقت تشغيل">99.9% Uptime</span>
+      </span>
+      <span class="trust-badge">
+        <span class="tb-icon" style="background:rgba(124,58,237,.1)">🛡️</span>
+        <span data-en="PCI Compliant" data-ar="متوافق PCI">PCI Compliant</span>
+      </span>
+      <span class="trust-badge">
+        <span class="tb-icon" style="background:rgba(245,158,11,.1)">🎧</span>
+        <span data-en="24/7 Support" data-ar="دعم 24/7">24/7 Support</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="section" id="how" style="background:var(--n50)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="HOW IT WORKS" data-ar="كيف يعمل">HOW IT WORKS</span> <span class="line"></span></div>
+      <h2 data-en="Get Started in Four Simple Steps" data-ar="ابدأ في أربع خطوات بسيطة">Get Started in Four Simple Steps</h2>
+      <p data-en="From consultation to launch, we make it seamless for you to start distributing digital products."
+         data-ar="من الاستشارة إلى الإطلاق، نجعل بدء توزيع المنتجات الرقمية سلساً لك.">From consultation to launch, we make it seamless for you to start distributing digital products.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3 data-en="Consultation" data-ar="استشارة">Consultation</h3>
+        <p data-en="We learn about your business needs and recommend the right solution: EVD, API, or both." data-ar="نتعرف على احتياجات عملك ونوصي بالحل المناسب: EVD أو API أو كليهما.">We learn about your business needs and recommend the right solution: EVD, API, or both.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <h3 data-en="Setup & Integration" data-ar="الإعداد والتكامل">Setup & Integration</h3>
+        <p data-en="We deploy your platform, configure products, and integrate with your existing systems." data-ar="ننشر منصتك ونهيئ المنتجات ونتكامل مع أنظمتك الحالية.">We deploy your platform, configure products, and integrate with your existing systems.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <h3 data-en="Testing & Training" data-ar="الاختبار والتدريب">Testing & Training</h3>
+        <p data-en="Full testing of all transactions and training for your team on the dashboard and tools." data-ar="اختبار كامل لجميع المعاملات وتدريب فريقك على لوحة التحكم والأدوات.">Full testing of all transactions and training for your team on the dashboard and tools.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <h3 data-en="Go Live & Scale" data-ar="الإطلاق والتوسع">Go Live & Scale</h3>
+        <p data-en="Launch with confidence. Our team provides ongoing support as your business grows." data-ar="أطلق بثقة. فريقنا يوفر دعماً مستمراً مع نمو أعمالك.">Launch with confidence. Our team provides ongoing support as your business grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="OUR SOLUTIONS" data-ar="حلولنا">OUR SOLUTIONS</span> <span class="line"></span></div>
+      <h2 data-en="One Platform, Three Powerful Solutions" data-ar="منصة واحدة، ثلاثة حلول قوية">One Platform, Three Powerful Solutions</h2>
+      <p data-en="Whether you need offline distribution, online integration, or a consumer storefront, Cardni has the infrastructure."
+         data-ar="سواء كنت تحتاج توزيعاً أوفلاين أو تكاملاً أونلاين أو متجراً للمستهلكين، كاردني لديها البنية التحتية.">Whether you need offline distribution, online integration, or a consumer storefront, Cardni has the infrastructure.</p>
+    </div>
+
+    <!-- EVD -->
+    <div class="svc-block reveal">
+      <div class="svc-info">
+        <div class="svc-icon" style="background:var(--v50);border:1px solid var(--v200)">🏪</div>
+        <h3 data-en="EVD Platform" data-ar="منصة EVD">EVD Platform</h3>
+        <div class="svc-subtitle" data-en="Electronic Voucher Distribution" data-ar="توزيع القسائم الإلكترونية">Electronic Voucher Distribution</div>
+        <p data-en="A complete turnkey solution to launch your own EVD company. We provide the full software ecosystem including management dashboard, POS app for merchants, and distributor app so you can manage stock, distributors, terminals, and merchants from day one."
+           data-ar="حل متكامل جاهز لإطلاق شركة EVD الخاصة بك. نوفر لك منظومة برمجية كاملة تشمل لوحة إدارة وتطبيق نقاط البيع للتجار وتطبيق الموزعين لتدير المخزون والموزعين والأجهزة والتجار من اليوم الأول.">A complete turnkey solution to launch your own EVD company. We provide the full software ecosystem including management dashboard, POS app for merchants, and distributor app so you can manage stock, distributors, terminals, and merchants from day one.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Full management software for stock, distributors & merchants" data-ar="برنامج إدارة كامل للمخزون والموزعين والتجار">Full management software for stock, distributors & merchants</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="POS terminal app for offline voucher sales" data-ar="تطبيق أجهزة نقاط البيع لبيع القسائم أوفلاين">POS terminal app for offline voucher sales</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Distributor app for sub-agent & territory management" data-ar="تطبيق الموزعين لإدارة الوكلاء والمناطق">Distributor app for sub-agent & territory management</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Vouchers, game top-ups & international mobile recharge" data-ar="قسائم وشحن ألعاب وشحن جوال دولي">Vouchers, game top-ups & international mobile recharge</span></div>
+        </div>
+        <a href="#contact" class="btn btn-fill" data-en="Launch Your EVD Business →" data-ar="أطلق أعمال EVD →">Launch Your EVD Business →</a>
+      </div>
+      <div class="svc-visual">
+        <div class="mock">
+          <div class="mock-bar"><span class="mock-d" style="background:#ff5f57"></span><span class="mock-d" style="background:#febc2e"></span><span class="mock-d" style="background:#28c840"></span><span class="mock-url"></span></div>
+          <div class="mock-body">
+            <div class="evd-grid">
+              <div class="evd-tile"><div class="icon">📦</div><div class="label" data-en="Total Stock" data-ar="إجمالي المخزون">Total Stock</div><div class="val">24.8K</div></div>
+              <div class="evd-tile"><div class="icon">👥</div><div class="label" data-en="Distributors" data-ar="الموزعين">Distributors</div><div class="val">128</div></div>
+              <div class="evd-tile"><div class="icon">🖥️</div><div class="label" data-en="Terminals" data-ar="الأجهزة">Terminals</div><div class="val">1,240</div></div>
+              <div class="evd-tile"><div class="icon">📊</div><div class="label" data-en="Success Rate" data-ar="معدل النجاح">Success Rate</div><div class="val">99.2%</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B2B -->
+    <div class="svc-block flip reveal">
+      <div class="svc-info">
+        <div class="svc-icon" style="background:#eef2ff;border:1px solid #c7d2fe">🔌</div>
+        <h3 data-en="B2B Integration" data-ar="تكامل B2B">B2B Integration</h3>
+        <div class="svc-subtitle" data-en="Open API & E-Commerce Plugins" data-ar="API مفتوح وإضافات التجارة الإلكترونية">Open API & E-Commerce Plugins</div>
+        <p data-en="Connect your platform to Cardni's vast catalog through our robust RESTful API. With ready-made Salla plugins and comprehensive documentation, integration takes days, not months."
+           data-ar="اربط منصتك بكتالوج كاردني الواسع من خلال API القوي. مع إضافات سلة الجاهزة والتوثيق الشامل، يستغرق التكامل أياماً وليس أشهراً.">Connect your platform to Cardni's vast catalog through our robust RESTful API. With ready-made Salla plugins and comprehensive documentation, integration takes days, not months.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="RESTful API with comprehensive documentation" data-ar="API RESTful مع توثيق شامل">RESTful API with comprehensive documentation</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Ready-made Salla e-commerce plugin" data-ar="إضافة سلة الجاهزة للتجارة الإلكترونية">Ready-made Salla e-commerce plugin</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Real-time inventory & instant fulfillment" data-ar="مخزون فوري وتنفيذ لحظي">Real-time inventory & instant fulfillment</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Webhooks, callbacks & detailed reporting" data-ar="Webhooks وتقارير مفصلة">Webhooks, callbacks & detailed reporting</span></div>
+        </div>
+        <a href="#contact" class="btn btn-fill" data-en="Start Integrating →" data-ar="ابدأ التكامل →">Start Integrating →</a>
+      </div>
+      <div class="svc-visual">
+        <div class="mock">
+          <div class="mock-bar"><span class="mock-d" style="background:#ff5f57"></span><span class="mock-d" style="background:#febc2e"></span><span class="mock-d" style="background:#28c840"></span><span class="mock-url"></span></div>
+          <div class="mock-body">
+            <div class="api-block">
+              <div><span class="api-method">POST</span> /api/v1/orders</div>
+              <div style="color:var(--n300)">{</div>
+              <div style="padding-left:18px"><span class="api-key">"product"</span>: <span class="api-str">"itunes_50_usd"</span>,</div>
+              <div style="padding-left:18px"><span class="api-key">"quantity"</span>: <span class="api-num">10</span>,</div>
+              <div style="padding-left:18px"><span class="api-key">"webhook"</span>: <span class="api-str">"https://your-site.com/cb"</span></div>
+              <div style="color:var(--n300)">}</div>
+              <div class="api-resp">✓ 200 OK - 10 vouchers fulfilled in 230ms</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B2C -->
+    <div class="svc-block reveal">
+      <div class="svc-info">
+        <div class="svc-icon" style="background:#fdf4ff;border:1px solid #f0abfc">🛍️</div>
+        <h3 data-en="Cardni Store" data-ar="متجر كاردني">Cardni Store</h3>
+        <div class="svc-subtitle" data-en="Direct-to-Consumer | cardni.com" data-ar="البيع المباشر | cardni.com">Direct-to-Consumer | cardni.com</div>
+        <p data-en="Our flagship store at cardni.com lets end customers purchase vouchers, game credits, gift cards, and mobile top-ups directly with instant digital delivery and secure payments."
+           data-ar="متجرنا على cardni.com يتيح للعملاء شراء القسائم وأرصدة الألعاب وبطاقات الهدايا وشحن الجوال مباشرة مع توصيل رقمي فوري ودفع آمن.">Our flagship store at cardni.com lets end customers purchase vouchers, game credits, gift cards, and mobile top-ups directly with instant digital delivery and secure payments.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Wide catalog: gaming, mobile, gift cards, entertainment" data-ar="كتالوج واسع: ألعاب، جوال، بطاقات هدايا، ترفيه">Wide catalog: gaming, mobile, gift cards, entertainment</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Instant delivery via email & SMS" data-ar="توصيل فوري عبر البريد والرسائل">Instant delivery via email & SMS</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="Multiple secure payment options" data-ar="خيارات دفع آمنة متعددة">Multiple secure payment options</span></div>
+          <div class="svc-feat"><span class="chk">✓</span><span data-en="24/7 customer support" data-ar="دعم عملاء على مدار الساعة">24/7 customer support</span></div>
+        </div>
+        <a href="https://cardni.com" target="_blank" class="btn btn-fill" data-en="Visit Cardni Store →" data-ar="زيارة متجر كاردني →">Visit Cardni Store →</a>
+      </div>
+      <div class="svc-visual">
+        <div class="mock">
+          <div class="mock-bar"><span class="mock-d" style="background:#ff5f57"></span><span class="mock-d" style="background:#febc2e"></span><span class="mock-d" style="background:#28c840"></span><span class="mock-url"></span></div>
+          <div class="mock-body">
+            <div class="store-hero-mini">
+              <div class="icon">🛒</div>
+              <h4>cardni.com</h4>
+              <p data-en="Your Digital Store" data-ar="متجرك الرقمي">Your Digital Store</p>
+            </div>
+            <div class="store-cats">
+              <div class="store-cat"><div class="icon">🎮</div><div class="label" data-en="Gaming" data-ar="ألعاب">Gaming</div></div>
+              <div class="store-cat"><div class="icon">📱</div><div class="label" data-en="Mobile" data-ar="جوال">Mobile</div></div>
+              <div class="store-cat"><div class="icon">🎁</div><div class="label" data-en="Gift Cards" data-ar="هدايا">Gift Cards</div></div>
+              <div class="store-cat"><div class="icon">💳</div><div class="label" data-en="Vouchers" data-ar="قسائم">Vouchers</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHY CARDNI ═══════════ -->
+<section class="section section-dark" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="WHY CARDNI" data-ar="لماذا كاردني">WHY CARDNI</span> <span class="line"></span></div>
+      <h2 data-en="Built for Scale. Designed for Trust." data-ar="مبنية للتوسع. مصممة للثقة.">Built for Scale. Designed for Trust.</h2>
+      <p data-en="Deep industry expertise meets cutting-edge technology to deliver solutions that grow with your business."
+         data-ar="خبرة عميقة في الصناعة تلتقي بأحدث التقنيات لتقديم حلول تنمو مع أعمالك.">Deep industry expertise meets cutting-edge technology to deliver solutions that grow with your business.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-card-icon">⚡</div>
+        <h3 data-en="Instant Fulfillment" data-ar="تنفيذ فوري">Instant Fulfillment</h3>
+        <p data-en="Orders processed in milliseconds. Your customers get what they need instantly, every time." data-ar="تتم معالجة الطلبات في أجزاء من الثانية. عملاؤك يحصلون على ما يحتاجونه فوراً.">Orders processed in milliseconds. Your customers get what they need instantly, every time.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-card-icon">🔒</div>
+        <h3 data-en="Enterprise Security" data-ar="أمان المؤسسات">Enterprise Security</h3>
+        <p data-en="Bank-grade encryption and PCI-compliant protocols protect every transaction and data point." data-ar="تشفير بمستوى البنوك وبروتوكولات PCI تحمي كل معاملة وبيانات.">Bank-grade encryption and PCI-compliant protocols protect every transaction and data point.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-card-icon">📈</div>
+        <h3 data-en="Infinite Scalability" data-ar="قابلية توسع لا محدودة">Infinite Scalability</h3>
+        <p data-en="Our infrastructure handles millions of transactions. Scale without worrying about capacity." data-ar="بنيتنا التحتية تعالج ملايين المعاملات. توسّع دون القلق بشأن السعة.">Our infrastructure handles millions of transactions. Scale without worrying about capacity.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-card-icon">🌍</div>
+        <h3 data-en="Global Coverage" data-ar="تغطية عالمية">Global Coverage</h3>
+        <p data-en="Hundreds of suppliers across 20+ countries, all through a single integration point." data-ar="مئات الموردين في أكثر من 20 دولة، كل ذلك من خلال نقطة تكامل واحدة.">Hundreds of suppliers across 20+ countries, all through a single integration point.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-card-icon">🤝</div>
+        <h3 data-en="Dedicated Support" data-ar="دعم مخصص">Dedicated Support</h3>
+        <p data-en="Your own account manager and technical team ensure success at every step." data-ar="مدير حسابك وفريقك الفني يضمنون النجاح في كل خطوة.">Your own account manager and technical team ensure success at every step.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-card-icon">💡</div>
+        <h3 data-en="Smart Analytics" data-ar="تحليلات ذكية">Smart Analytics</h3>
+        <p data-en="Real-time dashboards with full visibility into sales, trends, and performance metrics." data-ar="لوحات معلومات فورية مع رؤية كاملة للمبيعات والاتجاهات والأداء.">Real-time dashboards with full visibility into sales, trends, and performance metrics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="section" id="testimonials" style="background:var(--n50);display:none">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="TESTIMONIALS" data-ar="آراء العملاء">TESTIMONIALS</span> <span class="line"></span></div>
+      <h2 data-en="Trusted by Partners Worldwide" data-ar="موثوق من شركاء حول العالم">Trusted by Partners Worldwide</h2>
+      <p data-en="Hear from businesses that have transformed their digital distribution with Cardni."
+         data-ar="اسمع من الشركات التي حولت توزيعها الرقمي مع كاردني.">Hear from businesses that have transformed their digital distribution with Cardni.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote" data-en="Cardni's EVD platform transformed our business. We went from zero to 500+ terminals in under 6 months. The support team is exceptional."
+           data-ar="منصة EVD من كاردني حولت أعمالنا. انتقلنا من صفر إلى أكثر من 500 جهاز في أقل من 6 أشهر. فريق الدعم استثنائي.">Cardni's EVD platform transformed our business. We went from zero to 500+ terminals in under 6 months. The support team is exceptional.</p>
+        <div class="test-author">
+          <div class="test-av" style="background:var(--v500)">A</div>
+          <div>
+            <div class="test-name">Ahmed K.</div>
+            <div class="test-role" data-en="CEO, TechPay Solutions" data-ar="الرئيس التنفيذي، تك باي">CEO, TechPay Solutions</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal reveal-delay-1">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote" data-en="The API integration was seamless. We had our Salla store selling vouchers within 48 hours. The documentation is best-in-class."
+           data-ar="تكامل API كان سلساً. بدأنا ببيع القسائم في متجر سلة خلال 48 ساعة. التوثيق من الأفضل في المجال.">The API integration was seamless. We had our Salla store selling vouchers within 48 hours. The documentation is best-in-class.</p>
+        <div class="test-author">
+          <div class="test-av" style="background:var(--i500)">S</div>
+          <div>
+            <div class="test-name">Sara M.</div>
+            <div class="test-role" data-en="CTO, Digital Mart" data-ar="المديرة التقنية، ديجيتال مارت">CTO, Digital Mart</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal reveal-delay-2">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote" data-en="We distribute across 3 countries using Cardni. The reliability is unmatched, 99.9% uptime and instant fulfillment on every order."
+           data-ar="نوزع عبر 3 دول باستخدام كاردني. الموثوقية لا مثيل لها، 99.9% وقت تشغيل وتنفيذ فوري لكل طلب.">We distribute across 3 countries using Cardni. The reliability is unmatched, 99.9% uptime and instant fulfillment on every order.</p>
+        <div class="test-author">
+          <div class="test-av" style="background:var(--success)">K</div>
+          <div>
+            <div class="test-name">Khalid R.</div>
+            <div class="test-role" data-en="MD, Gulf Digital Group" data-ar="المدير العام، مجموعة الخليج الرقمية">MD, Gulf Digital Group</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2 data-en="Ready to Power Your Distribution?" data-ar="مستعد لتشغيل التوزيع؟">Ready to Power Your Distribution?</h2>
+      <p data-en="Join 50+ partners who trust Cardni. Get a free consultation and launch in weeks, not months."
+         data-ar="انضم إلى أكثر من 50 شريكاً يثقون بكاردني. احصل على استشارة مجانية وأطلق خلال أسابيع.">Join 50+ partners who trust Cardni. Get a free consultation and launch in weeks, not months.</p>
+      <div class="cta-btns">
+        <a href="#contact" class="btn btn-white btn-lg" data-en="Start Free Consultation" data-ar="ابدأ استشارة مجانية">Start Free Consultation</a>
+        <a href="#services" class="btn btn-ghost btn-lg" data-en="View Solutions" data-ar="عرض الحلول">View Solutions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="section" id="contact" style="background:var(--n50)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag"><span class="line"></span> <span data-en="CONTACT US" data-ar="تواصل معنا">CONTACT US</span> <span class="line"></span></div>
+      <h2 data-en="Let's Build Something Great" data-ar="لنبني شيئاً عظيماً معاً">Let's Build Something Great</h2>
+      <p data-en="Tell us about your business and we'll recommend the perfect solution."
+         data-ar="أخبرنا عن عملك وسنوصي بالحل المثالي.">Tell us about your business and we'll recommend the perfect solution.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <h2 data-en="Get in Touch" data-ar="تواصل معنا">Get in Touch</h2>
+        <p data-en="Have questions? Our team typically responds within 2 hours during business days."
+           data-ar="لديك أسئلة؟ فريقنا يستجيب عادة خلال ساعتين في أيام العمل.">Have questions? Our team typically responds within 2 hours during business days.</p>
+        <div class="contact-methods">
+          <div class="c-method">
+            <div class="c-method-icon">✉️</div>
+            <div><h4 data-en="Email" data-ar="البريد الإلكتروني">Email</h4><p>info@cardni.com</p></div>
+          </div>
+          <div class="c-method">
+            <div class="c-method-icon">📞</div>
+            <div><h4 data-en="Phone" data-ar="الهاتف">Phone</h4><p>+966 53 976 1698</p></div>
+          </div>
+          <div class="c-method">
+            <div class="c-method-icon">📍</div>
+            <div><h4 data-en="Location" data-ar="الموقع">Location</h4><p data-en="Riyadh, Saudi Arabia" data-ar="الرياض، المملكة العربية السعودية">Riyadh, Saudi Arabia</p></div>
+          </div>
+        </div>
+        <div class="contact-trust">
+          <div class="ct-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span data-en="End-to-end encrypted" data-ar="مشفر من طرف لطرف">End-to-end encrypted</span>
+          </div>
+          <div class="ct-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            <span data-en="GDPR compliant" data-ar="متوافق مع GDPR">GDPR compliant</span>
+          </div>
+          <div class="ct-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span data-en="No spam, ever" data-ar="بدون رسائل مزعجة">No spam, ever</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-1">
+        <h3 data-en="Send us a message" data-ar="أرسل لنا رسالة">Send us a message</h3>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+              <input type="text" required placeholder=" ">
+            </div>
+            <div class="form-group">
+              <label data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+              <input type="email" required placeholder=" ">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-en="Phone" data-ar="رقم الجوال">Phone</label>
+              <input type="tel" required placeholder=" ">
+            </div>
+            <div class="form-group">
+              <label data-en="Company" data-ar="الشركة">Company</label>
+              <input type="text" placeholder=" ">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-en="Interested In" data-ar="مهتم بـ">Interested In</label>
+            <select>
+              <option value="" data-en="Select a solution..." data-ar="اختر حلاً...">Select a solution...</option>
+              <option value="evd" data-en="EVD Platform" data-ar="منصة EVD">EVD Platform</option>
+              <option value="b2b" data-en="B2B API Integration" data-ar="تكامل B2B API">B2B API Integration</option>
+              <option value="store" data-en="Cardni Store Partnership" data-ar="شراكة متجر كاردني">Cardni Store Partnership</option>
+              <option value="other" data-en="Other" data-ar="أخرى">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-en="Message" data-ar="الرسالة">Message</label>
+            <textarea data-placeholder-en="Tell us about your project..." data-placeholder-ar="أخبرنا عن مشروعك..." placeholder="Tell us about your project..."></textarea>
+          </div>
+          <button type="submit" class="form-submit" data-en="Send Message" data-ar="إرسال الرسالة">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span>Card</span>ni <small data-en="Business" data-ar="أعمال">Business</small></a>
+        <p data-en="Empowering businesses with complete digital voucher distribution solutions worldwide."
+           data-ar="نمكّن الشركات بحلول توزيع القسائم الرقمية المتكاملة حول العالم.">Empowering businesses with complete digital voucher distribution solutions worldwide.</p>
+        <div class="footer-social">
+          <a href="https://t.me/cardnicom" target="_blank" aria-label="Telegram">✈</a>
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">◻</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Solutions" data-ar="الحلول">Solutions</h4>
+        <a href="#services" data-en="EVD Platform" data-ar="منصة EVD">EVD Platform</a>
+        <a href="#services" data-en="B2B Integration" data-ar="تكامل B2B">B2B Integration</a>
+        <a href="https://cardni.com" data-en="Cardni Store" data-ar="متجر كاردني">Cardni Store</a>
+        <a href="#" data-en="API Documentation" data-ar="توثيق API">API Documentation</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Company" data-ar="الشركة">Company</h4>
+        <a href="#" data-en="About Us" data-ar="من نحن">About Us</a>
+        <a href="#" data-en="Careers" data-ar="وظائف">Careers</a>
+        <a href="#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+        <a href="#" data-en="Blog" data-ar="المدونة">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+        <a href="#" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+        <a href="#" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+        <a href="#" data-en="Cookie Policy" data-ar="سياسة الكوكيز">Cookie Policy</a>
+        <a href="#" data-en="SLA" data-ar="اتفاقية مستوى الخدمة">SLA</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Cardni. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></span>
+      <span data-en="Riyadh, Saudi Arabia" data-ar="الرياض، المملكة العربية السعودية">Riyadh, Saudi Arabia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ WHATSAPP FAB ═══════════ -->
+<a href="https://wa.me/966539761698" target="_blank" class="wa-fab" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Sticky mobile CTA -->
+<div class="sticky-cta">
+  <a href="#contact" class="btn btn-fill btn-lg" data-en="Start Free Consultation" data-ar="ابدأ استشارة مجانية">Start Free Consultation</a>
+</div>
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+// ——— Language Toggle ———
+let lang = 'en';
+function toggleLang() {
+  lang = lang === 'en' ? 'ar' : 'en';
+  const html = document.documentElement;
+  html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  html.lang = lang;
+  document.body.style.fontFamily = lang === 'ar' ? 'var(--font-ar)' : 'var(--font-en)';
+
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const t = el.getAttribute('data-' + lang);
+    if (t) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = t;
+      else el.textContent = t;
+    }
+  });
+  document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+    el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
+  });
+  document.querySelectorAll('select option[data-en]').forEach(o => {
+    const t = o.getAttribute('data-' + lang);
+    if (t) o.textContent = t;
+  });
+  document.getElementById('langLabel').textContent = lang === 'en' ? 'عربي' : 'English';
+}
+
+// ——— Navbar scroll ———
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ——— Mobile menu ———
+function openMob() { document.getElementById('mobOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMob() { document.getElementById('mobOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+
+// ——— Scroll reveal ———
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ——— Counter animation ———
+function animateCounters() {
+  document.querySelectorAll('.dash-stat-val').forEach(el => {
+    const text = el.textContent;
+    // Only animate numeric-like values
+    if (/^\$/.test(text) || /^\d/.test(text)) {
+      el.style.transition = 'opacity .3s';
+    }
+  });
+}
+setTimeout(animateCounters, 1000);
+
+// ——— Contact form ———
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  const orig = btn.textContent;
+  btn.textContent = lang === 'ar' ? '✓ تم الإرسال بنجاح' : '✓ Sent Successfully';
+  btn.style.background = 'var(--success)';
+  btn.style.boxShadow = '0 8px 32px rgba(16,185,129,.3)';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.boxShadow = ''; e.target.reset(); }, 3000);
+}
+
+// ——— Smooth scroll for anchor links ———
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
