@@ -1,0 +1,6 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- noon logo - stylized Arabic-inspired "noon" text -->
+  <path d="M3 16 C3 10, 7 7, 11 7 C15 7, 17 10, 17 13" fill="none" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="20" cy="14" r="2.5" fill="#1a1a2e"/>
+  <circle cx="10" cy="5.5" r="1.5" fill="#1a1a2e"/>
+</svg>

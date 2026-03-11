@@ -1,0 +1,12 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Xbox spherical X logo -->
+  <!-- Sphere -->
+  <circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="1.2"/>
+  <!-- X curved lines forming sphere -->
+  <path d="M 5 5 Q 12 12 19 19" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 19 5 Q 12 12 5 19" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <!-- Additional sphere definition lines -->
+  <ellipse cx="12" cy="12" rx="9.5" ry="3" fill="none" stroke="white" stroke-width="0.8" opacity="0.5"/>
+  <path d="M 4 12 Q 6 10 8 10" fill="none" stroke="white" stroke-width="0.8" opacity="0.4"/>
+  <path d="M 16 10 Q 18 10 20 12" fill="none" stroke="white" stroke-width="0.8" opacity="0.4"/>
+</svg>

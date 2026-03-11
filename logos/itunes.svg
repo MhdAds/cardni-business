@@ -1,0 +1,11 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Apple logo - simple apple with bite -->
+  <!-- Main apple body -->
+  <path d="M 12 2 Q 8 4 7 8 Q 6 10 6 13 Q 6 18 10 21 Q 12 22 12 22 Q 12 22 14 21 Q 18 18 18 13 Q 18 10 17 8 Q 16 4 12 2" fill="white"/>
+  <!-- Bite mark on right side -->
+  <path d="M 16 6 Q 17 6 17 7 Q 17 8 16 8 Q 15 8 15 7 Q 15 6 16 6" fill="currentColor"/>
+  <!-- Stem -->
+  <rect x="11" y="1" width="2" height="2" rx="1" fill="white"/>
+  <!-- Leaf -->
+  <path d="M 13.5 2 Q 15 2.5 15.5 3.5" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

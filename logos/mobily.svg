@@ -1,0 +1,16 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mobily butterfly-like design with two circles -->
+  <!-- Left circle -->
+  <circle cx="8" cy="10" r="4" fill="white"/>
+  <!-- Right circle -->
+  <circle cx="16" cy="10" r="4" fill="white"/>
+  <!-- Central connection -->
+  <ellipse cx="12" cy="12" rx="2" ry="3" fill="white"/>
+  <!-- Bottom accent - butterfly wings extension -->
+  <path d="M 8 14 Q 10 16 12 17 Q 14 16 16 14" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Top accent -->
+  <path d="M 8 6 Q 10 4 12 3 Q 14 4 16 6" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Inner definition circles (transparent on white background) -->
+  <circle cx="8" cy="10" r="2" fill="none" stroke="white" stroke-width="0.7" opacity="0.4"/>
+  <circle cx="16" cy="10" r="2" fill="none" stroke="white" stroke-width="0.7" opacity="0.4"/>
+</svg>

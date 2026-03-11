@@ -1,0 +1,13 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Steam circular logo with gear/piston design -->
+  <!-- Outer circle -->
+  <circle cx="12" cy="12" r="11" fill="none" stroke="white" stroke-width="1.5"/>
+  <!-- Main gear/piston shape -->
+  <circle cx="12" cy="8" r="2.5" fill="white"/>
+  <path d="M 12 10.5 Q 14 11.5 14.5 14 Q 15 16 13.5 17.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="14.5" cy="17.5" r="2" fill="white"/>
+  <path d="M 13 16 Q 11 15.5 10 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="9.5" cy="13" r="1.8" fill="white"/>
+  <!-- Additional circular element -->
+  <path d="M 9 11 Q 7.5 12 7.5 14 Q 7.5 15.5 9 16" fill="none" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
+</svg>
