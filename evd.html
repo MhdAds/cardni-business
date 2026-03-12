@@ -506,6 +506,34 @@
             .footer-bottom { flex-direction: column; align-items: flex-start; }
         }
 
+        /* ====== CONTACT SECTION ====== */
+        .contact-section { background: var(--cream); padding: 140px 0; }
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: start;
+        }
+        .contact-info h2 { margin-bottom: 16px; }
+        .contact-info p { color: var(--gray-500); margin-bottom: 32px; }
+        .contact-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .contact-list li { display: flex; flex-direction: column; gap: 2px; }
+        .contact-label-text { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-400); }
+        .contact-list a { color: var(--dark); text-decoration: none; font-weight: 500; }
+        .contact-list a:hover { color: var(--violet-600); }
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 13px; font-weight: 500; color: var(--gray-600); }
+        .form-group input, .form-group textarea {
+            padding: 14px 18px; border: 1px solid #e2e2e2; border-radius: var(--radius-md);
+            font-family: var(--sans); font-size: 14px; color: var(--dark);
+            background: var(--white); transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--violet-600);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .contact-form .btn { width: 100%; }
+
         /* ====== RTL ====== */
         [dir="rtl"] .logo small { margin-left: 0; margin-right: 6px; }
         [dir="rtl"] .nav-links { flex-direction: row-reverse; }
@@ -514,6 +542,10 @@
         [dir="rtl"] .block-grid:not(.reverse) { direction: rtl; }
         [dir="rtl"] .block-grid:not(.reverse) > * { direction: rtl; }
         [dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
+
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
     </style>
 </head>
 <body>
@@ -705,7 +737,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div>
-                    <div class="stat-value" data-en="1.8M+" data-ar="1.8M+">1.8M+</div>
+                    <div class="stat-value" data-en="3,000,000+" data-ar="3,000,000+">3,000,000+</div>
                     <div class="stat-label" data-en="Transactions" data-ar="معاملات">Transactions</div>
                 </div>
                 <div>
@@ -736,22 +768,51 @@
         </div>
     </section>
 
-    <!-- Contact Block -->
-    <section class="block block-white" id="contact">
-        <div class="container container-narrow">
-            <h2 class="heading-lg text-center" style="margin-bottom: 60px;" data-en="Contact EVD Team" data-ar="تواصل مع فريق EVD">Contact EVD Team</h2>
-            <p class="body-md text-center" style="margin-bottom: 48px; color: var(--gray-500);" data-en="Dedicated support for implementation, training, and ongoing operations." data-ar="دعم مخصص للتنفيذ والتدريب والعمليات الجارية.">Dedicated support for implementation, training, and ongoing operations.</p>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <span class="icon">💚</span>
-                    <h3 data-en="WhatsApp" data-ar="واتس آب">WhatsApp</h3>
-                    <p><a href="https://wa.me/966539761698" target="_blank" style="color: var(--violet-600); font-weight: 600; text-decoration: none;">+966 539 761 698</a></p>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h2 class="heading-lg" data-en="Get in Touch" data-ar="تواصل معنا">Get in Touch</h2>
+                    <p class="body-lg" data-en="Have questions? Our team is ready to help. Reach out to us via phone, email, or visit us in Riyadh." data-ar="هل لديك أسئلة؟ فريقنا جاهز للمساعدة. تواصل معنا عبر الهاتف أو البريد الإلكتروني أو قم بزيارتنا في الرياض.">Have questions? Our team is ready to help. Reach out to us via phone, email, or visit us in Riyadh.</p>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="contact-label-text" data-en="Phone" data-ar="هاتف">Phone</span>
+                            <a href="tel:+966539761698">+966 53 976 1698</a>
+                        </li>
+                        <li>
+                            <span class="contact-label-text" data-en="Email" data-ar="البريد الإلكتروني">Email</span>
+                            <a href="mailto:info@cardni.com">info@cardni.com</a>
+                        </li>
+                        <li>
+                            <span class="contact-label-text" data-en="WhatsApp" data-ar="واتس اب">WhatsApp</span>
+                            <a href="https://wa.me/966539761698" target="_blank" data-en="Message us" data-ar="راسلنا">Message us</a>
+                        </li>
+                        <li>
+                            <span class="contact-label-text" data-en="Telegram" data-ar="تيليجرام">Telegram</span>
+                            <a href="https://t.me/cardnicom" target="_blank">@cardnicom</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="benefit-card">
-                    <span class="icon">📧</span>
-                    <h3 data-en="Email" data-ar="البريد الإلكتروني">Email</h3>
-                    <p><a href="mailto:info@cardni.com" style="color: var(--violet-600); font-weight: 600; text-decoration: none;">info@cardni.com</a></p>
-                </div>
+                <form class="contact-form fade-in" id="contact-form">
+                    <div class="form-group">
+                        <label for="name" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-en="Email Address" data-ar="عنوان البريد الإلكتروني">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company" data-en="Company" data-ar="الشركة">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-en="Message" data-ar="الرسالة">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-en="Send Message" data-ar="إرسال الرسالة">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
@@ -851,6 +912,27 @@
                 }
             });
         });
+
+        // Form Submission
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = contactForm.querySelector('button');
+                btn.textContent = 'Sending...';
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.textContent = 'Sent!';
+                    btn.style.background = '#10b981';
+                    setTimeout(() => {
+                        btn.textContent = 'Send Message';
+                        btn.disabled = false;
+                        btn.style.background = '';
+                        contactForm.reset();
+                    }, 2000);
+                }, 1000);
+            });
+        }
     </script>
 </body>
 </html>
